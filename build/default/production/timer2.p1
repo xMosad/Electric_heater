@@ -194,69 +194,69 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"3 timer2.c
-[; ;timer2.c: 3: void timer2_init(void){
+"8 timer2.c
+[; ;timer2.c: 8: void timer2_init(void){
 [v _timer2_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _timer2_init ]
 [f ]
-"4
-[; ;timer2.c: 4:      (T2CON &= ~(1 << 2)) ;
-[e =& _T2CON -> ~ << -> 1 `i -> 2 `i `Vuc ]
-"5
-[; ;timer2.c: 5:      (T2CON |= (1 << 1));
-[e =| _T2CON -> << -> 1 `i -> 1 `i `Vuc ]
-"6
-[; ;timer2.c: 6:      (T2CON &= ~(1 << 0));
-[e =& _T2CON -> ~ << -> 1 `i -> 0 `i `Vuc ]
-"7
-[; ;timer2.c: 7:      TMR2 = 131 ;
-[e = _TMR2 -> -> 131 `i `uc ]
-"8
-[; ;timer2.c: 8:      (INTCON |= (1 << 7));
-[e =| _INTCON -> << -> 1 `i -> 7 `i `Vuc ]
 "9
-[; ;timer2.c: 9:      (INTCON |= (1 << 6));
-[e =| _INTCON -> << -> 1 `i -> 6 `i `Vuc ]
+[; ;timer2.c: 9:     (T2CON &= ~(1 << 2)) ;
+[e =& _T2CON -> ~ << -> 1 `i -> 2 `i `Vuc ]
 "10
-[; ;timer2.c: 10:      (PIR1 &= ~(1 << 1));
-[e =& _PIR1 -> ~ << -> 1 `i -> 1 `i `Vuc ]
+[; ;timer2.c: 10:     (T2CON |= (1 << 1));
+[e =| _T2CON -> << -> 1 `i -> 1 `i `Vuc ]
 "11
-[; ;timer2.c: 11:      (PIE1 |= (1 << 1));
-[e =| _PIE1 -> << -> 1 `i -> 1 `i `Vuc ]
+[; ;timer2.c: 11:     (T2CON &= ~(1 << 0));
+[e =& _T2CON -> ~ << -> 1 `i -> 0 `i `Vuc ]
 "12
-[; ;timer2.c: 12:      (T2CON |= (1 << 2)) ;
-[e =| _T2CON -> << -> 1 `i -> 2 `i `Vuc ]
+[; ;timer2.c: 12:     TMR2 = 131 ;
+[e = _TMR2 -> -> 131 `i `uc ]
 "13
-[; ;timer2.c: 13: }
+[; ;timer2.c: 13:     (INTCON |= (1 << 7));
+[e =| _INTCON -> << -> 1 `i -> 7 `i `Vuc ]
+"14
+[; ;timer2.c: 14:     (INTCON |= (1 << 6));
+[e =| _INTCON -> << -> 1 `i -> 6 `i `Vuc ]
+"15
+[; ;timer2.c: 15:     (PIR1 &= ~(1 << 1));
+[e =& _PIR1 -> ~ << -> 1 `i -> 1 `i `Vuc ]
+"16
+[; ;timer2.c: 16:     (PIE1 |= (1 << 1));
+[e =| _PIE1 -> << -> 1 `i -> 1 `i `Vuc ]
+"17
+[; ;timer2.c: 17:     (T2CON |= (1 << 2)) ;
+[e =| _T2CON -> << -> 1 `i -> 2 `i `Vuc ]
+"18
+[; ;timer2.c: 18: }
 [e :UE 95 ]
 }
-"15
-[; ;timer2.c: 15: void stop_timer(void){
+"25
+[; ;timer2.c: 25: void stop_timer(void){
 [v _stop_timer `(v ~T0 @X0 1 ef ]
 {
 [e :U _stop_timer ]
 [f ]
-"16
-[; ;timer2.c: 16:     (T2CON &= ~(1 << 2)) ;
+"26
+[; ;timer2.c: 26:     (T2CON &= ~(1 << 2)) ;
 [e =& _T2CON -> ~ << -> 1 `i -> 2 `i `Vuc ]
-"17
-[; ;timer2.c: 17: }
+"27
+[; ;timer2.c: 27: }
 [e :UE 96 ]
 }
-"19
-[; ;timer2.c: 19: void start_timer(void){
+"34
+[; ;timer2.c: 34: void start_timer(void){
 [v _start_timer `(v ~T0 @X0 1 ef ]
 {
 [e :U _start_timer ]
 [f ]
-"20
-[; ;timer2.c: 20:     (T2CON |= (1 << 2)) ;
+"35
+[; ;timer2.c: 35:     (T2CON |= (1 << 2)) ;
 [e =| _T2CON -> << -> 1 `i -> 2 `i `Vuc ]
-"21
-[; ;timer2.c: 21:     TMR2 = 131 ;
+"36
+[; ;timer2.c: 36:     TMR2 = 131 ;
 [e = _TMR2 -> -> 131 `i `uc ]
-"22
-[; ;timer2.c: 22: }
+"37
+[; ;timer2.c: 37: }
 [e :UE 97 ]
 }

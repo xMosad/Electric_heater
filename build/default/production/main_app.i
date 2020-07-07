@@ -14,6 +14,7 @@
 
 
 
+
 #pragma config FOSC = EXTRC
 #pragma config WDTE = OFF
 #pragma config PWRTE = OFF
@@ -1738,7 +1739,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 18 "main_app.c" 2
+# 19 "main_app.c" 2
 
 # 1 "./timer2.h" 1
 
@@ -1756,7 +1757,7 @@ extern __bank0 __bit __timeout;
 void timer2_init(void);
 void stop_timer(void);
 void start_timer(void);
-# 19 "main_app.c" 2
+# 20 "main_app.c" 2
 
 # 1 "./temp_sensor.h" 1
 
@@ -1775,10 +1776,12 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
+
 
 typedef enum {
     ON_STATE,
@@ -1787,7 +1790,7 @@ typedef enum {
 # 6 "./temp_sensor.h" 2
 
 # 1 "./adc_drive.h" 1
-# 16 "./adc_drive.h"
+# 14 "./adc_drive.h"
 void ADC_Init(void);
 uint16_t ADC_Read (uint8_t channel);
 # 7 "./temp_sensor.h" 2
@@ -1795,13 +1798,14 @@ uint16_t ADC_Read (uint8_t channel);
 
 
 
+
 void temp_sensor_init(void);
 uint8_t average (void);
 uint8_t temp_sensor_read (void);
-# 20 "main_app.c" 2
+# 21 "main_app.c" 2
 
 # 1 "./temp_control.h" 1
-# 16 "./temp_control.h"
+# 14 "./temp_control.h"
 typedef enum {
     HEATER_ON ,
     COOLER_ON,
@@ -1812,7 +1816,7 @@ void temp_control_off(void);
 void temp_control_init(void);
 void temp_set( uint8_t temp );
 void led(void);
-# 21 "main_app.c" 2
+# 22 "main_app.c" 2
 
 # 1 "./SSD.h" 1
 # 11 "./SSD.h"
@@ -1831,7 +1835,7 @@ typedef enum {
     SSD_ON,
     SSD_OFF
 }SSD_BLINK_t;
-# 22 "main_app.c" 2
+# 23 "main_app.c" 2
 
 # 1 "./switchs.h" 1
 
@@ -1846,12 +1850,12 @@ typedef enum {
 
 
 # 1 "./I2C_drive.h" 1
-# 18 "./I2C_drive.h"
+# 16 "./I2C_drive.h"
 # 1 "./I2C_drive.h" 1
-# 18 "./I2C_drive.h" 2
+# 16 "./I2C_drive.h" 2
 
 
-void I2C1_Init(long int freq);
+void I2C1_Init(uint32_t freq);
 void I2C_Wait(void);
 void I2C1_Start(void);
 void I2C1_Stop(void);
@@ -1878,7 +1882,7 @@ typedef enum{
 void switch_init(void);
 void switch_scan(void);
 void sw_action(void);
-# 23 "main_app.c" 2
+# 24 "main_app.c" 2
 
 
 
@@ -1897,14 +1901,16 @@ uint8_t hold_temp ;
 
 MODE_STATE_t mode = NORMAL_MODE ;
 POWER_MODES_t power_mode = ON_STATE ;
-
-
+# 75 "main_app.c"
 void __attribute__((picinterrupt(("")))) isr (void){
     TMR2 = 131 ;
+
     if(PIR1 & (1 << 1)){
        (PIR1 &= ~(1 << 1));
        switch (mode){
+
            case NORMAL_MODE :
+
                 hold_temp = temp_sensor_read ();
                 ssd_update(hold_temp);
                 temp_set (hold_temp);
@@ -1912,26 +1918,35 @@ void __attribute__((picinterrupt(("")))) isr (void){
                 switch_scan();
                 sw_action();
                 break;
+
            case SETTING_MODE :
+
                 switch_scan();
                 sw_action();
                 ssd_blink(set_temp);
                 break;
+           default :
+
+               break ;
        }
     }
+
+
     if (INTCON & (1 << 1)){
         (INTCON &= ~(1 << 1));
         switch (power_mode){
-             case ON_STATE :
-                 power_mode = OFF_STATE ;
-                 stop_timer();
-                 ssd_turn_off();
-                 temp_control_off();
-                 break;
-             case OFF_STATE :
-                  power_mode = ON_STATE ;
-                  start_timer();
-                  break;
+
+            case ON_STATE :
+                power_mode = OFF_STATE ;
+                stop_timer();
+                ssd_turn_off();
+                temp_control_off();
+                break;
+
+            case OFF_STATE :
+                power_mode = ON_STATE ;
+                start_timer();
+                break;
         }
     }
 
@@ -1943,6 +1958,8 @@ void main() {
     switch_init();
     ssd_init();
     EEPROM_init();
+
+
     if (EEPROM_read(0xff) > 100){
        set_temp = 60 ;
     }

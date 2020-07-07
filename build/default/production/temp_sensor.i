@@ -12,9 +12,7 @@
 
 
 # 1 "./port.h" 1
-
-
-
+# 17 "./port.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1728,7 +1726,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 4 "./port.h" 2
+# 17 "./port.h" 2
 # 4 "./temp_sensor.h" 2
 
 # 1 "./macros.h" 1
@@ -1745,10 +1743,12 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
+
 
 typedef enum {
     ON_STATE,
@@ -1757,10 +1757,11 @@ typedef enum {
 # 6 "./temp_sensor.h" 2
 
 # 1 "./adc_drive.h" 1
-# 16 "./adc_drive.h"
+# 14 "./adc_drive.h"
 void ADC_Init(void);
 uint16_t ADC_Read (uint8_t channel);
 # 7 "./temp_sensor.h" 2
+
 
 
 
@@ -1776,23 +1777,40 @@ extern uint8_t temp_timer ;
 static uint8_t i = 0 ;
 uint8_t temp = 0 ;
 
+
+
+
+
+
 void temp_sensor_init(void){
-     ADC_Init();
-     (TRISA |= (1 << 2));
+    ADC_Init();
+    (TRISA |= (1 << 2));
 }
 
+
+
+
+
+
 uint8_t average (void){
-     uint8_t i = 0 ;
-     uint16_t sum = 0 ;
-     for (i = 0 ; i < 10 ; i++){
-         sum = sum + temp_hold_array[i] ;
-     }
-     return (sum / 10) ;
+    uint8_t i = 0 ;
+    uint16_t sum = 0 ;
+    for (i = 0 ; i < 10 ; i++){
+        sum = sum + temp_hold_array[i] ;
+    }
+    return (sum / 10) ;
 }
+
+
+
+
+
 
 uint8_t temp_sensor_read (void) {
     temp_timer += 1;
-    if( (temp_timer == 100) ){
+
+    if( temp_timer == 100 ){
+
         temp_hold_array[i] = (ADC_Read(2) * 4.89 ) ;
         temp_hold_array[i] = temp_hold_array[i] / 10.0 ;
         i++ ;

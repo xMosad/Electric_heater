@@ -7,7 +7,7 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "SSD.c" 2
-# 1 "./SSD.H" 1
+# 1 "./SSD.h" 1
 
 
 
@@ -22,21 +22,21 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
 
+
 typedef enum {
     ON_STATE,
     OFF_STATE
 }POWER_MODES_t;
-# 4 "./SSD.H" 2
+# 4 "./SSD.h" 2
 
 # 1 "./port.h" 1
-
-
-
+# 17 "./port.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1750,11 +1750,11 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 4 "./port.h" 2
-# 5 "./SSD.H" 2
+# 17 "./port.h" 2
+# 5 "./SSD.h" 2
 
 # 1 "./macros.h" 1
-# 6 "./SSD.H" 2
+# 6 "./SSD.h" 2
 
 
 
@@ -1785,18 +1785,26 @@ extern uint8_t set_temp ;
 SSD_SELECT_t ssd_select = SSD_LEFT ;
 SSD_BLINK_t blink = SSD_ON ;
 
-void ssd_init(void){
 
+
+
+
+
+void ssd_init(void){
 
      (TRISD &= ~(255 << 0));
      (PORTD &= ~(255 << 0));
-
 
      (TRISA &= ~(1 << 4));
      (PORTA &= ~(1 << 4));
      (TRISA &= ~(1 << 5));
      (PORTA &= ~(1 << 5));
 }
+
+
+
+
+
 
 uint8_t display7s(uint8_t v)
 {
@@ -1857,11 +1865,18 @@ uint8_t display7s(uint8_t v)
 
 }
 
+
+
+
+
+
 void ssd_update(uint8_t temp){
     ssd_delay += 1;
+
     if (ssd_delay == 50){
+
         switch (ssd_select){
-           case SSD_LEFT :
+            case SSD_LEFT :
                 tens = temp / 10 ;
                 (PORTA |= (1 << 4));
                 (PORTA &= ~(1 << 5));
@@ -1877,39 +1892,54 @@ void ssd_update(uint8_t temp){
                  ssd_delay = 0 ;
                  ssd_select = SSD_LEFT ;
                  break;
-            default : break ;
+            default :
+                break ;
         }
     }
 }
+
+
+
+
+
 
 void ssd_turn_off(void){
     (PORTD &= ~(255 << 0));
     (PORTA &= ~(1 << 4));
     (PORTA &= ~(1 << 5));
+    ssd_delay = 0 ;
 }
+
+
+
+
+
 
 void ssd_blink(uint8_t e_temp){
      ssd_timer += 1;
-     switch (blink){
-            case SSD_ON :
-                 if (ssd_timer < 1000){
-                     ssd_update(e_temp);
-                 }
-                 else{
-                      blink = SSD_OFF ;
-                      ssd_timer = 0 ;
-                      ssd_turn_off();
-                 }
-                 break ;
-            case SSD_OFF :
-                 if (ssd_timer == 1000){
-                     blink = SSD_ON ;
-                     ssd_timer = 0 ;
-                 }
-                 else {
 
-                 }
-                 break;
-            default : break ;
+     switch (blink){
+
+        case SSD_ON :
+            if (ssd_timer < 1000){
+                ssd_update(e_temp);
+                }
+            else{
+                blink = SSD_OFF ;
+                ssd_timer = 0 ;
+                ssd_turn_off();
+            }
+            break ;
+
+        case SSD_OFF :
+            if (ssd_timer == 1000){
+                blink = SSD_ON ;
+                ssd_timer = 0 ;
+            }
+            else {
+
+            }
+            break;
+        default : break ;
      }
 }

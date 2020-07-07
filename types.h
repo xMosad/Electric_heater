@@ -8,11 +8,13 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+// system mode
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
 
+//power mode
 typedef enum {
     ON_STATE,
     OFF_STATE

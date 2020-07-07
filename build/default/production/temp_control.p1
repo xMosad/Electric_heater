@@ -204,171 +204,199 @@ Version 4.0 HI-TECH Software Intermediate Code
 "5 temp_control.c
 [; ;temp_control.c: 5: TEMP_STATE_t state ;
 [v _state `E864 ~T0 @X0 1 e ]
-"7
-[; ;temp_control.c: 7: void temp_control_init(void){
+"13
+[; ;temp_control.c: 13: void temp_control_init(void){
 [v _temp_control_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _temp_control_init ]
 [f ]
-"9
-[; ;temp_control.c: 9:      (TRISC &= ~(1 << 5));
+"15
+[; ;temp_control.c: 15:      (TRISC &= ~(1 << 5));
 [e =& _TRISC -> ~ << -> 1 `i -> 5 `i `Vuc ]
-"10
-[; ;temp_control.c: 10:      (PORTC &= ~(1 << 5));
+"16
+[; ;temp_control.c: 16:      (PORTC &= ~(1 << 5));
 [e =& _PORTC -> ~ << -> 1 `i -> 5 `i `Vuc ]
-"13
-[; ;temp_control.c: 13:      (TRISC &= ~(1 << 2));
-[e =& _TRISC -> ~ << -> 1 `i -> 2 `i `Vuc ]
-"14
-[; ;temp_control.c: 14:      (PORTC &= ~(1 << 2));
-[e =& _PORTC -> ~ << -> 1 `i -> 2 `i `Vuc ]
-"17
-[; ;temp_control.c: 17:      (TRISB &= ~(1 << 4));
-[e =& _TRISB -> ~ << -> 1 `i -> 4 `i `Vuc ]
-"18
-[; ;temp_control.c: 18:      (PORTB &= ~(1 << 4));
-[e =& _PORTB -> ~ << -> 1 `i -> 4 `i `Vuc ]
 "19
-[; ;temp_control.c: 19: }
+[; ;temp_control.c: 19:      (TRISC &= ~(1 << 2));
+[e =& _TRISC -> ~ << -> 1 `i -> 2 `i `Vuc ]
+"20
+[; ;temp_control.c: 20:      (PORTC &= ~(1 << 2));
+[e =& _PORTC -> ~ << -> 1 `i -> 2 `i `Vuc ]
+"23
+[; ;temp_control.c: 23:      (TRISB &= ~(1 << 4));
+[e =& _TRISB -> ~ << -> 1 `i -> 4 `i `Vuc ]
+"24
+[; ;temp_control.c: 24:      (PORTB &= ~(1 << 4));
+[e =& _PORTB -> ~ << -> 1 `i -> 4 `i `Vuc ]
+"25
+[; ;temp_control.c: 25: }
 [e :UE 95 ]
 }
-"21
-[; ;temp_control.c: 21: void temp_set( uint8_t temp ){
+"32
+[; ;temp_control.c: 32: void temp_set( uint8_t temp ){
 [v _temp_set `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _temp_set ]
 [v _temp `uc ~T0 @X0 1 r1 ]
 [f ]
-"22
-[; ;temp_control.c: 22:      if ( temp < (set_temp - 5 ) ){
+"33
+[; ;temp_control.c: 33:     if ( temp < (set_temp - 5 ) ){
 [e $ ! < -> _temp `i - -> _set_temp `i -> 5 `i 97  ]
 {
-"23
-[; ;temp_control.c: 23:           (PORTC |= (1 << 5));
+"34
+[; ;temp_control.c: 34:         (PORTC |= (1 << 5));
 [e =| _PORTC -> << -> 1 `i -> 5 `i `Vuc ]
-"24
-[; ;temp_control.c: 24:           (PORTC &= ~(1 << 2));
+"35
+[; ;temp_control.c: 35:         (PORTC &= ~(1 << 2));
 [e =& _PORTC -> ~ << -> 1 `i -> 2 `i `Vuc ]
-"25
-[; ;temp_control.c: 25:           state = HEATER_ON ;
+"36
+[; ;temp_control.c: 36:         state = HEATER_ON ;
 [e = _state . `E864 0 ]
-"26
-[; ;temp_control.c: 26:      }
+"37
+[; ;temp_control.c: 37:     }
 }
 [e $U 98  ]
-"27
-[; ;temp_control.c: 27:      else if ( temp > (set_temp + 5 ) ){
+"38
+[; ;temp_control.c: 38:     else if ( temp > (set_temp + 5 ) ){
 [e :U 97 ]
 [e $ ! > -> _temp `i + -> _set_temp `i -> 5 `i 99  ]
 {
-"28
-[; ;temp_control.c: 28:           (PORTC |= (1 << 2));
+"39
+[; ;temp_control.c: 39:         (PORTC |= (1 << 2));
 [e =| _PORTC -> << -> 1 `i -> 2 `i `Vuc ]
-"29
-[; ;temp_control.c: 29:           (PORTC &= ~(1 << 5));
+"40
+[; ;temp_control.c: 40:         (PORTC &= ~(1 << 5));
 [e =& _PORTC -> ~ << -> 1 `i -> 5 `i `Vuc ]
-"30
-[; ;temp_control.c: 30:           state = COOLER_ON ;
+"41
+[; ;temp_control.c: 41:         state = COOLER_ON ;
 [e = _state . `E864 1 ]
-"31
-[; ;temp_control.c: 31:      }
+"42
+[; ;temp_control.c: 42:     }
 }
 [e $U 100  ]
-"32
-[; ;temp_control.c: 32:      else {
+"43
+[; ;temp_control.c: 43:     else if ( temp == set_temp){
 [e :U 99 ]
+[e $ ! == -> _temp `i -> _set_temp `i 101  ]
 {
-"36
-[; ;temp_control.c: 36:      }
+"44
+[; ;temp_control.c: 44:         (PORTC &= ~(1 << 2));
+[e =& _PORTC -> ~ << -> 1 `i -> 2 `i `Vuc ]
+"45
+[; ;temp_control.c: 45:         (PORTC &= ~(1 << 5));
+[e =& _PORTC -> ~ << -> 1 `i -> 5 `i `Vuc ]
+"46
+[; ;temp_control.c: 46:         state = IDEL_STATE ;
+[e = _state . `E864 2 ]
+"47
+[; ;temp_control.c: 47:     }
 }
+[e $U 102  ]
+"48
+[; ;temp_control.c: 48:     else {
+[e :U 101 ]
+{
+"50
+[; ;temp_control.c: 50:     }
+}
+[e :U 102 ]
 [e :U 100 ]
 [e :U 98 ]
-"37
-[; ;temp_control.c: 37: }
+"51
+[; ;temp_control.c: 51: }
 [e :UE 96 ]
 }
-"39
-[; ;temp_control.c: 39: void led(void){
+"58
+[; ;temp_control.c: 58: void led(void){
 [v _led `(v ~T0 @X0 1 ef ]
 {
 [e :U _led ]
 [f ]
-"40
-[; ;temp_control.c: 40:      switch (state){
-[e $U 103  ]
-{
-"42
-[; ;temp_control.c: 42:          case HEATER_ON :
-[e :U 104 ]
-"43
-[; ;temp_control.c: 43:               led_timer += 1;
-[e =+ _led_timer -> -> 1 `i `ui ]
-"44
-[; ;temp_control.c: 44:               if (led_timer == 1000){
-[e $ ! == _led_timer -> -> 1000 `i `ui 105  ]
-{
-"45
-[; ;temp_control.c: 45:                  (PORTB ^= ( 1 << 4));
-[e =^ _PORTB -> << -> 1 `i -> 4 `i `Vuc ]
-"46
-[; ;temp_control.c: 46:                  led_timer = 0 ; }
-[e = _led_timer -> -> 0 `i `ui ]
-}
-[e :U 105 ]
-"47
-[; ;temp_control.c: 47:               break ;
-[e $U 102  ]
-"50
-[; ;temp_control.c: 50:          case COOLER_ON :
-[e :U 106 ]
-"51
-[; ;temp_control.c: 51:                (PORTB |= (1 << 4));
-[e =| _PORTB -> << -> 1 `i -> 4 `i `Vuc ]
-"52
-[; ;temp_control.c: 52:                led_timer = 0 ;
-[e = _led_timer -> -> 0 `i `ui ]
-"53
-[; ;temp_control.c: 53:                break ;
-[e $U 102  ]
-"56
-[; ;temp_control.c: 56:          case IDEL_STATE : (PORTB &= ~(1 << 4)); break;
-[e :U 107 ]
-[e =& _PORTB -> ~ << -> 1 `i -> 4 `i `Vuc ]
-[e $U 102  ]
-"58
-[; ;temp_control.c: 58:          default : break ;
-[e :U 108 ]
-[e $U 102  ]
 "59
-[; ;temp_control.c: 59:      }
-}
-[e $U 102  ]
-[e :U 103 ]
-[e [\ -> _state `ui , $ -> . `E864 0 `ui 104
- , $ -> . `E864 1 `ui 106
- , $ -> . `E864 2 `ui 107
- 108 ]
-[e :U 102 ]
-"60
-[; ;temp_control.c: 60: }
-[e :UE 101 ]
-}
+[; ;temp_control.c: 59:     switch (state){
+[e $U 105  ]
+{
+"61
+[; ;temp_control.c: 61:         case HEATER_ON :
+[e :U 106 ]
 "62
-[; ;temp_control.c: 62: void temp_control_off(void){
+[; ;temp_control.c: 62:             led_timer += 1;
+[e =+ _led_timer -> -> 1 `i `ui ]
+"63
+[; ;temp_control.c: 63:                 if (led_timer == 1000){
+[e $ ! == _led_timer -> -> 1000 `i `ui 107  ]
+{
+"64
+[; ;temp_control.c: 64:                     (PORTB ^= ( 1 << 4));
+[e =^ _PORTB -> << -> 1 `i -> 4 `i `Vuc ]
+"65
+[; ;temp_control.c: 65:                     led_timer = 0 ; }
+[e = _led_timer -> -> 0 `i `ui ]
+}
+[e :U 107 ]
+"66
+[; ;temp_control.c: 66:             break ;
+[e $U 104  ]
+"68
+[; ;temp_control.c: 68:         case COOLER_ON :
+[e :U 108 ]
+"69
+[; ;temp_control.c: 69:                 (PORTB |= (1 << 4));
+[e =| _PORTB -> << -> 1 `i -> 4 `i `Vuc ]
+"70
+[; ;temp_control.c: 70:                 led_timer = 0 ;
+[e = _led_timer -> -> 0 `i `ui ]
+"71
+[; ;temp_control.c: 71:                 break ;
+[e $U 104  ]
+"73
+[; ;temp_control.c: 73:         case IDEL_STATE :
+[e :U 109 ]
+"74
+[; ;temp_control.c: 74:             (PORTB &= ~(1 << 4));
+[e =& _PORTB -> ~ << -> 1 `i -> 4 `i `Vuc ]
+"75
+[; ;temp_control.c: 75:             break;
+[e $U 104  ]
+"76
+[; ;temp_control.c: 76:         default :
+[e :U 110 ]
+"78
+[; ;temp_control.c: 78:             break ;
+[e $U 104  ]
+"79
+[; ;temp_control.c: 79:      }
+}
+[e $U 104  ]
+[e :U 105 ]
+[e [\ -> _state `ui , $ -> . `E864 0 `ui 106
+ , $ -> . `E864 1 `ui 108
+ , $ -> . `E864 2 `ui 109
+ 110 ]
+[e :U 104 ]
+"80
+[; ;temp_control.c: 80: }
+[e :UE 103 ]
+}
+"87
+[; ;temp_control.c: 87: void temp_control_off(void){
 [v _temp_control_off `(v ~T0 @X0 1 ef ]
 {
 [e :U _temp_control_off ]
 [f ]
-"63
-[; ;temp_control.c: 63:      (PORTC &= ~(1 << 5));
+"88
+[; ;temp_control.c: 88:      (PORTC &= ~(1 << 5));
 [e =& _PORTC -> ~ << -> 1 `i -> 5 `i `Vuc ]
-"64
-[; ;temp_control.c: 64:      (PORTC &= ~(1 << 2));
+"89
+[; ;temp_control.c: 89:      (PORTC &= ~(1 << 2));
 [e =& _PORTC -> ~ << -> 1 `i -> 2 `i `Vuc ]
-"65
-[; ;temp_control.c: 65:      (PORTB &= ~(1 << 4));
+"90
+[; ;temp_control.c: 90:      (PORTB &= ~(1 << 4));
 [e =& _PORTB -> ~ << -> 1 `i -> 4 `i `Vuc ]
-"66
-[; ;temp_control.c: 66: }
-[e :UE 109 ]
+"91
+[; ;temp_control.c: 91:      led_timer = 0 ;
+[e = _led_timer -> -> 0 `i `ui ]
+"92
+[; ;temp_control.c: 92: }
+[e :UE 111 ]
 }

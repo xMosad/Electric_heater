@@ -8,7 +8,7 @@
 # 2 "<built-in>" 2
 # 1 "adc_drive.c" 2
 # 1 "./adc_drive.h" 1
-# 12 "./adc_drive.h"
+# 10 "./adc_drive.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1722,7 +1722,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 12 "./adc_drive.h" 2
+# 10 "./adc_drive.h" 2
 
 # 1 "./types.h" 1
 
@@ -1735,24 +1735,31 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
 
+
 typedef enum {
     ON_STATE,
     OFF_STATE
 }POWER_MODES_t;
-# 13 "./adc_drive.h" 2
+# 11 "./adc_drive.h" 2
 
 # 1 "./macros.h" 1
-# 14 "./adc_drive.h" 2
+# 12 "./adc_drive.h" 2
 
 
 void ADC_Init(void);
 uint16_t ADC_Read (uint8_t channel);
 # 1 "adc_drive.c" 2
+
+
+
+
+
 
 
 void ADC_Init(void){
@@ -1770,6 +1777,11 @@ void ADC_Init(void){
 
     (ADCON0 |= (1 << 0));
 }
+
+
+
+
+
 
 uint16_t ADC_Read (uint8_t channel){
     (ADCON0 &= ~(1 << 3));

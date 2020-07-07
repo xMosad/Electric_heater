@@ -3,12 +3,12 @@
 [d edition pro ]
 [d chip 16F877A ]
 [d frameptr 0 ]
-"39 D:\xBlank\COM\swift\Electric water\main_app.c
+"40 D:\xBlank\COM\swift\Electric water\main_app.c
 [e E859 . `uc
 NORMAL_MODE 0
 SETTING_MODE 1
 ]
-"40
+"41
 [e E863 . `uc
 ON_STATE 0
 OFF_STATE 1
@@ -28,7 +28,7 @@ SSD_OFF 1
 PRESSED 0
 RELEASED 1
 ]
-"40
+"55
 [e E8 . `uc
 NORMAL_MODE 0
 SETTING_MODE 1
@@ -39,12 +39,12 @@ HEATER_ON 0
 COOLER_ON 1
 IDEL_STATE 2
 ]
-"3 D:\xBlank\COM\swift\Electric water\adc_drive.c
+"8 D:\xBlank\COM\swift\Electric water\adc_drive.c
 [v _ADC_Init ADC_Init `(v  1 e 1 0 ]
-"19
+"29
 [v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
-"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\aldiv.c
-[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awdiv.c
 [v ___awdiv __awdiv `(i  1 e 2 0 ]
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
@@ -67,67 +67,67 @@ IDEL_STATE 2
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"3 D:\xBlank\COM\swift\Electric water\eeprom.c
+"8 D:\xBlank\COM\swift\Electric water\eeprom.c
 [v _EEPROM_init EEPROM_init `(v  1 e 1 0 ]
-"7
+"18
 [v _EEPROM_write EEPROM_write `(v  1 e 1 0 ]
-"14
+"31
 [v _EEPROM_read EEPROM_read `(uc  1 e 1 0 ]
-"3 D:\xBlank\COM\swift\Electric water\I2C_drive.c
+"8 D:\xBlank\COM\swift\Electric water\I2C_drive.c
 [v _I2C_Wait I2C_Wait `(v  1 e 1 0 ]
 [v i1_I2C_Wait I2C_Wait `(v  1 e 1 0 ]
-"7
+"17
 [v _I2C1_Init I2C1_Init `(v  1 e 1 0 ]
-"15
+"31
 [v _I2C1_Start I2C1_Start `(v  1 e 1 0 ]
 [v i1_I2C1_Start I2C1_Start `(v  1 e 1 0 ]
-"20
+"41
 [v _I2C1_Stop I2C1_Stop `(v  1 e 1 0 ]
 [v i1_I2C1_Stop I2C1_Stop `(v  1 e 1 0 ]
-"25
+"51
 [v _I2C1_Wr I2C1_Wr `(v  1 e 1 0 ]
 [v i1_I2C1_Wr I2C1_Wr `(v  1 e 1 0 ]
-"31
-[v _I2C1_Rd I2C1_Rd `(uc  1 e 1 0 ]
-"43 D:\xBlank\COM\swift\Electric water\main_app.c
-[v _isr isr `II(v  1 e 1 0 ]
-"80
-[v _main main `(v  1 e 1 0 ]
-"10 D:\xBlank\COM\swift\Electric water\SSD.c
-[v _ssd_init ssd_init `(v  1 e 1 0 ]
-"23
-[v _display7s display7s `(uc  1 e 1 0 ]
-"82
-[v _ssd_update ssd_update `(v  1 e 1 0 ]
-"107
-[v _ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
-"113
-[v _ssd_blink ssd_blink `(v  1 e 1 0 ]
-"12 D:\xBlank\COM\swift\Electric water\switchs.c
-[v _switch_init switch_init `(v  1 e 1 0 ]
-"20
-[v _switch_scan switch_scan `(v  1 e 1 0 ]
-"36
-[v _sw_action sw_action `(v  1 e 1 0 ]
-"7 D:\xBlank\COM\swift\Electric water\temp_control.c
-[v _temp_control_init temp_control_init `(v  1 e 1 0 ]
-"21
-[v _temp_set temp_set `(v  1 e 1 0 ]
-"39
-[v _led led `(v  1 e 1 0 ]
 "62
+[v _I2C1_Rd I2C1_Rd `(uc  1 e 1 0 ]
+"75 D:\xBlank\COM\swift\Electric water\main_app.c
+[v _isr isr `II(v  1 e 1 0 ]
+"124
+[v _main main `(v  1 e 1 0 ]
+"15 D:\xBlank\COM\swift\Electric water\SSD.c
+[v _ssd_init ssd_init `(v  1 e 1 0 ]
+"31
+[v _display7s display7s `(uc  1 e 1 0 ]
+"95
+[v _ssd_update ssd_update `(v  1 e 1 0 ]
+"128
+[v _ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
+"140
+[v _ssd_blink ssd_blink `(v  1 e 1 0 ]
+"15 D:\xBlank\COM\swift\Electric water\switchs.c
+[v _switch_init switch_init `(v  1 e 1 0 ]
+"28
+[v _switch_scan switch_scan `(v  1 e 1 0 ]
+"50
+[v _sw_action sw_action `(v  1 e 1 0 ]
+"13 D:\xBlank\COM\swift\Electric water\temp_control.c
+[v _temp_control_init temp_control_init `(v  1 e 1 0 ]
+"32
+[v _temp_set temp_set `(v  1 e 1 0 ]
+"58
+[v _led led `(v  1 e 1 0 ]
+"87
 [v _temp_control_off temp_control_off `(v  1 e 1 0 ]
-"8 D:\xBlank\COM\swift\Electric water\temp_sensor.c
+"13 D:\xBlank\COM\swift\Electric water\temp_sensor.c
 [v _temp_sensor_init temp_sensor_init `(v  1 e 1 0 ]
-"13
+"23
 [v _average average `(uc  1 e 1 0 ]
-"22
+"37
 [v _temp_sensor_read temp_sensor_read `(uc  1 e 1 0 ]
-"3 D:\xBlank\COM\swift\Electric water\timer2.c
+"8 D:\xBlank\COM\swift\Electric water\timer2.c
 [v _timer2_init timer2_init `(v  1 e 1 0 ]
-"15
+"25
 [v _stop_timer stop_timer `(v  1 e 1 0 ]
-"19
+"34
 [v _start_timer start_timer `(v  1 e 1 0 ]
 "166 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
@@ -175,25 +175,25 @@ IDEL_STATE 2
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
 "2824
 [v _SSPIF SSPIF `VEb  1 e 0 @99 ]
-"29 D:\xBlank\COM\swift\Electric water\main_app.c
+"30 D:\xBlank\COM\swift\Electric water\main_app.c
 [v _temp_timer temp_timer `uc  1 e 1 0 ]
-"30
-[v _ssd_delay ssd_delay `uc  1 e 1 0 ]
 "31
-[v _switch_delay switch_delay `uc  1 e 1 0 ]
+[v _ssd_delay ssd_delay `uc  1 e 1 0 ]
 "32
-[v _switch_wait switch_wait `ui  1 e 2 0 ]
+[v _switch_delay switch_delay `uc  1 e 1 0 ]
 "33
-[v _ssd_timer ssd_timer `ui  1 e 2 0 ]
+[v _switch_wait switch_wait `ui  1 e 2 0 ]
 "34
+[v _ssd_timer ssd_timer `ui  1 e 2 0 ]
+"35
 [v _led_timer led_timer `ui  1 e 2 0 ]
-"36
-[v _set_temp set_temp `uc  1 e 1 0 ]
 "37
+[v _set_temp set_temp `uc  1 e 1 0 ]
+"38
 [v _hold_temp hold_temp `uc  1 e 1 0 ]
-"39
-[v _mode mode `E859  1 e 1 0 ]
 "40
+[v _mode mode `E859  1 e 1 0 ]
+"41
 [v _power_mode power_mode `E863  1 e 1 0 ]
 "3 D:\xBlank\COM\swift\Electric water\SSD.c
 [v _tens tens `uc  1 e 1 0 ]
@@ -214,128 +214,127 @@ IDEL_STATE 2
 [v _i i `uc  1 s 1 i ]
 "6
 [v _temp temp `uc  1 e 1 0 ]
-"80 D:\xBlank\COM\swift\Electric water\main_app.c
+"124 D:\xBlank\COM\swift\Electric water\main_app.c
 [v _main main `(v  1 e 1 0 ]
 {
-"99
+"145
 } 0
-"3 D:\xBlank\COM\swift\Electric water\timer2.c
+"8 D:\xBlank\COM\swift\Electric water\timer2.c
 [v _timer2_init timer2_init `(v  1 e 1 0 ]
-{
-"13
-} 0
-"8 D:\xBlank\COM\swift\Electric water\temp_sensor.c
-[v _temp_sensor_init temp_sensor_init `(v  1 e 1 0 ]
-{
-"11
-} 0
-"3 D:\xBlank\COM\swift\Electric water\adc_drive.c
-[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
-{
-"17
-} 0
-"7 D:\xBlank\COM\swift\Electric water\temp_control.c
-[v _temp_control_init temp_control_init `(v  1 e 1 0 ]
-{
-"19
-} 0
-"12 D:\xBlank\COM\swift\Electric water\switchs.c
-[v _switch_init switch_init `(v  1 e 1 0 ]
 {
 "18
 } 0
-"10 D:\xBlank\COM\swift\Electric water\SSD.c
-[v _ssd_init ssd_init `(v  1 e 1 0 ]
+"13 D:\xBlank\COM\swift\Electric water\temp_sensor.c
+[v _temp_sensor_init temp_sensor_init `(v  1 e 1 0 ]
+{
+"16
+} 0
+"8 D:\xBlank\COM\swift\Electric water\adc_drive.c
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+{
+"22
+} 0
+"13 D:\xBlank\COM\swift\Electric water\temp_control.c
+[v _temp_control_init temp_control_init `(v  1 e 1 0 ]
+{
+"25
+} 0
+"15 D:\xBlank\COM\swift\Electric water\switchs.c
+[v _switch_init switch_init `(v  1 e 1 0 ]
 {
 "21
 } 0
-"14 D:\xBlank\COM\swift\Electric water\eeprom.c
-[v _EEPROM_read EEPROM_read `(uc  1 e 1 0 ]
+"15 D:\xBlank\COM\swift\Electric water\SSD.c
+[v _ssd_init ssd_init `(v  1 e 1 0 ]
 {
-"15
-[v EEPROM_read@_x _x `uc  1 a 1 4 ]
-"14
-[v EEPROM_read@address address `ui  1 p 2 1 ]
 "24
 } 0
-"25 D:\xBlank\COM\swift\Electric water\I2C_drive.c
+"31 D:\xBlank\COM\swift\Electric water\eeprom.c
+[v _EEPROM_read EEPROM_read `(uc  1 e 1 0 ]
+{
+"32
+[v EEPROM_read@_x _x `uc  1 a 1 4 ]
+"31
+[v EEPROM_read@address address `ui  1 p 2 1 ]
+"41
+} 0
+"51 D:\xBlank\COM\swift\Electric water\I2C_drive.c
 [v _I2C1_Wr I2C1_Wr `(v  1 e 1 0 ]
 {
 [v I2C1_Wr@_data _data `uc  1 a 1 wreg ]
 [v I2C1_Wr@_data _data `uc  1 a 1 wreg ]
 [v I2C1_Wr@_data _data `uc  1 a 1 0 ]
-"29
+"55
 } 0
-"20
+"41
 [v _I2C1_Stop I2C1_Stop `(v  1 e 1 0 ]
 {
-"23
-} 0
-"15
-[v _I2C1_Start I2C1_Start `(v  1 e 1 0 ]
-{
-"18
-} 0
-"3
-[v _I2C_Wait I2C_Wait `(v  1 e 1 0 ]
-{
-"5
+"44
 } 0
 "31
-[v _I2C1_Rd I2C1_Rd `(uc  1 e 1 0 ]
+[v _I2C1_Start I2C1_Start `(v  1 e 1 0 ]
 {
-"37
+"34
 } 0
-"3 D:\xBlank\COM\swift\Electric water\eeprom.c
-[v _EEPROM_init EEPROM_init `(v  1 e 1 0 ]
-{
-"5
-} 0
-"7 D:\xBlank\COM\swift\Electric water\I2C_drive.c
-[v _I2C1_Init I2C1_Init `(v  1 e 1 0 ]
-{
-[v I2C1_Init@freq freq `l  1 p 4 15 ]
-"13
-} 0
-"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\aldiv.c
-[v ___aldiv __aldiv `(l  1 e 4 0 ]
+"8
+[v _I2C_Wait I2C_Wait `(v  1 e 1 0 ]
 {
 "10
-[v ___aldiv@quotient quotient `l  1 a 4 11 ]
-"11
-[v ___aldiv@sign sign `uc  1 a 1 10 ]
-[v ___aldiv@counter counter `uc  1 a 1 9 ]
-"5
-[v ___aldiv@divisor divisor `l  1 p 4 0 ]
-[v ___aldiv@dividend dividend `l  1 p 4 4 ]
-"41
 } 0
-"43 D:\xBlank\COM\swift\Electric water\main_app.c
+"62
+[v _I2C1_Rd I2C1_Rd `(uc  1 e 1 0 ]
+{
+"68
+} 0
+"8 D:\xBlank\COM\swift\Electric water\eeprom.c
+[v _EEPROM_init EEPROM_init `(v  1 e 1 0 ]
+{
+"10
+} 0
+"17 D:\xBlank\COM\swift\Electric water\I2C_drive.c
+[v _I2C1_Init I2C1_Init `(v  1 e 1 0 ]
+{
+[v I2C1_Init@freq freq `ul  1 p 4 14 ]
+"24
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 9 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 13 ]
+"5
+[v ___lldiv@divisor divisor `ul  1 p 4 0 ]
+[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+"30
+} 0
+"75 D:\xBlank\COM\swift\Electric water\main_app.c
 [v _isr isr `II(v  1 e 1 0 ]
 {
-"79
+"123
 } 0
-"21 D:\xBlank\COM\swift\Electric water\temp_control.c
+"32 D:\xBlank\COM\swift\Electric water\temp_control.c
 [v _temp_set temp_set `(v  1 e 1 0 ]
 {
 [v temp_set@temp temp `uc  1 a 1 wreg ]
 [v temp_set@temp temp `uc  1 a 1 wreg ]
 [v temp_set@temp temp `uc  1 a 1 3 ]
-"37
+"51
 } 0
-"22 D:\xBlank\COM\swift\Electric water\temp_sensor.c
+"37 D:\xBlank\COM\swift\Electric water\temp_sensor.c
 [v _temp_sensor_read temp_sensor_read `(uc  1 e 1 0 ]
 {
-"36
+"53
 } 0
-"13
+"23
 [v _average average `(uc  1 e 1 0 ]
 {
-"15
+"25
 [v average@sum sum `ui  1 a 2 11 ]
-"14
+"24
 [v average@i i `uc  1 a 1 13 ]
-"20
+"30
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
@@ -377,17 +376,17 @@ IDEL_STATE 2
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S546 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S545 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S551 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S554 . 4 `l 1 i 4 0 `d 1 f 4 0 `S546 1 fAsBytes 4 0 `S551 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S554  1 a 4 26 ]
+[s S550 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S553 . 4 `l 1 i 4 0 `d 1 f 4 0 `S545 1 fAsBytes 4 0 `S550 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S553  1 a 4 26 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 20 ]
-[s S623 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S622 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S626 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S623 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S626  1 a 2 30 ]
+[u S625 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S622 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S625  1 a 2 30 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 25 ]
 "11
@@ -433,92 +432,92 @@ IDEL_STATE 2
 [v ___fldiv@b b `d  1 p 4 10 ]
 "185
 } 0
-"19 D:\xBlank\COM\swift\Electric water\adc_drive.c
+"29 D:\xBlank\COM\swift\Electric water\adc_drive.c
 [v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
 {
 [v ADC_Read@channel channel `uc  1 a 1 wreg ]
 [v ADC_Read@channel channel `uc  1 a 1 wreg ]
 [v ADC_Read@channel channel `uc  1 a 1 4 ]
-"27
+"37
 } 0
-"62 D:\xBlank\COM\swift\Electric water\temp_control.c
+"87 D:\xBlank\COM\swift\Electric water\temp_control.c
 [v _temp_control_off temp_control_off `(v  1 e 1 0 ]
 {
-"66
+"92
 } 0
-"20 D:\xBlank\COM\swift\Electric water\switchs.c
+"28 D:\xBlank\COM\swift\Electric water\switchs.c
 [v _switch_scan switch_scan `(v  1 e 1 0 ]
 {
-"34
+"43
 } 0
-"36
+"50
 [v _sw_action sw_action `(v  1 e 1 0 ]
 {
-"71
+"91
 } 0
-"7 D:\xBlank\COM\swift\Electric water\eeprom.c
+"18 D:\xBlank\COM\swift\Electric water\eeprom.c
 [v _EEPROM_write EEPROM_write `(v  1 e 1 0 ]
 {
 [v EEPROM_write@address address `ui  1 p 2 1 ]
 [v EEPROM_write@_x _x `uc  1 p 1 3 ]
-"13
+"24
 } 0
-"25 D:\xBlank\COM\swift\Electric water\I2C_drive.c
+"51 D:\xBlank\COM\swift\Electric water\I2C_drive.c
 [v i1_I2C1_Wr I2C1_Wr `(v  1 e 1 0 ]
 {
 [v i1I2C1_Wr@_data _data `uc  1 a 1 wreg ]
 [v i1I2C1_Wr@_data _data `uc  1 a 1 wreg ]
 [v i1I2C1_Wr@_data _data `uc  1 a 1 0 ]
-"29
+"55
 } 0
-"20
+"41
 [v i1_I2C1_Stop I2C1_Stop `(v  1 e 1 0 ]
 {
-"23
+"44
 } 0
-"15
+"31
 [v i1_I2C1_Start I2C1_Start `(v  1 e 1 0 ]
 {
-"18
+"34
 } 0
-"3
+"8
 [v i1_I2C_Wait I2C_Wait `(v  1 e 1 0 ]
 {
-"5
+"10
 } 0
-"15 D:\xBlank\COM\swift\Electric water\timer2.c
+"25 D:\xBlank\COM\swift\Electric water\timer2.c
 [v _stop_timer stop_timer `(v  1 e 1 0 ]
 {
-"17
+"27
 } 0
-"19
+"34
 [v _start_timer start_timer `(v  1 e 1 0 ]
 {
-"22
+"37
 } 0
-"113 D:\xBlank\COM\swift\Electric water\SSD.c
+"140 D:\xBlank\COM\swift\Electric water\SSD.c
 [v _ssd_blink ssd_blink `(v  1 e 1 0 ]
 {
 [v ssd_blink@e_temp e_temp `uc  1 a 1 wreg ]
 [v ssd_blink@e_temp e_temp `uc  1 a 1 wreg ]
 [v ssd_blink@e_temp e_temp `uc  1 a 1 13 ]
-"137
+"167
 } 0
-"82
+"95
 [v _ssd_update ssd_update `(v  1 e 1 0 ]
 {
 [v ssd_update@temp temp `uc  1 a 1 wreg ]
 [v ssd_update@temp temp `uc  1 a 1 wreg ]
 [v ssd_update@temp temp `uc  1 a 1 12 ]
-"105
+"121
 } 0
-"23
+"31
 [v _display7s display7s `(uc  1 e 1 0 ]
 {
 [v display7s@v v `uc  1 a 1 wreg ]
 [v display7s@v v `uc  1 a 1 wreg ]
 [v display7s@v v `uc  1 a 1 2 ]
-"80
+"88
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
@@ -544,13 +543,13 @@ IDEL_STATE 2
 [v ___awdiv@dividend dividend `i  1 p 2 2 ]
 "41
 } 0
-"107 D:\xBlank\COM\swift\Electric water\SSD.c
+"128 D:\xBlank\COM\swift\Electric water\SSD.c
 [v _ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
 {
-"111
+"133
 } 0
-"39 D:\xBlank\COM\swift\Electric water\temp_control.c
+"58 D:\xBlank\COM\swift\Electric water\temp_control.c
 [v _led led `(v  1 e 1 0 ]
 {
-"60
+"80
 } 0

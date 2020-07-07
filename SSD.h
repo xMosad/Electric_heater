@@ -5,8 +5,8 @@
 #include "port.h"
 #include "macros.h"
 
-#define SSD_SWITCH_TIME 50
-#define SSD_BLINK_TIME 1000
+#define SSD_SWITCH_TIME 50 // delay between SSD switch 
+#define SSD_BLINK_TIME 1000 // blink period of SSD
 
 void ssd_init(void);
 uint8_t display7s(uint8_t v);

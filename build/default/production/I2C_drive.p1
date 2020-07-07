@@ -200,128 +200,128 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"3 I2C_drive.c
-[; ;I2C_drive.c: 3: void I2C_Wait(void){
+"8 I2C_drive.c
+[; ;I2C_drive.c: 8: void I2C_Wait(void){
 [v _I2C_Wait `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C_Wait ]
 [f ]
-"4
-[; ;I2C_drive.c: 4:   while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
+"9
+[; ;I2C_drive.c: 9:   while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
 [e $U 96  ]
 [e :U 97 ]
 [e :U 96 ]
 [e $ || != & -> _SSPSTAT `i -> 4 `i -> 0 `i != & -> _SSPCON2 `i -> 31 `i -> 0 `i 97  ]
 [e :U 98 ]
-"5
-[; ;I2C_drive.c: 5: }
+"10
+[; ;I2C_drive.c: 10: }
 [e :UE 95 ]
 }
-"7
-[; ;I2C_drive.c: 7: void I2C1_Init(long int freq){
-[v _I2C1_Init `(v ~T0 @X0 1 ef1`l ]
+"17
+[; ;I2C_drive.c: 17: void I2C1_Init(uint32_t freq){
+[v _I2C1_Init `(v ~T0 @X0 1 ef1`ul ]
 {
 [e :U _I2C1_Init ]
-[v _freq `l ~T0 @X0 1 r1 ]
+[v _freq `ul ~T0 @X0 1 r1 ]
 [f ]
-"8
-[; ;I2C_drive.c: 8:     (SSPCON |= (1 << 5));
+"18
+[; ;I2C_drive.c: 18:     (SSPCON |= (1 << 5));
 [e =| _SSPCON -> << -> 1 `i -> 5 `i `Vuc ]
-"9
-[; ;I2C_drive.c: 9:     (SSPCON |= (1 << 3));
+"19
+[; ;I2C_drive.c: 19:     (SSPCON |= (1 << 3));
 [e =| _SSPCON -> << -> 1 `i -> 3 `i `Vuc ]
-"10
-[; ;I2C_drive.c: 10:     SSPADD = (8000000 / (freq * 4) ) - 1 ;
-[e = _SSPADD -> - / -> 8000000 `l * _freq -> -> 4 `i `l -> -> 1 `i `l `uc ]
-"11
-[; ;I2C_drive.c: 11:     TRISC |= (1 << 3);
+"20
+[; ;I2C_drive.c: 20:     SSPADD = (8000000 / (freq * 4) ) - 1 ;
+[e = _SSPADD -> - / -> -> 8000000 `l `ul * _freq -> -> -> 4 `i `l `ul -> -> -> 1 `i `l `ul `uc ]
+"22
+[; ;I2C_drive.c: 22:     TRISC |= (1 << 3);
 [e =| _TRISC -> << -> 1 `i -> 3 `i `Vuc ]
-"12
-[; ;I2C_drive.c: 12:     TRISC |= (1 << 4);
+"23
+[; ;I2C_drive.c: 23:     TRISC |= (1 << 4);
 [e =| _TRISC -> << -> 1 `i -> 4 `i `Vuc ]
-"13
-[; ;I2C_drive.c: 13: }
+"24
+[; ;I2C_drive.c: 24: }
 [e :UE 99 ]
 }
-"15
-[; ;I2C_drive.c: 15: void I2C1_Start(void){
+"31
+[; ;I2C_drive.c: 31: void I2C1_Start(void){
 [v _I2C1_Start `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C1_Start ]
 [f ]
-"16
-[; ;I2C_drive.c: 16:     I2C_Wait();
+"32
+[; ;I2C_drive.c: 32:     I2C_Wait();
 [e ( _I2C_Wait ..  ]
-"17
-[; ;I2C_drive.c: 17:     (SSPCON2 |= (1 << 0));
+"33
+[; ;I2C_drive.c: 33:     (SSPCON2 |= (1 << 0));
 [e =| _SSPCON2 -> << -> 1 `i -> 0 `i `Vuc ]
-"18
-[; ;I2C_drive.c: 18: }
+"34
+[; ;I2C_drive.c: 34: }
 [e :UE 100 ]
 }
-"20
-[; ;I2C_drive.c: 20: void I2C1_Stop(void){
+"41
+[; ;I2C_drive.c: 41: void I2C1_Stop(void){
 [v _I2C1_Stop `(v ~T0 @X0 1 ef ]
 {
 [e :U _I2C1_Stop ]
 [f ]
-"21
-[; ;I2C_drive.c: 21:     I2C_Wait();
+"42
+[; ;I2C_drive.c: 42:     I2C_Wait();
 [e ( _I2C_Wait ..  ]
-"22
-[; ;I2C_drive.c: 22:     (SSPCON2 |= (1 << 2));
+"43
+[; ;I2C_drive.c: 43:     (SSPCON2 |= (1 << 2));
 [e =| _SSPCON2 -> << -> 1 `i -> 2 `i `Vuc ]
-"23
-[; ;I2C_drive.c: 23: }
+"44
+[; ;I2C_drive.c: 44: }
 [e :UE 101 ]
 }
-"25
-[; ;I2C_drive.c: 25: void I2C1_Wr(uint8_t _data){
+"51
+[; ;I2C_drive.c: 51: void I2C1_Wr(uint8_t _data){
 [v _I2C1_Wr `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _I2C1_Wr ]
 [v __data `uc ~T0 @X0 1 r1 ]
 [f ]
-"26
-[; ;I2C_drive.c: 26:     I2C_Wait();
+"52
+[; ;I2C_drive.c: 52:     I2C_Wait();
 [e ( _I2C_Wait ..  ]
-"27
-[; ;I2C_drive.c: 27:     SSPBUF = _data ;
+"53
+[; ;I2C_drive.c: 53:     SSPBUF = _data ;
 [e = _SSPBUF __data ]
-"28
-[; ;I2C_drive.c: 28:     I2C_Wait();
+"54
+[; ;I2C_drive.c: 54:     I2C_Wait();
 [e ( _I2C_Wait ..  ]
-"29
-[; ;I2C_drive.c: 29: }
+"55
+[; ;I2C_drive.c: 55: }
 [e :UE 102 ]
 }
-"31
-[; ;I2C_drive.c: 31: uint8_t I2C1_Rd(void){
+"62
+[; ;I2C_drive.c: 62: uint8_t I2C1_Rd(void){
 [v _I2C1_Rd `(uc ~T0 @X0 1 ef ]
 {
 [e :U _I2C1_Rd ]
 [f ]
-"32
-[; ;I2C_drive.c: 32:     SSPIF = 0;
+"63
+[; ;I2C_drive.c: 63:     SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
-"33
-[; ;I2C_drive.c: 33:     (SSPCON2 |= (1 << 3));
+"64
+[; ;I2C_drive.c: 64:     (SSPCON2 |= (1 << 3));
 [e =| _SSPCON2 -> << -> 1 `i -> 3 `i `Vuc ]
-"34
-[; ;I2C_drive.c: 34:     while(!SSPIF);
+"65
+[; ;I2C_drive.c: 65:     while(!SSPIF);
 [e $U 104  ]
 [e :U 105 ]
 [e :U 104 ]
 [e $ ! _SSPIF 105  ]
 [e :U 106 ]
-"35
-[; ;I2C_drive.c: 35:     SSPIF = 0;
+"66
+[; ;I2C_drive.c: 66:     SSPIF = 0;
 [e = _SSPIF -> -> 0 `i `b ]
-"36
-[; ;I2C_drive.c: 36:     return SSPBUF;
+"67
+[; ;I2C_drive.c: 67:     return SSPBUF;
 [e ) _SSPBUF ]
 [e $UE 103  ]
-"37
-[; ;I2C_drive.c: 37: }
+"68
+[; ;I2C_drive.c: 68: }
 [e :UE 103 ]
 }

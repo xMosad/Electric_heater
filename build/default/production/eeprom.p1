@@ -1,18 +1,18 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"20 ./I2C_drive.h
-[; ;./I2C_drive.h: 20: void I2C1_Init(long int freq);
-[v _I2C1_Init `(v ~T0 @X0 0 ef1`l ]
-"22
-[; ;./I2C_drive.h: 22: void I2C1_Start(void);
+"18 ./I2C_drive.h
+[; ;./I2C_drive.h: 18: void I2C1_Init(uint32_t freq);
+[v _I2C1_Init `(v ~T0 @X0 0 ef1`ul ]
+"20
+[; ;./I2C_drive.h: 20: void I2C1_Start(void);
 [v _I2C1_Start `(v ~T0 @X0 0 ef ]
-"24
-[; ;./I2C_drive.h: 24: void I2C1_Wr(uint8_t _data);
+"22
+[; ;./I2C_drive.h: 22: void I2C1_Wr(uint8_t _data);
 [v _I2C1_Wr `(v ~T0 @X0 0 ef1`uc ]
-"23
-[; ;./I2C_drive.h: 23: void I2C1_Stop(void);
+"21
+[; ;./I2C_drive.h: 21: void I2C1_Stop(void);
 [v _I2C1_Stop `(v ~T0 @X0 0 ef ]
-"25
-[; ;./I2C_drive.h: 25: uint8_t I2C1_Rd(void);
+"23
+[; ;./I2C_drive.h: 23: uint8_t I2C1_Rd(void);
 [v _I2C1_Rd `(uc ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
@@ -194,83 +194,83 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"3 eeprom.c
-[; ;eeprom.c: 3: void EEPROM_init(void){
+"8 eeprom.c
+[; ;eeprom.c: 8: void EEPROM_init(void){
 [v _EEPROM_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _EEPROM_init ]
 [f ]
-"4
-[; ;eeprom.c: 4:      I2C1_Init(100000);
-[e ( _I2C1_Init (1 -> 100000 `l ]
-"5
-[; ;eeprom.c: 5: }
+"9
+[; ;eeprom.c: 9:      I2C1_Init(100000);
+[e ( _I2C1_Init (1 -> -> 100000 `l `ul ]
+"10
+[; ;eeprom.c: 10: }
 [e :UE 95 ]
 }
-"7
-[; ;eeprom.c: 7: void EEPROM_write (uint16_t address , uint8_t _x){
+"18
+[; ;eeprom.c: 18: void EEPROM_write (uint16_t address , uint8_t _x){
 [v _EEPROM_write `(v ~T0 @X0 1 ef2`ui`uc ]
 {
 [e :U _EEPROM_write ]
 [v _address `ui ~T0 @X0 1 r1 ]
 [v __x `uc ~T0 @X0 1 r2 ]
 [f ]
-"8
-[; ;eeprom.c: 8:     I2C1_Start();
+"19
+[; ;eeprom.c: 19:     I2C1_Start();
 [e ( _I2C1_Start ..  ]
-"9
-[; ;eeprom.c: 9:     I2C1_Wr(0XA2);
+"20
+[; ;eeprom.c: 20:     I2C1_Wr(0XA2);
 [e ( _I2C1_Wr (1 -> -> 162 `i `uc ]
-"10
-[; ;eeprom.c: 10:     I2C1_Wr(address);
+"21
+[; ;eeprom.c: 21:     I2C1_Wr(address);
 [e ( _I2C1_Wr (1 -> _address `uc ]
-"11
-[; ;eeprom.c: 11:     I2C1_Wr(_x);
+"22
+[; ;eeprom.c: 22:     I2C1_Wr(_x);
 [e ( _I2C1_Wr (1 __x ]
-"12
-[; ;eeprom.c: 12:     I2C1_Stop();
+"23
+[; ;eeprom.c: 23:     I2C1_Stop();
 [e ( _I2C1_Stop ..  ]
-"13
-[; ;eeprom.c: 13: }
+"24
+[; ;eeprom.c: 24: }
 [e :UE 96 ]
 }
-"14
-[; ;eeprom.c: 14: uint8_t EEPROM_read(uint16_t address ){
+"31
+[; ;eeprom.c: 31: uint8_t EEPROM_read(uint16_t address ){
 [v _EEPROM_read `(uc ~T0 @X0 1 ef1`ui ]
 {
 [e :U _EEPROM_read ]
 [v _address `ui ~T0 @X0 1 r1 ]
 [f ]
-"15
-[; ;eeprom.c: 15:     uint8_t _x = 0 ;
+"32
+[; ;eeprom.c: 32:     uint8_t _x = 0 ;
 [v __x `uc ~T0 @X0 1 a ]
 [e = __x -> -> 0 `i `uc ]
-"16
-[; ;eeprom.c: 16:     I2C1_Start();
+"33
+[; ;eeprom.c: 33:     I2C1_Start();
 [e ( _I2C1_Start ..  ]
-"17
-[; ;eeprom.c: 17:     I2C1_Wr(0XA2);
+"34
+[; ;eeprom.c: 34:     I2C1_Wr(0XA2);
 [e ( _I2C1_Wr (1 -> -> 162 `i `uc ]
-"18
-[; ;eeprom.c: 18:     I2C1_Wr(address);
+"35
+[; ;eeprom.c: 35:     I2C1_Wr(address);
 [e ( _I2C1_Wr (1 -> _address `uc ]
-"19
-[; ;eeprom.c: 19:     I2C1_Start();
+"36
+[; ;eeprom.c: 36:     I2C1_Start();
 [e ( _I2C1_Start ..  ]
-"20
-[; ;eeprom.c: 20:     I2C1_Wr(0XA3);
+"37
+[; ;eeprom.c: 37:     I2C1_Wr(0XA3);
 [e ( _I2C1_Wr (1 -> -> 163 `i `uc ]
-"21
-[; ;eeprom.c: 21:     _x = I2C1_Rd();
+"38
+[; ;eeprom.c: 38:     _x = I2C1_Rd();
 [e = __x ( _I2C1_Rd ..  ]
-"22
-[; ;eeprom.c: 22:     I2C1_Stop();
+"39
+[; ;eeprom.c: 39:     I2C1_Stop();
 [e ( _I2C1_Stop ..  ]
-"23
-[; ;eeprom.c: 23:     return _x ;
+"40
+[; ;eeprom.c: 40:     return _x ;
 [e ) __x ]
 [e $UE 97  ]
-"24
-[; ;eeprom.c: 24: }
+"41
+[; ;eeprom.c: 41: }
 [e :UE 97 ]
 }

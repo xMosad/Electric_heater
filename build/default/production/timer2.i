@@ -15,9 +15,7 @@
 # 4 "./timer2.h" 2
 
 # 1 "./port.h" 1
-
-
-
+# 17 "./port.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1731,7 +1729,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 4 "./port.h" 2
+# 17 "./port.h" 2
 # 5 "./timer2.h" 2
 
 
@@ -1743,21 +1741,36 @@ void start_timer(void);
 # 1 "timer2.c" 2
 
 
+
+
+
+
+
 void timer2_init(void){
-     (T2CON &= ~(1 << 2)) ;
-     (T2CON |= (1 << 1));
-     (T2CON &= ~(1 << 0));
-     TMR2 = 131 ;
-     (INTCON |= (1 << 7));
-     (INTCON |= (1 << 6));
-     (PIR1 &= ~(1 << 1));
-     (PIE1 |= (1 << 1));
-     (T2CON |= (1 << 2)) ;
+    (T2CON &= ~(1 << 2)) ;
+    (T2CON |= (1 << 1));
+    (T2CON &= ~(1 << 0));
+    TMR2 = 131 ;
+    (INTCON |= (1 << 7));
+    (INTCON |= (1 << 6));
+    (PIR1 &= ~(1 << 1));
+    (PIE1 |= (1 << 1));
+    (T2CON |= (1 << 2)) ;
 }
+
+
+
+
+
 
 void stop_timer(void){
     (T2CON &= ~(1 << 2)) ;
 }
+
+
+
+
+
 
 void start_timer(void){
     (T2CON |= (1 << 2)) ;

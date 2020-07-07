@@ -191,67 +191,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"3 adc_drive.c
-[; ;adc_drive.c: 3: void ADC_Init(void){
+"8 adc_drive.c
+[; ;adc_drive.c: 8: void ADC_Init(void){
 [v _ADC_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _ADC_Init ]
 [f ]
-"5
-[; ;adc_drive.c: 5:     (ADCON0 |= (1 << 7));
+"10
+[; ;adc_drive.c: 10:     (ADCON0 |= (1 << 7));
 [e =| _ADCON0 -> << -> 1 `i -> 7 `i `Vuc ]
-"6
-[; ;adc_drive.c: 6:     (ADCON0 |= (1 << 6));
-[e =| _ADCON0 -> << -> 1 `i -> 6 `i `Vuc ]
-"7
-[; ;adc_drive.c: 7:     (ADCON1 |= (1 << 6));
-[e =| _ADCON1 -> << -> 1 `i -> 6 `i `Vuc ]
-"9
-[; ;adc_drive.c: 9:     (ADCON1 |= (1 << 7));
-[e =| _ADCON1 -> << -> 1 `i -> 7 `i `Vuc ]
 "11
-[; ;adc_drive.c: 11:     (ADCON1 &= ~(1 << 0));
-[e =& _ADCON1 -> ~ << -> 1 `i -> 0 `i `Vuc ]
+[; ;adc_drive.c: 11:     (ADCON0 |= (1 << 6));
+[e =| _ADCON0 -> << -> 1 `i -> 6 `i `Vuc ]
 "12
-[; ;adc_drive.c: 12:     (ADCON1 &= ~(1 << 1));
-[e =& _ADCON1 -> ~ << -> 1 `i -> 1 `i `Vuc ]
-"13
-[; ;adc_drive.c: 13:     (ADCON1 &= ~(1 << 2));
-[e =& _ADCON1 -> ~ << -> 1 `i -> 2 `i `Vuc ]
+[; ;adc_drive.c: 12:     (ADCON1 |= (1 << 6));
+[e =| _ADCON1 -> << -> 1 `i -> 6 `i `Vuc ]
 "14
-[; ;adc_drive.c: 14:     (ADCON1 &= ~(1 << 3));
-[e =& _ADCON1 -> ~ << -> 1 `i -> 3 `i `Vuc ]
+[; ;adc_drive.c: 14:     (ADCON1 |= (1 << 7));
+[e =| _ADCON1 -> << -> 1 `i -> 7 `i `Vuc ]
 "16
-[; ;adc_drive.c: 16:     (ADCON0 |= (1 << 0));
-[e =| _ADCON0 -> << -> 1 `i -> 0 `i `Vuc ]
+[; ;adc_drive.c: 16:     (ADCON1 &= ~(1 << 0));
+[e =& _ADCON1 -> ~ << -> 1 `i -> 0 `i `Vuc ]
 "17
-[; ;adc_drive.c: 17: }
+[; ;adc_drive.c: 17:     (ADCON1 &= ~(1 << 1));
+[e =& _ADCON1 -> ~ << -> 1 `i -> 1 `i `Vuc ]
+"18
+[; ;adc_drive.c: 18:     (ADCON1 &= ~(1 << 2));
+[e =& _ADCON1 -> ~ << -> 1 `i -> 2 `i `Vuc ]
+"19
+[; ;adc_drive.c: 19:     (ADCON1 &= ~(1 << 3));
+[e =& _ADCON1 -> ~ << -> 1 `i -> 3 `i `Vuc ]
+"21
+[; ;adc_drive.c: 21:     (ADCON0 |= (1 << 0));
+[e =| _ADCON0 -> << -> 1 `i -> 0 `i `Vuc ]
+"22
+[; ;adc_drive.c: 22: }
 [e :UE 95 ]
 }
-"19
-[; ;adc_drive.c: 19: uint16_t ADC_Read (uint8_t channel){
+"29
+[; ;adc_drive.c: 29: uint16_t ADC_Read (uint8_t channel){
 [v _ADC_Read `(ui ~T0 @X0 1 ef1`uc ]
 {
 [e :U _ADC_Read ]
 [v _channel `uc ~T0 @X0 1 r1 ]
 [f ]
-"20
-[; ;adc_drive.c: 20:     (ADCON0 &= ~(1 << 3));
+"30
+[; ;adc_drive.c: 30:     (ADCON0 &= ~(1 << 3));
 [e =& _ADCON0 -> ~ << -> 1 `i -> 3 `i `Vuc ]
-"21
-[; ;adc_drive.c: 21:     (ADCON0 &= ~(1 << 4));
+"31
+[; ;adc_drive.c: 31:     (ADCON0 &= ~(1 << 4));
 [e =& _ADCON0 -> ~ << -> 1 `i -> 4 `i `Vuc ]
-"22
-[; ;adc_drive.c: 22:     (ADCON0 &= ~(1 << 5));
+"32
+[; ;adc_drive.c: 32:     (ADCON0 &= ~(1 << 5));
 [e =& _ADCON0 -> ~ << -> 1 `i -> 5 `i `Vuc ]
-"23
-[; ;adc_drive.c: 23:     ADCON0 |= (channel << 3);
+"33
+[; ;adc_drive.c: 33:     ADCON0 |= (channel << 3);
 [e =| _ADCON0 -> << -> _channel `i -> 3 `i `Vuc ]
-"24
-[; ;adc_drive.c: 24:     (ADCON0 |= (1 << 2));
+"34
+[; ;adc_drive.c: 34:     (ADCON0 |= (1 << 2));
 [e =| _ADCON0 -> << -> 1 `i -> 2 `i `Vuc ]
-"25
-[; ;adc_drive.c: 25:     while (ADCON0 & (1 << 2)){}
+"35
+[; ;adc_drive.c: 35:     while (ADCON0 & (1 << 2)){}
 [e $U 97  ]
 [e :U 98 ]
 {
@@ -259,11 +259,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 97 ]
 [e $ != & -> _ADCON0 `i << -> 1 `i -> 2 `i -> 0 `i 98  ]
 [e :U 99 ]
-"26
-[; ;adc_drive.c: 26:     return ( ADRESL + (ADRESH* 256) ) ;
+"36
+[; ;adc_drive.c: 36:     return ( ADRESL + (ADRESH* 256) ) ;
 [e ) -> + -> _ADRESL `i * -> _ADRESH `i -> 256 `i `ui ]
 [e $UE 96  ]
-"27
-[; ;adc_drive.c: 27: }
+"37
+[; ;adc_drive.c: 37: }
 [e :UE 96 ]
 }

@@ -11,8 +11,6 @@
 #define MAX_TEMP 75
 #define LED_TOOGLE_TIME 1000
 
-
-
 typedef enum {
     HEATER_ON ,
     COOLER_ON,

@@ -4,7 +4,7 @@
 #include "macros.h"
 #include "port.h"
 
-#define TIMER_INITIAL_VALUE 131
+#define TIMER_INITIAL_VALUE 131 
 
 void timer2_init(void);
 void stop_timer(void);

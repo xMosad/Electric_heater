@@ -1,6 +1,19 @@
 #ifndef PORT_H
 #define PORT_H
 
+/*
+ * LM5              - > A2
+ * HEATER           - > C5
+ * COOLER           - > C2
+ * LED              - > B4
+ * UP BUTTON        - > B2
+ * DOWN BUTTPN      - > B1
+ * OFF BUTTON       - > B0
+ * SSD LEFT SELECT  - > A4
+ * SSD RIGHT SELECT - > A5
+ * SSD PORT         - > D
+ */
+
 #include <xc.h>
 // temperature sensor
 #define TEMP_SENSOR_DIR  TRISA

@@ -22,10 +22,12 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
+
 
 typedef enum {
     ON_STATE,
@@ -34,7 +36,7 @@ typedef enum {
 # 4 "./eeprom.h" 2
 
 # 1 "./I2C_drive.h" 1
-# 15 "./I2C_drive.h"
+# 13 "./I2C_drive.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1748,17 +1750,17 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 15 "./I2C_drive.h" 2
+# 13 "./I2C_drive.h" 2
 
 
 # 1 "./macros.h" 1
-# 17 "./I2C_drive.h" 2
+# 15 "./I2C_drive.h" 2
 
 # 1 "./I2C_drive.h" 1
-# 18 "./I2C_drive.h" 2
+# 16 "./I2C_drive.h" 2
 
 
-void I2C1_Init(long int freq);
+void I2C1_Init(uint32_t freq);
 void I2C_Wait(void);
 void I2C1_Start(void);
 void I2C1_Stop(void);
@@ -1773,9 +1775,20 @@ uint8_t EEPROM_read(uint16_t address );
 # 1 "eeprom.c" 2
 
 
+
+
+
+
+
 void EEPROM_init(void){
      I2C1_Init(100000);
 }
+
+
+
+
+
+
 
 void EEPROM_write (uint16_t address , uint8_t _x){
     I2C1_Start();
@@ -1784,6 +1797,12 @@ void EEPROM_write (uint16_t address , uint8_t _x){
     I2C1_Wr(_x);
     I2C1_Stop();
 }
+
+
+
+
+
+
 uint8_t EEPROM_read(uint16_t address ){
     uint8_t _x = 0 ;
     I2C1_Start();

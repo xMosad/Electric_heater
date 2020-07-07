@@ -1,24 +1,41 @@
 #include "eeprom.h"
 
+/******************************************************************************
+* Description : Initialize the EEPROM 24c04  
+* Parameters  : none 
+* Return type : void                                                                           
+*******************************************************************************/
 void EEPROM_init(void){
-     I2C1_Init(100000);
+     I2C1_Init(100000); // intialize the 12c with freq 100 KHZ
 }
 
+/******************************************************************************
+* Description : write to the 24c04  
+* Parameters  : the address to be written into (uint16_t)
+*               the data to be written         (uint8_t)
+* Return type : void                                                                           
+*******************************************************************************/
 void EEPROM_write (uint16_t address , uint8_t _x){
-    I2C1_Start();
-    I2C1_Wr(0XA2);
-    I2C1_Wr(address);
-    I2C1_Wr(_x);
-    I2C1_Stop();
+    I2C1_Start();     //send start
+    I2C1_Wr(0XA2);    // write the 24c04 (write address) 
+    I2C1_Wr(address); // write address of the data
+    I2C1_Wr(_x);      // write the data in the address
+    I2C1_Stop();      // send stop
 }
+
+/******************************************************************************
+* Description : read from a specific address in 24c04  
+* Parameters  : the address where we read from  
+* Return type : uint8_t                                                                           
+*******************************************************************************/
 uint8_t EEPROM_read(uint16_t address ){
-    uint8_t _x = 0 ;
-    I2C1_Start();
-    I2C1_Wr(0XA2);
-    I2C1_Wr(address);
-    I2C1_Start();
-    I2C1_Wr(0XA3);
-    _x = I2C1_Rd();
-    I2C1_Stop();
+    uint8_t _x = 0 ;  // variable to hold the written data 
+    I2C1_Start();     // send start 
+    I2C1_Wr(0XA2);    // write the 24c04 (write address)
+    I2C1_Wr(address); // write address of the data
+    I2C1_Start();     // send repeated start
+    I2C1_Wr(0XA3);    // write the 24c04 (read address) 
+    _x = I2C1_Rd();   // read the data
+    I2C1_Stop();      // send stop
     return _x ;
 }

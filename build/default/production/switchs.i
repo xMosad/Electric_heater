@@ -22,10 +22,12 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
+
 
 typedef enum {
     ON_STATE,
@@ -34,9 +36,7 @@ typedef enum {
 # 4 "./switchs.h" 2
 
 # 1 "./port.h" 1
-
-
-
+# 17 "./port.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1750,7 +1750,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 4 "./port.h" 2
+# 17 "./port.h" 2
 # 5 "./switchs.h" 2
 
 # 1 "./macros.h" 1
@@ -1762,12 +1762,12 @@ extern __bank0 __bit __timeout;
 
 
 # 1 "./I2C_drive.h" 1
-# 18 "./I2C_drive.h"
+# 16 "./I2C_drive.h"
 # 1 "./I2C_drive.h" 1
-# 18 "./I2C_drive.h" 2
+# 16 "./I2C_drive.h" 2
 
 
-void I2C1_Init(long int freq);
+void I2C1_Init(uint32_t freq);
 void I2C_Wait(void);
 void I2C1_Start(void);
 void I2C1_Stop(void);
@@ -1802,9 +1802,12 @@ extern uint16_t switch_wait;
 extern uint8_t set_temp ;
 SWITCH_STATE_t up_sw = RELEASED ;
 SWITCH_STATE_t down_sw = RELEASED ;
-SWITCH_STATE_t power_sw = RELEASED ;
-
 extern MODE_STATE_t mode ;
+
+
+
+
+
 
 void switch_init(void){
 
@@ -1814,8 +1817,14 @@ void switch_init(void){
      (INTCON |= (1 << 4));
 }
 
+
+
+
+
+
 void switch_scan(void){
-     switch_delay += 1 ;
+    switch_delay += 1 ;
+
     if (switch_delay == 200){
        if ( !((PORTB & (1<<2)))){
           up_sw = PRESSED ;
@@ -1830,39 +1839,50 @@ void switch_scan(void){
     }
 }
 
-void sw_action(void){
-     switch (mode){
-         case NORMAL_MODE :
-              if ( (up_sw == PRESSED ) || (down_sw == PRESSED) ) {
-                  mode = SETTING_MODE ;
-                  up_sw = RELEASED ;
-                  down_sw = RELEASED ;
-              }
-              else{
 
-              }
-              break;
-         case SETTING_MODE :
-              if (switch_wait < 5000){
-                  if ( (up_sw == PRESSED) && (set_temp < 75)){
-                      set_temp += 5 ;
-                      switch_wait = 0 ;
-                      up_sw = RELEASED ;
-                  }
-                  else if ( (down_sw == PRESSED) && (set_temp > 35)){
-                      set_temp -= 5 ;
-                      switch_wait = 0 ;
-                      down_sw = RELEASED ;
-                  }
-                  else {
-                      switch_wait += 1 ;
-                  }
-              }
-              else {
-                   mode = NORMAL_MODE ;
-                   switch_wait = 0 ;
-                   EEPROM_write(0xff , set_temp);
-              }
-              break;
-     }
+
+
+
+
+void sw_action(void){
+    switch (mode){
+
+        case NORMAL_MODE :
+            if ( (up_sw == PRESSED ) || (down_sw == PRESSED) ) {
+                mode = SETTING_MODE ;
+                up_sw = RELEASED ;
+                down_sw = RELEASED ;
+            }
+            else{
+
+            }
+            break;
+
+        case SETTING_MODE :
+
+            if (switch_wait < 5000){
+                if ( (up_sw == PRESSED) && (set_temp < 75)){
+                    set_temp += 5 ;
+                    switch_wait = 0 ;
+                    up_sw = RELEASED ;
+                }
+                else if ( (down_sw == PRESSED) && (set_temp > 35)){
+                    set_temp -= 5 ;
+                    switch_wait = 0 ;
+                    down_sw = RELEASED ;
+                }
+                else {
+                    switch_wait += 1 ;
+                }
+            }
+            else {
+                mode = NORMAL_MODE ;
+                switch_wait = 0 ;
+                EEPROM_write(0xff , set_temp);
+            }
+            break;
+        default :
+
+            break ;
+    }
 }

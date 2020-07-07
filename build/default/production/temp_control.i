@@ -22,10 +22,12 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
+
 
 typedef enum {
     ON_STATE,
@@ -34,9 +36,7 @@ typedef enum {
 # 4 "./temp_control.h" 2
 
 # 1 "./port.h" 1
-
-
-
+# 17 "./port.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1750,12 +1750,19 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 4 "./port.h" 2
+# 17 "./port.h" 2
 # 5 "./temp_control.h" 2
 
 # 1 "./macros.h" 1
 # 6 "./temp_control.h" 2
-# 16 "./temp_control.h"
+
+
+
+
+
+
+
+
 typedef enum {
     HEATER_ON ,
     COOLER_ON,
@@ -1773,6 +1780,12 @@ extern uint8_t set_temp ;
 extern uint16_t led_timer ;
 TEMP_STATE_t state ;
 
+
+
+
+
+
+
 void temp_control_init(void){
 
      (TRISC &= ~(1 << 5));
@@ -1787,49 +1800,69 @@ void temp_control_init(void){
      (PORTB &= ~(1 << 4));
 }
 
+
+
+
+
+
 void temp_set( uint8_t temp ){
-     if ( temp < (set_temp - 5 ) ){
-          (PORTC |= (1 << 5));
-          (PORTC &= ~(1 << 2));
-          state = HEATER_ON ;
-     }
-     else if ( temp > (set_temp + 5 ) ){
-          (PORTC |= (1 << 2));
-          (PORTC &= ~(1 << 5));
-          state = COOLER_ON ;
-     }
-     else {
+    if ( temp < (set_temp - 5 ) ){
+        (PORTC |= (1 << 5));
+        (PORTC &= ~(1 << 2));
+        state = HEATER_ON ;
+    }
+    else if ( temp > (set_temp + 5 ) ){
+        (PORTC |= (1 << 2));
+        (PORTC &= ~(1 << 5));
+        state = COOLER_ON ;
+    }
+    else if ( temp == set_temp){
+        (PORTC &= ~(1 << 2));
+        (PORTC &= ~(1 << 5));
+        state = IDEL_STATE ;
+    }
+    else {
 
-
-
-     }
+    }
 }
+
+
+
+
+
 
 void led(void){
-     switch (state){
+    switch (state){
 
-         case HEATER_ON :
-              led_timer += 1;
-              if (led_timer == 1000){
-                 (PORTB ^= ( 1 << 4));
-                 led_timer = 0 ; }
-              break ;
+        case HEATER_ON :
+            led_timer += 1;
+                if (led_timer == 1000){
+                    (PORTB ^= ( 1 << 4));
+                    led_timer = 0 ; }
+            break ;
 
+        case COOLER_ON :
+                (PORTB |= (1 << 4));
+                led_timer = 0 ;
+                break ;
 
-         case COOLER_ON :
-               (PORTB |= (1 << 4));
-               led_timer = 0 ;
-               break ;
+        case IDEL_STATE :
+            (PORTB &= ~(1 << 4));
+            break;
+        default :
 
-
-         case IDEL_STATE : (PORTB &= ~(1 << 4)); break;
-
-         default : break ;
+            break ;
      }
 }
+
+
+
+
+
 
 void temp_control_off(void){
      (PORTC &= ~(1 << 5));
      (PORTC &= ~(1 << 2));
      (PORTB &= ~(1 << 4));
+     led_timer = 0 ;
 }

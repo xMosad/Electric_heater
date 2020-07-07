@@ -8,7 +8,7 @@
 # 2 "<built-in>" 2
 # 1 "I2C_drive.c" 2
 # 1 "./I2C_drive.h" 1
-# 15 "./I2C_drive.h"
+# 13 "./I2C_drive.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1722,7 +1722,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 15 "./I2C_drive.h" 2
+# 13 "./I2C_drive.h" 2
 
 # 1 "./types.h" 1
 
@@ -1735,25 +1735,27 @@ typedef signed int sint16_t;
 typedef unsigned long uint32_t;
 typedef signed long sint32_t;
 
+
 typedef enum {
     NORMAL_MODE,
     SETTING_MODE
 }MODE_STATE_t;
 
+
 typedef enum {
     ON_STATE,
     OFF_STATE
 }POWER_MODES_t;
-# 16 "./I2C_drive.h" 2
+# 14 "./I2C_drive.h" 2
 
 # 1 "./macros.h" 1
-# 17 "./I2C_drive.h" 2
+# 15 "./I2C_drive.h" 2
 
 # 1 "./I2C_drive.h" 1
-# 18 "./I2C_drive.h" 2
+# 16 "./I2C_drive.h" 2
 
 
-void I2C1_Init(long int freq);
+void I2C1_Init(uint32_t freq);
 void I2C_Wait(void);
 void I2C1_Start(void);
 void I2C1_Stop(void);
@@ -1762,33 +1764,64 @@ uint8_t I2C1_Rd(void);
 # 1 "I2C_drive.c" 2
 
 
+
+
+
+
+
 void I2C_Wait(void){
   while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
 }
 
-void I2C1_Init(long int freq){
+
+
+
+
+
+void I2C1_Init(uint32_t freq){
     (SSPCON |= (1 << 5));
     (SSPCON |= (1 << 3));
     SSPADD = (8000000 / (freq * 4) ) - 1 ;
+
     TRISC |= (1 << 3);
     TRISC |= (1 << 4);
 }
+
+
+
+
+
 
 void I2C1_Start(void){
     I2C_Wait();
     (SSPCON2 |= (1 << 0));
 }
 
+
+
+
+
+
 void I2C1_Stop(void){
     I2C_Wait();
     (SSPCON2 |= (1 << 2));
 }
+
+
+
+
+
 
 void I2C1_Wr(uint8_t _data){
     I2C_Wait();
     SSPBUF = _data ;
     I2C_Wait();
 }
+
+
+
+
+
 
 uint8_t I2C1_Rd(void){
     SSPIF = 0;
