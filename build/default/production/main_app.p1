@@ -1,0 +1,499 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"39 main_app.c
+[; ;main_app.c: 39: MODE_STATE_t mode = NORMAL_MODE ;
+[c E859 0 1 .. ]
+[n E859 . NORMAL_MODE SETTING_MODE  ]
+"40
+[; ;main_app.c: 40: POWER_MODES_t power_mode = ON_STATE ;
+[c E863 0 1 .. ]
+[n E863 . ON_STATE OFF_STATE  ]
+[t ~ __interrupt . k ]
+[t T1 __interrupt ]
+"730 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 730: extern volatile unsigned char TMR2 __attribute__((address(0x011)));
+[v _TMR2 `Vuc ~T0 @X0 0 e@17 ]
+"532
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 532: extern volatile unsigned char PIR1 __attribute__((address(0x00C)));
+[v _PIR1 `Vuc ~T0 @X0 0 e@12 ]
+"13 ./temp_sensor.h
+[; ;./temp_sensor.h: 13: uint8_t temp_sensor_read (void);
+[v _temp_sensor_read `(uc ~T0 @X0 0 ef ]
+"13 ./SSD.h
+[; ;./SSD.h: 13: void ssd_update(uint8_t temp);
+[v _ssd_update `(v ~T0 @X0 0 ef1`uc ]
+"24 ./temp_control.h
+[; ;./temp_control.h: 24: void temp_set( uint8_t temp );
+[v _temp_set `(v ~T0 @X0 0 ef1`uc ]
+"25
+[; ;./temp_control.h: 25: void led(void);
+[v _led `(v ~T0 @X0 0 ef ]
+"19 ./switchs.h
+[; ;./switchs.h: 19: void switch_scan(void);
+[v _switch_scan `(v ~T0 @X0 0 ef ]
+"20
+[; ;./switchs.h: 20: void sw_action(void);
+[v _sw_action `(v ~T0 @X0 0 ef ]
+"15 ./SSD.h
+[; ;./SSD.h: 15: void ssd_blink(uint8_t e_temp);
+[v _ssd_blink `(v ~T0 @X0 0 ef1`uc ]
+"454 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 454: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
+[v _INTCON `Vuc ~T0 @X0 0 e@11 ]
+"10 ./timer2.h
+[; ;./timer2.h: 10: void stop_timer(void);
+[v _stop_timer `(v ~T0 @X0 0 ef ]
+"14 ./SSD.h
+[; ;./SSD.h: 14: void ssd_turn_off(void);
+[v _ssd_turn_off `(v ~T0 @X0 0 ef ]
+"22 ./temp_control.h
+[; ;./temp_control.h: 22: void temp_control_off(void);
+[v _temp_control_off `(v ~T0 @X0 0 ef ]
+"11 ./timer2.h
+[; ;./timer2.h: 11: void start_timer(void);
+[v _start_timer `(v ~T0 @X0 0 ef ]
+[p mainexit ]
+"11 ./temp_sensor.h
+[; ;./temp_sensor.h: 11: void temp_sensor_init(void);
+[v _temp_sensor_init `(v ~T0 @X0 0 ef ]
+"23 ./temp_control.h
+[; ;./temp_control.h: 23: void temp_control_init(void);
+[v _temp_control_init `(v ~T0 @X0 0 ef ]
+"18 ./switchs.h
+[; ;./switchs.h: 18: void switch_init(void);
+[v _switch_init `(v ~T0 @X0 0 ef ]
+"11 ./SSD.h
+[; ;./SSD.h: 11: void ssd_init(void);
+[v _ssd_init `(v ~T0 @X0 0 ef ]
+"7 ./eeprom.h
+[; ;./eeprom.h: 7: void EEPROM_init(void);
+[v _EEPROM_init `(v ~T0 @X0 0 ef ]
+"9
+[; ;./eeprom.h: 9: uint8_t EEPROM_read(uint16_t address );
+[v _EEPROM_read `(uc ~T0 @X0 0 ef1`ui ]
+"9 ./timer2.h
+[; ;./timer2.h: 9: void timer2_init(void);
+[v _timer2_init `(v ~T0 @X0 0 ef ]
+"8 main_app.c
+[p x FOSC = EXTRC ]
+"9
+[p x WDTE = OFF ]
+"10
+[p x PWRTE = OFF ]
+"11
+[p x BOREN = OFF ]
+"12
+[p x LVP = ON ]
+"13
+[p x CPD = OFF ]
+"14
+[p x WRT = OFF ]
+"15
+[p x CP = OFF ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
+[; <" INDF equ 00h ;# ">
+"61
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 61: __asm("TMR0 equ 01h");
+[; <" TMR0 equ 01h ;# ">
+"68
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 68: __asm("PCL equ 02h");
+[; <" PCL equ 02h ;# ">
+"75
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 75: __asm("STATUS equ 03h");
+[; <" STATUS equ 03h ;# ">
+"161
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 161: __asm("FSR equ 04h");
+[; <" FSR equ 04h ;# ">
+"168
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 168: __asm("PORTA equ 05h");
+[; <" PORTA equ 05h ;# ">
+"218
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 218: __asm("PORTB equ 06h");
+[; <" PORTB equ 06h ;# ">
+"280
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 280: __asm("PORTC equ 07h");
+[; <" PORTC equ 07h ;# ">
+"342
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 342: __asm("PORTD equ 08h");
+[; <" PORTD equ 08h ;# ">
+"404
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 404: __asm("PORTE equ 09h");
+[; <" PORTE equ 09h ;# ">
+"436
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 436: __asm("PCLATH equ 0Ah");
+[; <" PCLATH equ 0Ah ;# ">
+"456
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 456: __asm("INTCON equ 0Bh");
+[; <" INTCON equ 0Bh ;# ">
+"534
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 534: __asm("PIR1 equ 0Ch");
+[; <" PIR1 equ 0Ch ;# ">
+"596
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 596: __asm("PIR2 equ 0Dh");
+[; <" PIR2 equ 0Dh ;# ">
+"636
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 636: __asm("TMR1 equ 0Eh");
+[; <" TMR1 equ 0Eh ;# ">
+"643
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 643: __asm("TMR1L equ 0Eh");
+[; <" TMR1L equ 0Eh ;# ">
+"650
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 650: __asm("TMR1H equ 0Fh");
+[; <" TMR1H equ 0Fh ;# ">
+"657
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 657: __asm("T1CON equ 010h");
+[; <" T1CON equ 010h ;# ">
+"732
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 732: __asm("TMR2 equ 011h");
+[; <" TMR2 equ 011h ;# ">
+"739
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 739: __asm("T2CON equ 012h");
+[; <" T2CON equ 012h ;# ">
+"810
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 810: __asm("SSPBUF equ 013h");
+[; <" SSPBUF equ 013h ;# ">
+"817
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 817: __asm("SSPCON equ 014h");
+[; <" SSPCON equ 014h ;# ">
+"887
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 887: __asm("CCPR1 equ 015h");
+[; <" CCPR1 equ 015h ;# ">
+"894
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 894: __asm("CCPR1L equ 015h");
+[; <" CCPR1L equ 015h ;# ">
+"901
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 901: __asm("CCPR1H equ 016h");
+[; <" CCPR1H equ 016h ;# ">
+"908
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 908: __asm("CCP1CON equ 017h");
+[; <" CCP1CON equ 017h ;# ">
+"966
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 966: __asm("RCSTA equ 018h");
+[; <" RCSTA equ 018h ;# ">
+"1061
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1061: __asm("TXREG equ 019h");
+[; <" TXREG equ 019h ;# ">
+"1068
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1068: __asm("RCREG equ 01Ah");
+[; <" RCREG equ 01Ah ;# ">
+"1075
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1075: __asm("CCPR2 equ 01Bh");
+[; <" CCPR2 equ 01Bh ;# ">
+"1082
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1082: __asm("CCPR2L equ 01Bh");
+[; <" CCPR2L equ 01Bh ;# ">
+"1089
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1089: __asm("CCPR2H equ 01Ch");
+[; <" CCPR2H equ 01Ch ;# ">
+"1096
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1096: __asm("CCP2CON equ 01Dh");
+[; <" CCP2CON equ 01Dh ;# ">
+"1154
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1154: __asm("ADRESH equ 01Eh");
+[; <" ADRESH equ 01Eh ;# ">
+"1161
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1161: __asm("ADCON0 equ 01Fh");
+[; <" ADCON0 equ 01Fh ;# ">
+"1257
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1257: __asm("OPTION_REG equ 081h");
+[; <" OPTION_REG equ 081h ;# ">
+"1327
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1327: __asm("TRISA equ 085h");
+[; <" TRISA equ 085h ;# ">
+"1377
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1377: __asm("TRISB equ 086h");
+[; <" TRISB equ 086h ;# ">
+"1439
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1439: __asm("TRISC equ 087h");
+[; <" TRISC equ 087h ;# ">
+"1501
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1501: __asm("TRISD equ 088h");
+[; <" TRISD equ 088h ;# ">
+"1563
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1563: __asm("TRISE equ 089h");
+[; <" TRISE equ 089h ;# ">
+"1620
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1620: __asm("PIE1 equ 08Ch");
+[; <" PIE1 equ 08Ch ;# ">
+"1682
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1682: __asm("PIE2 equ 08Dh");
+[; <" PIE2 equ 08Dh ;# ">
+"1722
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1722: __asm("PCON equ 08Eh");
+[; <" PCON equ 08Eh ;# ">
+"1756
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1756: __asm("SSPCON2 equ 091h");
+[; <" SSPCON2 equ 091h ;# ">
+"1818
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1818: __asm("PR2 equ 092h");
+[; <" PR2 equ 092h ;# ">
+"1825
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1825: __asm("SSPADD equ 093h");
+[; <" SSPADD equ 093h ;# ">
+"1832
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1832: __asm("SSPSTAT equ 094h");
+[; <" SSPSTAT equ 094h ;# ">
+"2001
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2001: __asm("TXSTA equ 098h");
+[; <" TXSTA equ 098h ;# ">
+"2082
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2082: __asm("SPBRG equ 099h");
+[; <" SPBRG equ 099h ;# ">
+"2089
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2089: __asm("CMCON equ 09Ch");
+[; <" CMCON equ 09Ch ;# ">
+"2159
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2159: __asm("CVRCON equ 09Dh");
+[; <" CVRCON equ 09Dh ;# ">
+"2224
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2224: __asm("ADRESL equ 09Eh");
+[; <" ADRESL equ 09Eh ;# ">
+"2231
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2231: __asm("ADCON1 equ 09Fh");
+[; <" ADCON1 equ 09Fh ;# ">
+"2290
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2290: __asm("EEDATA equ 010Ch");
+[; <" EEDATA equ 010Ch ;# ">
+"2297
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2297: __asm("EEADR equ 010Dh");
+[; <" EEADR equ 010Dh ;# ">
+"2304
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2304: __asm("EEDATH equ 010Eh");
+[; <" EEDATH equ 010Eh ;# ">
+"2311
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2311: __asm("EEADRH equ 010Fh");
+[; <" EEADRH equ 010Fh ;# ">
+"2318
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2318: __asm("EECON1 equ 018Ch");
+[; <" EECON1 equ 018Ch ;# ">
+"2363
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
+[; <" EECON2 equ 018Dh ;# ">
+"29 main_app.c
+[; ;main_app.c: 29: uint8_t temp_timer ;
+[v _temp_timer `uc ~T0 @X0 1 e ]
+"30
+[; ;main_app.c: 30: uint8_t ssd_delay ;
+[v _ssd_delay `uc ~T0 @X0 1 e ]
+"31
+[; ;main_app.c: 31: uint8_t switch_delay;
+[v _switch_delay `uc ~T0 @X0 1 e ]
+"32
+[; ;main_app.c: 32: uint16_t switch_wait;
+[v _switch_wait `ui ~T0 @X0 1 e ]
+"33
+[; ;main_app.c: 33: uint16_t ssd_timer;
+[v _ssd_timer `ui ~T0 @X0 1 e ]
+"34
+[; ;main_app.c: 34: uint16_t led_timer ;
+[v _led_timer `ui ~T0 @X0 1 e ]
+"36
+[; ;main_app.c: 36: uint8_t set_temp ;
+[v _set_temp `uc ~T0 @X0 1 e ]
+"37
+[; ;main_app.c: 37: uint8_t hold_temp ;
+[v _hold_temp `uc ~T0 @X0 1 e ]
+"39
+[; ;main_app.c: 39: MODE_STATE_t mode = NORMAL_MODE ;
+[v _mode `E859 ~T0 @X0 1 e ]
+[i _mode
+. `E859 0
+]
+"40
+[; ;main_app.c: 40: POWER_MODES_t power_mode = ON_STATE ;
+[v _power_mode `E863 ~T0 @X0 1 e ]
+[i _power_mode
+. `E863 0
+]
+[v $root$_isr `(v ~T0 @X0 0 e ]
+"43
+[; ;main_app.c: 43: void __attribute__((picinterrupt(("")))) isr (void){
+[v _isr `(v ~T1 @X0 1 ef ]
+{
+[e :U _isr ]
+[f ]
+"44
+[; ;main_app.c: 44:     TMR2 = 131 ;
+[e = _TMR2 -> -> 131 `i `uc ]
+"45
+[; ;main_app.c: 45:     if(PIR1 & (1 << 1)){
+[e $ ! != & -> _PIR1 `i << -> 1 `i -> 1 `i -> 0 `i 96  ]
+{
+"46
+[; ;main_app.c: 46:        (PIR1 &= ~(1 << 1));
+[e =& _PIR1 -> ~ << -> 1 `i -> 1 `i `Vuc ]
+"47
+[; ;main_app.c: 47:        switch (mode){
+[e $U 98  ]
+{
+"48
+[; ;main_app.c: 48:            case NORMAL_MODE :
+[e :U 99 ]
+"49
+[; ;main_app.c: 49:                 hold_temp = temp_sensor_read ();
+[e = _hold_temp ( _temp_sensor_read ..  ]
+"50
+[; ;main_app.c: 50:                 ssd_update(hold_temp);
+[e ( _ssd_update (1 _hold_temp ]
+"51
+[; ;main_app.c: 51:                 temp_set (hold_temp);
+[e ( _temp_set (1 _hold_temp ]
+"52
+[; ;main_app.c: 52:                 led();
+[e ( _led ..  ]
+"53
+[; ;main_app.c: 53:                 switch_scan();
+[e ( _switch_scan ..  ]
+"54
+[; ;main_app.c: 54:                 sw_action();
+[e ( _sw_action ..  ]
+"55
+[; ;main_app.c: 55:                 break;
+[e $U 97  ]
+"56
+[; ;main_app.c: 56:            case SETTING_MODE :
+[e :U 100 ]
+"57
+[; ;main_app.c: 57:                 switch_scan();
+[e ( _switch_scan ..  ]
+"58
+[; ;main_app.c: 58:                 sw_action();
+[e ( _sw_action ..  ]
+"59
+[; ;main_app.c: 59:                 ssd_blink(set_temp);
+[e ( _ssd_blink (1 _set_temp ]
+"60
+[; ;main_app.c: 60:                 break;
+[e $U 97  ]
+"61
+[; ;main_app.c: 61:        }
+}
+[e $U 97  ]
+[e :U 98 ]
+[e [\ -> _mode `ui , $ -> . `E859 0 `ui 99
+ , $ -> . `E859 1 `ui 100
+ 97 ]
+[e :U 97 ]
+"62
+[; ;main_app.c: 62:     }
+}
+[e :U 96 ]
+"63
+[; ;main_app.c: 63:     if (INTCON & (1 << 1)){
+[e $ ! != & -> _INTCON `i << -> 1 `i -> 1 `i -> 0 `i 101  ]
+{
+"64
+[; ;main_app.c: 64:         (INTCON &= ~(1 << 1));
+[e =& _INTCON -> ~ << -> 1 `i -> 1 `i `Vuc ]
+"65
+[; ;main_app.c: 65:         switch (power_mode){
+[e $U 103  ]
+{
+"66
+[; ;main_app.c: 66:              case ON_STATE :
+[e :U 104 ]
+"67
+[; ;main_app.c: 67:                  power_mode = OFF_STATE ;
+[e = _power_mode . `E863 1 ]
+"68
+[; ;main_app.c: 68:                  stop_timer();
+[e ( _stop_timer ..  ]
+"69
+[; ;main_app.c: 69:                  ssd_turn_off();
+[e ( _ssd_turn_off ..  ]
+"70
+[; ;main_app.c: 70:                  temp_control_off();
+[e ( _temp_control_off ..  ]
+"71
+[; ;main_app.c: 71:                  break;
+[e $U 102  ]
+"72
+[; ;main_app.c: 72:              case OFF_STATE :
+[e :U 105 ]
+"73
+[; ;main_app.c: 73:                   power_mode = ON_STATE ;
+[e = _power_mode . `E863 0 ]
+"74
+[; ;main_app.c: 74:                   start_timer();
+[e ( _start_timer ..  ]
+"75
+[; ;main_app.c: 75:                   break;
+[e $U 102  ]
+"76
+[; ;main_app.c: 76:         }
+}
+[e $U 102  ]
+[e :U 103 ]
+[e [\ -> _power_mode `ui , $ -> . `E863 0 `ui 104
+ , $ -> . `E863 1 `ui 105
+ 102 ]
+[e :U 102 ]
+"77
+[; ;main_app.c: 77:     }
+}
+[e :U 101 ]
+"79
+[; ;main_app.c: 79: }
+[e :UE 95 ]
+}
+[v $root$_main `(v ~T0 @X0 0 e ]
+"80
+[; ;main_app.c: 80: void main() {
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[e :U _main ]
+[f ]
+"82
+[; ;main_app.c: 82:     temp_sensor_init();
+[e ( _temp_sensor_init ..  ]
+"83
+[; ;main_app.c: 83:     temp_control_init();
+[e ( _temp_control_init ..  ]
+"84
+[; ;main_app.c: 84:     switch_init();
+[e ( _switch_init ..  ]
+"85
+[; ;main_app.c: 85:     ssd_init();
+[e ( _ssd_init ..  ]
+"86
+[; ;main_app.c: 86:     EEPROM_init();
+[e ( _EEPROM_init ..  ]
+"87
+[; ;main_app.c: 87:     if (EEPROM_read(0xff) > 100){
+[e $ ! > -> ( _EEPROM_read (1 -> -> 255 `i `ui `i -> 100 `i 107  ]
+{
+"88
+[; ;main_app.c: 88:        set_temp = 60 ;
+[e = _set_temp -> -> 60 `i `uc ]
+"89
+[; ;main_app.c: 89:     }
+}
+[e $U 108  ]
+"90
+[; ;main_app.c: 90:     else {
+[e :U 107 ]
+{
+"91
+[; ;main_app.c: 91:        set_temp = EEPROM_read(0xff) ;
+[e = _set_temp ( _EEPROM_read (1 -> -> 255 `i `ui ]
+"92
+[; ;main_app.c: 92:     }
+}
+[e :U 108 ]
+"93
+[; ;main_app.c: 93:     timer2_init();
+[e ( _timer2_init ..  ]
+"96
+[; ;main_app.c: 96:     while(1){
+[e :U 110 ]
+{
+"98
+[; ;main_app.c: 98:     }
+}
+[e :U 109 ]
+[e $U 110  ]
+[e :U 111 ]
+"99
+[; ;main_app.c: 99: }
+[e :UE 106 ]
+}
