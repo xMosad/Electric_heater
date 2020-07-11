@@ -9,5 +9,6 @@
 void timer2_init(void);
 void stop_timer(void);
 void start_timer(void);
+void system_sleep(void);
 
 #endif

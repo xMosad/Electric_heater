@@ -4,12 +4,12 @@
 [d chip 16F877A ]
 [d frameptr 0 ]
 "40 D:\xBlank\COM\swift\Electric water\main_app.c
-[e E859 . `uc
+[e E860 . `uc
 NORMAL_MODE 0
 SETTING_MODE 1
 ]
 "41
-[e E863 . `uc
+[e E864 . `uc
 ON_STATE 0
 OFF_STATE 1
 ]
@@ -101,6 +101,7 @@ IDEL_STATE 2
 [v _ssd_update ssd_update `(v  1 e 1 0 ]
 "128
 [v _ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
+[v i1_ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
 "140
 [v _ssd_blink ssd_blink `(v  1 e 1 0 ]
 "15 D:\xBlank\COM\swift\Electric water\switchs.c
@@ -117,6 +118,7 @@ IDEL_STATE 2
 [v _led led `(v  1 e 1 0 ]
 "87
 [v _temp_control_off temp_control_off `(v  1 e 1 0 ]
+[v i1_temp_control_off temp_control_off `(v  1 e 1 0 ]
 "13 D:\xBlank\COM\swift\Electric water\temp_sensor.c
 [v _temp_sensor_init temp_sensor_init `(v  1 e 1 0 ]
 "23
@@ -127,8 +129,11 @@ IDEL_STATE 2
 [v _timer2_init timer2_init `(v  1 e 1 0 ]
 "25
 [v _stop_timer stop_timer `(v  1 e 1 0 ]
+[v i1_stop_timer stop_timer `(v  1 e 1 0 ]
 "34
 [v _start_timer start_timer `(v  1 e 1 0 ]
+"44
+[v _system_sleep system_sleep `(v  1 e 1 0 ]
 "166 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
 "216
@@ -192,9 +197,9 @@ IDEL_STATE 2
 "38
 [v _hold_temp hold_temp `uc  1 e 1 0 ]
 "40
-[v _mode mode `E859  1 e 1 0 ]
+[v _mode mode `E860  1 e 1 0 ]
 "41
-[v _power_mode power_mode `E863  1 e 1 0 ]
+[v _power_mode power_mode `E864  1 e 1 0 ]
 "3 D:\xBlank\COM\swift\Electric water\SSD.c
 [v _tens tens `uc  1 e 1 0 ]
 [v _ones ones `uc  1 e 1 0 ]
@@ -217,7 +222,7 @@ IDEL_STATE 2
 "124 D:\xBlank\COM\swift\Electric water\main_app.c
 [v _main main `(v  1 e 1 0 ]
 {
-"145
+"152
 } 0
 "8 D:\xBlank\COM\swift\Electric water\timer2.c
 [v _timer2_init timer2_init `(v  1 e 1 0 ]
@@ -234,17 +239,37 @@ IDEL_STATE 2
 {
 "22
 } 0
-"13 D:\xBlank\COM\swift\Electric water\temp_control.c
+"87 D:\xBlank\COM\swift\Electric water\temp_control.c
+[v _temp_control_off temp_control_off `(v  1 e 1 0 ]
+{
+"92
+} 0
+"13
 [v _temp_control_init temp_control_init `(v  1 e 1 0 ]
 {
 "25
+} 0
+"44 D:\xBlank\COM\swift\Electric water\timer2.c
+[v _system_sleep system_sleep `(v  1 e 1 0 ]
+{
+"46
 } 0
 "15 D:\xBlank\COM\swift\Electric water\switchs.c
 [v _switch_init switch_init `(v  1 e 1 0 ]
 {
 "21
 } 0
-"15 D:\xBlank\COM\swift\Electric water\SSD.c
+"25 D:\xBlank\COM\swift\Electric water\timer2.c
+[v _stop_timer stop_timer `(v  1 e 1 0 ]
+{
+"27
+} 0
+"128 D:\xBlank\COM\swift\Electric water\SSD.c
+[v _ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
+{
+"133
+} 0
+"15
 [v _ssd_init ssd_init `(v  1 e 1 0 ]
 {
 "24
@@ -314,6 +339,16 @@ IDEL_STATE 2
 {
 "123
 } 0
+"87 D:\xBlank\COM\swift\Electric water\temp_control.c
+[v i1_temp_control_off temp_control_off `(v  1 e 1 0 ]
+{
+"92
+} 0
+"25 D:\xBlank\COM\swift\Electric water\timer2.c
+[v i1_stop_timer stop_timer `(v  1 e 1 0 ]
+{
+"27
+} 0
 "32 D:\xBlank\COM\swift\Electric water\temp_control.c
 [v _temp_set temp_set `(v  1 e 1 0 ]
 {
@@ -376,17 +411,17 @@ IDEL_STATE 2
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S545 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S550 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S550 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S553 . 4 `l 1 i 4 0 `d 1 f 4 0 `S545 1 fAsBytes 4 0 `S550 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S553  1 a 4 26 ]
+[s S555 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S558 . 4 `l 1 i 4 0 `d 1 f 4 0 `S550 1 fAsBytes 4 0 `S555 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S558  1 a 4 26 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 20 ]
-[s S622 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S627 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S625 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S622 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S625  1 a 2 30 ]
+[u S630 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S627 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S630  1 a 2 30 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 25 ]
 "11
@@ -440,11 +475,6 @@ IDEL_STATE 2
 [v ADC_Read@channel channel `uc  1 a 1 4 ]
 "37
 } 0
-"87 D:\xBlank\COM\swift\Electric water\temp_control.c
-[v _temp_control_off temp_control_off `(v  1 e 1 0 ]
-{
-"92
-} 0
 "28 D:\xBlank\COM\swift\Electric water\switchs.c
 [v _switch_scan switch_scan `(v  1 e 1 0 ]
 {
@@ -485,12 +515,7 @@ IDEL_STATE 2
 {
 "10
 } 0
-"25 D:\xBlank\COM\swift\Electric water\timer2.c
-[v _stop_timer stop_timer `(v  1 e 1 0 ]
-{
-"27
-} 0
-"34
+"34 D:\xBlank\COM\swift\Electric water\timer2.c
 [v _start_timer start_timer `(v  1 e 1 0 ]
 {
 "37
@@ -502,6 +527,11 @@ IDEL_STATE 2
 [v ssd_blink@e_temp e_temp `uc  1 a 1 wreg ]
 [v ssd_blink@e_temp e_temp `uc  1 a 1 13 ]
 "167
+} 0
+"128
+[v i1_ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
+{
+"133
 } 0
 "95
 [v _ssd_update ssd_update `(v  1 e 1 0 ]
@@ -542,11 +572,6 @@ IDEL_STATE 2
 [v ___awdiv@divisor divisor `i  1 p 2 0 ]
 [v ___awdiv@dividend dividend `i  1 p 2 2 ]
 "41
-} 0
-"128 D:\xBlank\COM\swift\Electric water\SSD.c
-[v _ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
-{
-"133
 } 0
 "58 D:\xBlank\COM\swift\Electric water\temp_control.c
 [v _led led `(v  1 e 1 0 ]

@@ -1757,6 +1757,7 @@ extern __bank0 __bit __timeout;
 void timer2_init(void);
 void stop_timer(void);
 void start_timer(void);
+void system_sleep(void);
 # 20 "main_app.c" 2
 
 # 1 "./temp_sensor.h" 1
@@ -1900,7 +1901,7 @@ uint8_t set_temp ;
 uint8_t hold_temp ;
 
 MODE_STATE_t mode = NORMAL_MODE ;
-POWER_MODES_t power_mode = ON_STATE ;
+POWER_MODES_t power_mode = OFF_STATE ;
 # 75 "main_app.c"
 void __attribute__((picinterrupt(("")))) isr (void){
     TMR2 = 131 ;
@@ -1958,6 +1959,7 @@ void main() {
     switch_init();
     ssd_init();
     EEPROM_init();
+    timer2_init();
 
 
     if (EEPROM_read(0xff) > 100){
@@ -1966,10 +1968,16 @@ void main() {
     else {
        set_temp = EEPROM_read(0xff) ;
     }
-    timer2_init();
+
+
+
+    stop_timer();
+    ssd_turn_off();
+    temp_control_off();
 
 
     while(1){
 
+        system_sleep();
     }
 }

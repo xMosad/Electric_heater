@@ -260,3 +260,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;timer2.c: 37: }
 [e :UE 97 ]
 }
+"44
+[; ;timer2.c: 44: void system_sleep(void){
+[v _system_sleep `(v ~T0 @X0 1 ef ]
+{
+[e :U _system_sleep ]
+[f ]
+"45
+[; ;timer2.c: 45:    __asm(" SLEEP ");
+[; <"  SLEEP  ;# ">
+"46
+[; ;timer2.c: 46: }
+[e :UE 98 ]
+}

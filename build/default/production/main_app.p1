@@ -1,12 +1,12 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "40 main_app.c
 [; ;main_app.c: 40: MODE_STATE_t mode = NORMAL_MODE ;
-[c E859 0 1 .. ]
-[n E859 . NORMAL_MODE SETTING_MODE  ]
+[c E860 0 1 .. ]
+[n E860 . NORMAL_MODE SETTING_MODE  ]
 "41
-[; ;main_app.c: 41: POWER_MODES_t power_mode = ON_STATE ;
-[c E863 0 1 .. ]
-[n E863 . ON_STATE OFF_STATE  ]
+[; ;main_app.c: 41: POWER_MODES_t power_mode = OFF_STATE ;
+[c E864 0 1 .. ]
+[n E864 . ON_STATE OFF_STATE  ]
 [t ~ __interrupt . k ]
 [t T1 __interrupt ]
 "730 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
@@ -67,12 +67,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "7 ./eeprom.h
 [; ;./eeprom.h: 7: void EEPROM_init(void);
 [v _EEPROM_init `(v ~T0 @X0 0 ef ]
-"9
-[; ;./eeprom.h: 9: uint8_t EEPROM_read(uint16_t address );
-[v _EEPROM_read `(uc ~T0 @X0 0 ef1`ui ]
 "9 ./timer2.h
 [; ;./timer2.h: 9: void timer2_init(void);
 [v _timer2_init `(v ~T0 @X0 0 ef ]
+"9 ./eeprom.h
+[; ;./eeprom.h: 9: uint8_t EEPROM_read(uint16_t address );
+[v _EEPROM_read `(uc ~T0 @X0 0 ef1`ui ]
+"12 ./timer2.h
+[; ;./timer2.h: 12: void system_sleep(void);
+[v _system_sleep `(v ~T0 @X0 0 ef ]
 "9 main_app.c
 [p x FOSC   = EXTRC ]
 "10
@@ -295,15 +298,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _hold_temp `uc ~T0 @X0 1 e ]
 "40
 [; ;main_app.c: 40: MODE_STATE_t mode = NORMAL_MODE ;
-[v _mode `E859 ~T0 @X0 1 e ]
+[v _mode `E860 ~T0 @X0 1 e ]
 [i _mode
-. `E859 0
+. `E860 0
 ]
 "41
-[; ;main_app.c: 41: POWER_MODES_t power_mode = ON_STATE ;
-[v _power_mode `E863 ~T0 @X0 1 e ]
+[; ;main_app.c: 41: POWER_MODES_t power_mode = OFF_STATE ;
+[v _power_mode `E864 ~T0 @X0 1 e ]
 [i _power_mode
-. `E863 0
+. `E864 1
 ]
 [v $root$_isr `(v ~T0 @X0 0 e ]
 "75
@@ -376,8 +379,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 97  ]
 [e :U 98 ]
-[e [\ -> _mode `ui , $ -> . `E859 0 `ui 99
- , $ -> . `E859 1 `ui 100
+[e [\ -> _mode `ui , $ -> . `E860 0 `ui 99
+ , $ -> . `E860 1 `ui 100
  101 ]
 [e :U 97 ]
 "102
@@ -400,7 +403,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 105 ]
 "110
 [; ;main_app.c: 110:                 power_mode = OFF_STATE ;
-[e = _power_mode . `E863 1 ]
+[e = _power_mode . `E864 1 ]
 "111
 [; ;main_app.c: 111:                 stop_timer();
 [e ( _stop_timer ..  ]
@@ -418,7 +421,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 106 ]
 "117
 [; ;main_app.c: 117:                 power_mode = ON_STATE ;
-[e = _power_mode . `E863 0 ]
+[e = _power_mode . `E864 0 ]
 "118
 [; ;main_app.c: 118:                 start_timer();
 [e ( _start_timer ..  ]
@@ -430,8 +433,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e $U 103  ]
 [e :U 104 ]
-[e [\ -> _power_mode `ui , $ -> . `E863 0 `ui 105
- , $ -> . `E863 1 `ui 106
+[e [\ -> _power_mode `ui , $ -> . `E864 0 `ui 105
+ , $ -> . `E864 1 `ui 106
  103 ]
 [e :U 103 ]
 "121
@@ -464,42 +467,54 @@ Version 4.0 HI-TECH Software Intermediate Code
 "130
 [; ;main_app.c: 130:     EEPROM_init();
 [e ( _EEPROM_init ..  ]
-"133
-[; ;main_app.c: 133:     if (EEPROM_read(0xff) > 100){
+"131
+[; ;main_app.c: 131:     timer2_init();
+[e ( _timer2_init ..  ]
+"134
+[; ;main_app.c: 134:     if (EEPROM_read(0xff) > 100){
 [e $ ! > -> ( _EEPROM_read (1 -> -> 255 `i `ui `i -> 100 `i 108  ]
 {
-"134
-[; ;main_app.c: 134:        set_temp = 60 ;
-[e = _set_temp -> -> 60 `i `uc ]
 "135
-[; ;main_app.c: 135:     }
+[; ;main_app.c: 135:        set_temp = 60 ;
+[e = _set_temp -> -> 60 `i `uc ]
+"136
+[; ;main_app.c: 136:     }
 }
 [e $U 109  ]
-"136
-[; ;main_app.c: 136:     else {
+"137
+[; ;main_app.c: 137:     else {
 [e :U 108 ]
 {
-"137
-[; ;main_app.c: 137:        set_temp = EEPROM_read(0xff) ;
-[e = _set_temp ( _EEPROM_read (1 -> -> 255 `i `ui ]
 "138
-[; ;main_app.c: 138:     }
+[; ;main_app.c: 138:        set_temp = EEPROM_read(0xff) ;
+[e = _set_temp ( _EEPROM_read (1 -> -> 255 `i `ui ]
+"139
+[; ;main_app.c: 139:     }
 }
 [e :U 109 ]
-"139
-[; ;main_app.c: 139:     timer2_init();
-[e ( _timer2_init ..  ]
-"142
-[; ;main_app.c: 142:     while(1){
+"143
+[; ;main_app.c: 143:     stop_timer();
+[e ( _stop_timer ..  ]
+"144
+[; ;main_app.c: 144:     ssd_turn_off();
+[e ( _ssd_turn_off ..  ]
+"145
+[; ;main_app.c: 145:     temp_control_off();
+[e ( _temp_control_off ..  ]
+"148
+[; ;main_app.c: 148:     while(1){
 [e :U 111 ]
 {
-"144
-[; ;main_app.c: 144:     }
+"150
+[; ;main_app.c: 150:         system_sleep();
+[e ( _system_sleep ..  ]
+"151
+[; ;main_app.c: 151:     }
 }
 [e :U 110 ]
 [e $U 111  ]
 [e :U 112 ]
-"145
-[; ;main_app.c: 145: }
+"152
+[; ;main_app.c: 152: }
 [e :UE 107 ]
 }

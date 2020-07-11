@@ -38,7 +38,7 @@ uint8_t set_temp ; // store the setting temperature
 uint8_t hold_temp ; // store the measured temperature 
 
 MODE_STATE_t mode = NORMAL_MODE ; // variable will hold the system state 
-POWER_MODES_t power_mode = ON_STATE ; // variable will hold the power state 
+POWER_MODES_t power_mode = OFF_STATE ; // variable will hold the power state 
 
 /*
  * The ISR handle two interrupts :
@@ -128,6 +128,7 @@ void main() {
     switch_init();
     ssd_init();
     EEPROM_init();
+    timer2_init();
     // if a reading is stored in the eeprom we will read it 
     // if not the default temperature is 60 
     if (EEPROM_read(0xff) > 100){
@@ -136,10 +137,16 @@ void main() {
     else {
        set_temp = EEPROM_read(0xff) ;
     }
-    timer2_init();
+    
+    
+    // in off state 
+    stop_timer();
+    ssd_turn_off();
+    temp_control_off();
     
     //super loop 
     while(1){
-        // sleep 
+        // sleep
+        system_sleep();
     }
 }

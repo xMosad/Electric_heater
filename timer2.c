@@ -35,3 +35,12 @@ void start_timer(void){
     SET_BIT(T2CON , 2) ;   // start timer
     TMR2 = TIMER_INITIAL_VALUE ;            // intial value to fire every 1 ms
 }
+
+/******************************************************************************
+* Description : put system to sleep  
+* Parameters  : none 
+* Return type : void                                                                           
+*******************************************************************************/
+void system_sleep(void){
+   asm( " SLEEP " );
+}

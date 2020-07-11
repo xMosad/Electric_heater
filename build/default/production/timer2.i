@@ -1738,6 +1738,7 @@ extern __bank0 __bit __timeout;
 void timer2_init(void);
 void stop_timer(void);
 void start_timer(void);
+void system_sleep(void);
 # 1 "timer2.c" 2
 
 
@@ -1775,4 +1776,13 @@ void stop_timer(void){
 void start_timer(void){
     (T2CON |= (1 << 2)) ;
     TMR2 = 131 ;
+}
+
+
+
+
+
+
+void system_sleep(void){
+   __asm(" SLEEP ");
 }
