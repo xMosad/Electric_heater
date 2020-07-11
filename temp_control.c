@@ -1,7 +1,11 @@
 #include "temp_control.h"
 
+// system variables
 extern uint8_t set_temp ;
-extern uint16_t led_timer ;
+extern uint8_t measured_temp ; // store the measured temperature
+extern MODE_STATE_t mode  ; // variable will hold the system state
+
+// private 
 TEMP_STATE_t state ;
 
 /******************************************************************************
@@ -25,28 +29,36 @@ void temp_control_init(void){
 }
 
 /******************************************************************************
-* Description : turn on the cooler or the heater based on the measured temp  
+* Description : the task to turn on the cooler or the heater based 
+ *              on the measured temp . will be called for every new temp taken 
 * Parameters  : the measured temp (uint8_t); 
 * Return type : void                                                                           
 *******************************************************************************/
-void temp_set( uint8_t temp ){
-    if ( temp < (set_temp - TEMP_ERROR ) ){
-        SET_BIT(HEATER_PORT , HEATER_PIN); // heater on
-        CLEAR_BIT (COOLER_PORT , COOLER_PIN); //cooler off
-        state = HEATER_ON ; // will blink the led
-    }
-    else if ( temp > (set_temp + TEMP_ERROR ) ){
-        SET_BIT(COOLER_PORT , COOLER_PIN); //cooler on
-        CLEAR_BIT (HEATER_PORT , HEATER_PIN); // heater off
-        state = COOLER_ON ; // the led will be on
-    }
-    else if ( temp == set_temp){
-        CLEAR_BIT (COOLER_PORT , COOLER_PIN); //cooler off
-        CLEAR_BIT (HEATER_PORT , HEATER_PIN); // heater off
-        state = IDEL_STATE ; //the led will be off
+void temp_set( void ){
+    if (mode == NORMAL_MODE){
+        if ( measured_temp < (set_temp - TEMP_ERROR ) ){
+            SET_BIT(HEATER_PORT , HEATER_PIN); // heater on
+            CLEAR_BIT (COOLER_PORT , COOLER_PIN); //cooler off
+            state = HEATER_ON ; // will blink the led
+        }
+        else if ( measured_temp > (set_temp + TEMP_ERROR ) ){
+            SET_BIT(COOLER_PORT , COOLER_PIN); //cooler on
+            CLEAR_BIT (HEATER_PORT , HEATER_PIN); // heater off
+            SET_BIT(LED_PORT , LED_PIN);
+            state = HEATER_OFF ;
+        }
+        else if ( measured_temp == set_temp){
+            CLEAR_BIT (COOLER_PORT , COOLER_PIN); //cooler off
+            CLEAR_BIT (HEATER_PORT , HEATER_PIN); // heater off
+            CLEAR_BIT (LED_PORT , LED_PIN);
+            state = HEATER_OFF ;
+        }
+        else {
+              /* shouldn't be here */
+        }
     }
     else {
-          /* shouldn't be here */
+        temp_control_off();
     }
 }
 
@@ -56,27 +68,14 @@ void temp_set( uint8_t temp ){
 * Return type : void                                                                           
 *******************************************************************************/
 void led(void){
-    switch (state){
-        // toggle the led if the heater is on
-        case HEATER_ON :
-            led_timer += TIC_TIME;
-                if (led_timer == LED_TOOGLE_TIME){
-                    TOGGLE_BIT(LED_PORT , LED_PIN);
-                    led_timer = 0 ; }
-            break ;             
-        // turn the led on if the cooler is on
-        case COOLER_ON  :
-                SET_BIT(LED_PORT , LED_PIN);
-                led_timer = 0 ;
-                break ;
-        // turn the led off if the cooler is on
-        case IDEL_STATE :
-            CLEAR_BIT (LED_PORT , LED_PIN);
-            break; 
-        default : 
-            /* shouldn't be here */
-            break ;
-     }
+    if (mode == NORMAL_MODE){
+        if (state == HEATER_ON){
+            TOGGLE_BIT(LED_PORT , LED_PIN);
+        }
+        else {
+
+        }
+    }
 }
 
 /******************************************************************************
@@ -85,8 +84,7 @@ void led(void){
 * Return type : void                                                                           
 *******************************************************************************/
 void temp_control_off(void){
-     CLEAR_BIT (HEATER_PORT , HEATER_PIN); // heater off
-     CLEAR_BIT (COOLER_PORT , COOLER_PIN); //cooler off
-     CLEAR_BIT (LED_PORT , LED_PIN);       //led off
-     led_timer = 0 ; // initialize the counter
+    CLEAR_BIT (HEATER_PORT , HEATER_PIN); // heater off
+    CLEAR_BIT (COOLER_PORT , COOLER_PIN); //cooler off
+    CLEAR_BIT (LED_PORT , LED_PIN);       //led off
 }

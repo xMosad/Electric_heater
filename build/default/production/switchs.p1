@@ -1,36 +1,40 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"6 switchs.c
-[; ;switchs.c: 6: SWITCH_STATE_t up_sw = RELEASED ;
-[c E878 0 1 .. ]
-[n E878 . PRESSED RELEASED  ]
+"11 switchs.c
+[; ;switchs.c: 11: SWITCH_STATE_t up_sw = RELEASED ;
+[c E930 0 1 2 3 .. ]
+[n E930 . PRE_PRESSED PRESSED PRE_RELEASED RELEASED  ]
 "1375 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1375: extern volatile unsigned char TRISB __attribute__((address(0x086)));
 [v _TRISB `Vuc ~T0 @X0 0 e@134 ]
 "454
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 454: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
 [v _INTCON `Vuc ~T0 @X0 0 e@11 ]
-"3 switchs.c
-[; ;switchs.c: 3: extern uint8_t switch_delay;
-[v _switch_delay `uc ~T0 @X0 0 e ]
-"216 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
+"216
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 216: extern volatile unsigned char PORTB __attribute__((address(0x006)));
 [v _PORTB `Vuc ~T0 @X0 0 e@6 ]
-"55 switchs.c
-[; ;switchs.c: 55:                 mode = SETTING_MODE ;
+"26 ./switchs.h
+[; ;./switchs.h: 26: void sw_action(void);
+[v _sw_action `(v ~T0 @X0 0 ef ]
+"59 switchs.c
+[; ;switchs.c: 59:                 mode = SETTING_MODE ;
 [c E8 0 1 .. ]
 [n E8 . NORMAL_MODE SETTING_MODE  ]
-"8
-[; ;switchs.c: 8: extern MODE_STATE_t mode ;
+"6
+[; ;switchs.c: 6: extern MODE_STATE_t mode ;
 [v _mode `E8 ~T0 @X0 0 e ]
-"4
-[; ;switchs.c: 4: extern uint16_t switch_wait;
-[v _switch_wait `ui ~T0 @X0 0 e ]
 "5
 [; ;switchs.c: 5: extern uint8_t set_temp ;
 [v _set_temp `uc ~T0 @X0 0 e ]
 "8 ./eeprom.h
 [; ;./eeprom.h: 8: void EEPROM_write (uint16_t address , uint8_t _x);
 [v _EEPROM_write `(v ~T0 @X0 0 ef2`ui`uc ]
+"89 switchs.c
+[; ;switchs.c: 89:                 blink = SSD_ON ;
+[c E903 0 1 .. ]
+[n E903 . SSD_ON SSD_OFF  ]
+"7
+[; ;switchs.c: 7: extern SSD_BLINK_t blink ;
+[v _blink `E903 ~T0 @X0 0 e ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -211,223 +215,221 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"6 switchs.c
-[; ;switchs.c: 6: SWITCH_STATE_t up_sw = RELEASED ;
-[v _up_sw `E878 ~T0 @X0 1 e ]
+"10 switchs.c
+[; ;switchs.c: 10: uint16_t switch_wait;
+[v _switch_wait `ui ~T0 @X0 1 e ]
+"11
+[; ;switchs.c: 11: SWITCH_STATE_t up_sw = RELEASED ;
+[v _up_sw `E930 ~T0 @X0 1 e ]
 [i _up_sw
-. `E878 1
+. `E930 3
 ]
-"7
-[; ;switchs.c: 7: SWITCH_STATE_t down_sw = RELEASED ;
-[v _down_sw `E878 ~T0 @X0 1 e ]
+"12
+[; ;switchs.c: 12: SWITCH_STATE_t down_sw = RELEASED ;
+[v _down_sw `E930 ~T0 @X0 1 e ]
 [i _down_sw
-. `E878 1
+. `E930 3
 ]
-"15
-[; ;switchs.c: 15: void switch_init(void){
+"13
+[; ;switchs.c: 13: SWITCH_STATE_t samples[2];
+[v _samples `E930 ~T0 @X0 -> 2 `i e ]
+"21
+[; ;switchs.c: 21: void switch_init(void){
 [v _switch_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _switch_init ]
 [f ]
-"17
-[; ;switchs.c: 17:      (TRISB |= (1 << 2));
+"23
+[; ;switchs.c: 23:      (TRISB |= (1 << 2));
 [e =| _TRISB -> << -> 1 `i -> 2 `i `Vuc ]
-"18
-[; ;switchs.c: 18:      (TRISB |= (1 << 1));
+"24
+[; ;switchs.c: 24:      (TRISB |= (1 << 1));
 [e =| _TRISB -> << -> 1 `i -> 1 `i `Vuc ]
-"19
-[; ;switchs.c: 19:      (TRISB |= (1 << 0));
+"25
+[; ;switchs.c: 25:      (TRISB |= (1 << 0));
 [e =| _TRISB -> << -> 1 `i -> 0 `i `Vuc ]
-"20
-[; ;switchs.c: 20:      (INTCON |= (1 << 4));
+"26
+[; ;switchs.c: 26:      (INTCON |= (1 << 4));
 [e =| _INTCON -> << -> 1 `i -> 4 `i `Vuc ]
-"21
-[; ;switchs.c: 21: }
-[e :UE 95 ]
+"27
+[; ;switchs.c: 27: }
+[e :UE 96 ]
 }
-"28
-[; ;switchs.c: 28: void switch_scan(void){
+"34
+[; ;switchs.c: 34: void switch_scan(void){
 [v _switch_scan `(v ~T0 @X0 1 ef ]
 {
 [e :U _switch_scan ]
 [f ]
-"29
-[; ;switchs.c: 29:     switch_delay += 1 ;
-[e =+ _switch_delay -> -> 1 `i `uc ]
-"31
-[; ;switchs.c: 31:     if (switch_delay == 200){
-[e $ ! == -> _switch_delay `i -> 200 `i 97  ]
-{
-"32
-[; ;switchs.c: 32:        if ( !((PORTB & (1<<2)))){
+"37
+[; ;switchs.c: 37:        if ( !((PORTB & (1<<2)))){
 [e $ ! ! != & -> _PORTB `i << -> 1 `i -> 2 `i -> 0 `i 98  ]
 {
-"33
-[; ;switchs.c: 33:           up_sw = PRESSED ;
-[e = _up_sw . `E878 0 ]
-"34
-[; ;switchs.c: 34:        }
+"38
+[; ;switchs.c: 38:           up_sw = PRESSED ;
+[e = _up_sw . `E930 1 ]
+"39
+[; ;switchs.c: 39:        }
 }
 [e $U 99  ]
-"35
-[; ;switchs.c: 35:        else if ( !((PORTB & (1<<1)))){
+"40
+[; ;switchs.c: 40:        else if ( !((PORTB & (1<<1)))){
 [e :U 98 ]
 [e $ ! ! != & -> _PORTB `i << -> 1 `i -> 1 `i -> 0 `i 100  ]
 {
-"36
-[; ;switchs.c: 36:           down_sw = PRESSED ;
-[e = _down_sw . `E878 0 ]
-"37
-[; ;switchs.c: 37:        }
+"41
+[; ;switchs.c: 41:           down_sw = PRESSED ;
+[e = _down_sw . `E930 1 ]
+"42
+[; ;switchs.c: 42:        }
 }
 [e $U 101  ]
-"38
-[; ;switchs.c: 38:        else {
+"43
+[; ;switchs.c: 43:        else {
 [e :U 100 ]
 {
-"40
-[; ;switchs.c: 40:        }
+"45
+[; ;switchs.c: 45:        }
 }
 [e :U 101 ]
 [e :U 99 ]
-"41
-[; ;switchs.c: 41:        switch_delay = 0 ;
-[e = _switch_delay -> -> 0 `i `uc ]
-"42
-[; ;switchs.c: 42:     }
+"46
+[; ;switchs.c: 46:        sw_action();
+[e ( _sw_action ..  ]
+"47
+[; ;switchs.c: 47: }
+[e :UE 97 ]
 }
-[e :U 97 ]
-"43
-[; ;switchs.c: 43: }
-[e :UE 96 ]
-}
-"50
-[; ;switchs.c: 50: void sw_action(void){
+"54
+[; ;switchs.c: 54: void sw_action(void){
 [v _sw_action `(v ~T0 @X0 1 ef ]
 {
 [e :U _sw_action ]
 [f ]
-"51
-[; ;switchs.c: 51:     switch (mode){
+"55
+[; ;switchs.c: 55:     switch (mode){
 [e $U 104  ]
 {
-"53
-[; ;switchs.c: 53:         case NORMAL_MODE :
-[e :U 105 ]
-"54
-[; ;switchs.c: 54:             if ( (up_sw == PRESSED ) || (down_sw == PRESSED) ) {
-[e $ ! || == -> _up_sw `ui -> . `E878 0 `ui == -> _down_sw `ui -> . `E878 0 `ui 106  ]
-{
-"55
-[; ;switchs.c: 55:                 mode = SETTING_MODE ;
-[e = _mode . `E8 1 ]
-"56
-[; ;switchs.c: 56:                 up_sw = RELEASED ;
-[e = _up_sw . `E878 1 ]
 "57
-[; ;switchs.c: 57:                 down_sw = RELEASED ;
-[e = _down_sw . `E878 1 ]
+[; ;switchs.c: 57:         case NORMAL_MODE :
+[e :U 105 ]
 "58
-[; ;switchs.c: 58:             }
+[; ;switchs.c: 58:             if ( (up_sw == PRESSED ) || (down_sw == PRESSED) ) {
+[e $ ! || == -> _up_sw `ui -> . `E930 1 `ui == -> _down_sw `ui -> . `E930 1 `ui 106  ]
+{
+"59
+[; ;switchs.c: 59:                 mode = SETTING_MODE ;
+[e = _mode . `E8 1 ]
+"60
+[; ;switchs.c: 60:                 up_sw = RELEASED ;
+[e = _up_sw . `E930 3 ]
+"61
+[; ;switchs.c: 61:                 down_sw = RELEASED ;
+[e = _down_sw . `E930 3 ]
+"62
+[; ;switchs.c: 62:             }
 }
 [e $U 107  ]
-"59
-[; ;switchs.c: 59:             else{
+"63
+[; ;switchs.c: 63:             else{
 [e :U 106 ]
 {
-"61
-[; ;switchs.c: 61:             }
+"65
+[; ;switchs.c: 65:             }
 }
 [e :U 107 ]
-"62
-[; ;switchs.c: 62:             break;
-[e $U 103  ]
-"64
-[; ;switchs.c: 64:         case SETTING_MODE :
-[e :U 108 ]
 "66
-[; ;switchs.c: 66:             if (switch_wait < 5000){
+[; ;switchs.c: 66:             break;
+[e $U 103  ]
+"68
+[; ;switchs.c: 68:         case SETTING_MODE :
+[e :U 108 ]
+"70
+[; ;switchs.c: 70:             if (switch_wait < 5000){
 [e $ ! < _switch_wait -> -> 5000 `i `ui 109  ]
 {
-"67
-[; ;switchs.c: 67:                 if ( (up_sw == PRESSED) && (set_temp < 75)){
-[e $ ! && == -> _up_sw `ui -> . `E878 0 `ui < -> _set_temp `i -> 75 `i 110  ]
-{
-"68
-[; ;switchs.c: 68:                     set_temp += 5 ;
-[e =+ _set_temp -> -> 5 `i `uc ]
-"69
-[; ;switchs.c: 69:                     switch_wait = 0 ;
-[e = _switch_wait -> -> 0 `i `ui ]
-"70
-[; ;switchs.c: 70:                     up_sw = RELEASED ;
-[e = _up_sw . `E878 1 ]
 "71
-[; ;switchs.c: 71:                 }
+[; ;switchs.c: 71:                 if ( (up_sw == PRESSED) && (set_temp < 75)){
+[e $ ! && == -> _up_sw `ui -> . `E930 1 `ui < -> _set_temp `i -> 75 `i 110  ]
+{
+"72
+[; ;switchs.c: 72:                     set_temp += 5 ;
+[e =+ _set_temp -> -> 5 `i `uc ]
+"73
+[; ;switchs.c: 73:                     switch_wait = 0 ;
+[e = _switch_wait -> -> 0 `i `ui ]
+"74
+[; ;switchs.c: 74:                     up_sw = RELEASED ;
+[e = _up_sw . `E930 3 ]
+"75
+[; ;switchs.c: 75:                 }
 }
 [e $U 111  ]
-"72
-[; ;switchs.c: 72:                 else if ( (down_sw == PRESSED) && (set_temp > 35)){
-[e :U 110 ]
-[e $ ! && == -> _down_sw `ui -> . `E878 0 `ui > -> _set_temp `i -> 35 `i 112  ]
-{
-"73
-[; ;switchs.c: 73:                     set_temp -= 5 ;
-[e =- _set_temp -> -> 5 `i `uc ]
-"74
-[; ;switchs.c: 74:                     switch_wait = 0 ;
-[e = _switch_wait -> -> 0 `i `ui ]
-"75
-[; ;switchs.c: 75:                     down_sw = RELEASED ;
-[e = _down_sw . `E878 1 ]
 "76
-[; ;switchs.c: 76:                 }
+[; ;switchs.c: 76:                 else if ( (down_sw == PRESSED) && (set_temp > 35)){
+[e :U 110 ]
+[e $ ! && == -> _down_sw `ui -> . `E930 1 `ui > -> _set_temp `i -> 35 `i 112  ]
+{
+"77
+[; ;switchs.c: 77:                     set_temp -= 5 ;
+[e =- _set_temp -> -> 5 `i `uc ]
+"78
+[; ;switchs.c: 78:                     switch_wait = 0 ;
+[e = _switch_wait -> -> 0 `i `ui ]
+"79
+[; ;switchs.c: 79:                     down_sw = RELEASED ;
+[e = _down_sw . `E930 3 ]
+"80
+[; ;switchs.c: 80:                 }
 }
 [e $U 113  ]
-"77
-[; ;switchs.c: 77:                 else {
+"81
+[; ;switchs.c: 81:                 else {
 [e :U 112 ]
 {
-"78
-[; ;switchs.c: 78:                     switch_wait += 1 ;
-[e =+ _switch_wait -> -> 1 `i `ui ]
-"79
-[; ;switchs.c: 79:                 }
+"82
+[; ;switchs.c: 82:                     switch_wait += (200) ;
+[e =+ _switch_wait -> -> 200 `i `ui ]
+"83
+[; ;switchs.c: 83:                 }
 }
 [e :U 113 ]
 [e :U 111 ]
-"80
-[; ;switchs.c: 80:             }
+"84
+[; ;switchs.c: 84:             }
 }
 [e $U 114  ]
-"81
-[; ;switchs.c: 81:             else {
+"85
+[; ;switchs.c: 85:             else {
 [e :U 109 ]
 {
-"82
-[; ;switchs.c: 82:                 mode = NORMAL_MODE ;
+"86
+[; ;switchs.c: 86:                 mode = NORMAL_MODE ;
 [e = _mode . `E8 0 ]
-"83
-[; ;switchs.c: 83:                 switch_wait = 0 ;
+"87
+[; ;switchs.c: 87:                 switch_wait = 0 ;
 [e = _switch_wait -> -> 0 `i `ui ]
-"84
-[; ;switchs.c: 84:                 EEPROM_write(0xff , set_temp);
+"88
+[; ;switchs.c: 88:                 EEPROM_write(0xff , set_temp);
 [e ( _EEPROM_write (2 , -> -> 255 `i `ui _set_temp ]
-"85
-[; ;switchs.c: 85:             }
+"89
+[; ;switchs.c: 89:                 blink = SSD_ON ;
+[e = _blink . `E903 0 ]
+"90
+[; ;switchs.c: 90:             }
 }
 [e :U 114 ]
-"86
-[; ;switchs.c: 86:             break;
+"91
+[; ;switchs.c: 91:             break;
 [e $U 103  ]
-"87
-[; ;switchs.c: 87:         default :
+"92
+[; ;switchs.c: 92:         default :
 [e :U 115 ]
-"89
-[; ;switchs.c: 89:             break ;
+"94
+[; ;switchs.c: 94:             break ;
 [e $U 103  ]
-"90
-[; ;switchs.c: 90:     }
+"95
+[; ;switchs.c: 95:     }
 }
 [e $U 103  ]
 [e :U 104 ]
@@ -435,7 +437,7 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> . `E8 1 `ui 108
  115 ]
 [e :U 103 ]
-"91
-[; ;switchs.c: 91: }
+"96
+[; ;switchs.c: 96: }
 [e :UE 102 ]
 }

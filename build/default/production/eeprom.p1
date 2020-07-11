@@ -14,6 +14,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;./I2C_drive.h: 23: uint8_t I2C1_Rd(void);
 [v _I2C1_Rd `(uc ~T0 @X0 0 ef ]
+"3 eeprom.c
+[; ;eeprom.c: 3: extern uint8_t set_temp ;
+[v _set_temp `uc ~T0 @X0 0 e ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -194,83 +197,115 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"8 eeprom.c
-[; ;eeprom.c: 8: void EEPROM_init(void){
+"9 eeprom.c
+[; ;eeprom.c: 9: void EEPROM_init(void){
 [v _EEPROM_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _EEPROM_init ]
 [f ]
-"9
-[; ;eeprom.c: 9:      I2C1_Init(100000);
-[e ( _I2C1_Init (1 -> -> 100000 `l `ul ]
 "10
-[; ;eeprom.c: 10: }
+[; ;eeprom.c: 10:      I2C1_Init(100000);
+[e ( _I2C1_Init (1 -> -> 100000 `l `ul ]
+"11
+[; ;eeprom.c: 11: }
 [e :UE 95 ]
 }
-"18
-[; ;eeprom.c: 18: void EEPROM_write (uint16_t address , uint8_t _x){
+"19
+[; ;eeprom.c: 19: void EEPROM_write (uint16_t address , uint8_t _x){
 [v _EEPROM_write `(v ~T0 @X0 1 ef2`ui`uc ]
 {
 [e :U _EEPROM_write ]
 [v _address `ui ~T0 @X0 1 r1 ]
 [v __x `uc ~T0 @X0 1 r2 ]
 [f ]
-"19
-[; ;eeprom.c: 19:     I2C1_Start();
-[e ( _I2C1_Start ..  ]
 "20
-[; ;eeprom.c: 20:     I2C1_Wr(0XA2);
-[e ( _I2C1_Wr (1 -> -> 162 `i `uc ]
+[; ;eeprom.c: 20:     I2C1_Start();
+[e ( _I2C1_Start ..  ]
 "21
-[; ;eeprom.c: 21:     I2C1_Wr(address);
-[e ( _I2C1_Wr (1 -> _address `uc ]
+[; ;eeprom.c: 21:     I2C1_Wr(0XA2);
+[e ( _I2C1_Wr (1 -> -> 162 `i `uc ]
 "22
-[; ;eeprom.c: 22:     I2C1_Wr(_x);
-[e ( _I2C1_Wr (1 __x ]
+[; ;eeprom.c: 22:     I2C1_Wr(address);
+[e ( _I2C1_Wr (1 -> _address `uc ]
 "23
-[; ;eeprom.c: 23:     I2C1_Stop();
-[e ( _I2C1_Stop ..  ]
+[; ;eeprom.c: 23:     I2C1_Wr(_x);
+[e ( _I2C1_Wr (1 __x ]
 "24
-[; ;eeprom.c: 24: }
+[; ;eeprom.c: 24:     I2C1_Stop();
+[e ( _I2C1_Stop ..  ]
+"25
+[; ;eeprom.c: 25: }
 [e :UE 96 ]
 }
-"31
-[; ;eeprom.c: 31: uint8_t EEPROM_read(uint16_t address ){
+"32
+[; ;eeprom.c: 32: uint8_t EEPROM_read(uint16_t address ){
 [v _EEPROM_read `(uc ~T0 @X0 1 ef1`ui ]
 {
 [e :U _EEPROM_read ]
 [v _address `ui ~T0 @X0 1 r1 ]
 [f ]
-"32
-[; ;eeprom.c: 32:     uint8_t _x = 0 ;
+"33
+[; ;eeprom.c: 33:     uint8_t _x = 0 ;
 [v __x `uc ~T0 @X0 1 a ]
 [e = __x -> -> 0 `i `uc ]
-"33
-[; ;eeprom.c: 33:     I2C1_Start();
-[e ( _I2C1_Start ..  ]
 "34
-[; ;eeprom.c: 34:     I2C1_Wr(0XA2);
-[e ( _I2C1_Wr (1 -> -> 162 `i `uc ]
-"35
-[; ;eeprom.c: 35:     I2C1_Wr(address);
-[e ( _I2C1_Wr (1 -> _address `uc ]
-"36
-[; ;eeprom.c: 36:     I2C1_Start();
+[; ;eeprom.c: 34:     I2C1_Start();
 [e ( _I2C1_Start ..  ]
+"35
+[; ;eeprom.c: 35:     I2C1_Wr(0XA2);
+[e ( _I2C1_Wr (1 -> -> 162 `i `uc ]
+"36
+[; ;eeprom.c: 36:     I2C1_Wr(address);
+[e ( _I2C1_Wr (1 -> _address `uc ]
 "37
-[; ;eeprom.c: 37:     I2C1_Wr(0XA3);
-[e ( _I2C1_Wr (1 -> -> 163 `i `uc ]
+[; ;eeprom.c: 37:     I2C1_Start();
+[e ( _I2C1_Start ..  ]
 "38
-[; ;eeprom.c: 38:     _x = I2C1_Rd();
-[e = __x ( _I2C1_Rd ..  ]
+[; ;eeprom.c: 38:     I2C1_Wr(0XA3);
+[e ( _I2C1_Wr (1 -> -> 163 `i `uc ]
 "39
-[; ;eeprom.c: 39:     I2C1_Stop();
-[e ( _I2C1_Stop ..  ]
+[; ;eeprom.c: 39:     _x = I2C1_Rd();
+[e = __x ( _I2C1_Rd ..  ]
 "40
-[; ;eeprom.c: 40:     return _x ;
+[; ;eeprom.c: 40:     I2C1_Stop();
+[e ( _I2C1_Stop ..  ]
+"41
+[; ;eeprom.c: 41:     return _x ;
 [e ) __x ]
 [e $UE 97  ]
-"41
-[; ;eeprom.c: 41: }
+"42
+[; ;eeprom.c: 42: }
 [e :UE 97 ]
+}
+"48
+[; ;eeprom.c: 48: void get_set_temp(void){
+[v _get_set_temp `(v ~T0 @X0 1 ef ]
+{
+[e :U _get_set_temp ]
+[f ]
+"51
+[; ;eeprom.c: 51:     if (EEPROM_read(0xff) > 100){
+[e $ ! > -> ( _EEPROM_read (1 -> -> 255 `i `ui `i -> 100 `i 99  ]
+{
+"52
+[; ;eeprom.c: 52:        set_temp = 60 ;
+[e = _set_temp -> -> 60 `i `uc ]
+"53
+[; ;eeprom.c: 53:     }
+}
+[e $U 100  ]
+"54
+[; ;eeprom.c: 54:     else {
+[e :U 99 ]
+{
+"55
+[; ;eeprom.c: 55:        set_temp = EEPROM_read(0xff) ;
+[e = _set_temp ( _EEPROM_read (1 -> -> 255 `i `ui ]
+"56
+[; ;eeprom.c: 56:     }
+}
+[e :U 100 ]
+"57
+[; ;eeprom.c: 57: }
+[e :UE 98 ]
 }

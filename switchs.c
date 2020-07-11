@@ -1,11 +1,17 @@
+
 #include "switchs.h"
 
-extern uint8_t switch_delay;
-extern uint16_t switch_wait;
+// system variables
 extern uint8_t set_temp  ;
+extern MODE_STATE_t mode ;
+extern SSD_BLINK_t blink  ; // to store the ssd state on or off
+
+// private variables 
+uint16_t switch_wait;
 SWITCH_STATE_t up_sw = RELEASED ; // up buuton state
 SWITCH_STATE_t down_sw = RELEASED ; // down buuton state
-extern MODE_STATE_t mode ;
+SWITCH_STATE_t samples[SWITCH_SAMPLES];
+
 
 /******************************************************************************
 * Description : Initialize switch module  
@@ -26,9 +32,8 @@ void switch_init(void){
 * Return type : void                                                                           
 *******************************************************************************/
 void switch_scan(void){
-    switch_delay += TIC_TIME ;
+    
     // will enter the if every 200 ms  
-    if (switch_delay == SCANE_INTERVAL){
        if ( !(IS_SET(UP_BUTTON_PORT , UP_BUTTON_PIN))){
           up_sw = PRESSED ; // the up button is pressed
        }
@@ -38,8 +43,7 @@ void switch_scan(void){
        else {
            /* shouldn't reach here */
        }
-       switch_delay = 0 ; // initialize the counter 
-    }
+       sw_action();
 }
 
 /******************************************************************************
@@ -75,13 +79,14 @@ void sw_action(void){
                     down_sw = RELEASED ;
                 }
                 else {
-                    switch_wait += TIC_TIME ;
+                    switch_wait += SWITCH_SCAN_TASK_PERIOD ;
                 }
             }
             else {
                 mode = NORMAL_MODE ; // switch to normal mode
                 switch_wait = 0 ;    // initialize the counter 
                 EEPROM_write(0xff , set_temp); // write the new set temp to the eeprom
+                blink = SSD_ON ;
             }
             break;
         default : 

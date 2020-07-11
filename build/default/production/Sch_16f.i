@@ -1,4 +1,4 @@
-# 1 "temp_control.c"
+# 1 "Sch_16f.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,35 +6,10 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "temp_control.c" 2
-# 1 "./temp_control.h" 1
+# 1 "Sch_16f.c" 2
 
-
-
-# 1 "./Main.h" 1
-# 13 "./Main.h"
-typedef unsigned char uint8_t;
-typedef signed char sint8_t;
-typedef unsigned int uint16_t;
-typedef signed int sint16_t;
-typedef unsigned long uint32_t;
-typedef signed long sint32_t;
-
-
-typedef enum {
-    NORMAL_MODE,
-    SETTING_MODE
-}MODE_STATE_t;
-
-
-typedef enum {
-    ON_STATE,
-    OFF_STATE
-}POWER_MODES_t;
-# 4 "./temp_control.h" 2
-
-# 1 "./port.h" 1
-# 17 "./port.h"
+# 1 "./Sch_16f.h" 1
+# 20 "./Sch_16f.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -1748,18 +1723,56 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 17 "./port.h" 2
-# 5 "./temp_control.h" 2
+# 20 "./Sch_16f.h" 2
+
+# 1 "./temp_sensor.h" 1
+
+
+
+# 1 "./port.h" 1
+# 4 "./temp_sensor.h" 2
 
 # 1 "./macros.h" 1
-# 6 "./temp_control.h" 2
+# 5 "./temp_sensor.h" 2
+
+# 1 "./Main.h" 1
+# 13 "./Main.h"
+typedef unsigned char uint8_t;
+typedef signed char sint8_t;
+typedef unsigned int uint16_t;
+typedef signed int sint16_t;
+typedef unsigned long uint32_t;
+typedef signed long sint32_t;
+
+
+typedef enum {
+    NORMAL_MODE,
+    SETTING_MODE
+}MODE_STATE_t;
+
+
+typedef enum {
+    ON_STATE,
+    OFF_STATE
+}POWER_MODES_t;
+# 6 "./temp_sensor.h" 2
+
+# 1 "./adc_drive.h" 1
+# 14 "./adc_drive.h"
+void ADC_Init(void);
+uint16_t ADC_Read (uint8_t channel);
+# 7 "./temp_sensor.h" 2
 
 
 
 
+void temp_sensor_init(void);
+uint8_t average (void);
+void temp_sensor_read (void);
+# 21 "./Sch_16f.h" 2
 
-
-
+# 1 "./temp_control.h" 1
+# 13 "./temp_control.h"
 typedef enum {
     HEATER_ON ,
     HEATER_OFF,
@@ -1769,35 +1782,228 @@ void temp_control_off(void);
 void temp_control_init(void);
 void temp_set( void );
 void led(void);
-# 1 "temp_control.c" 2
+# 22 "./Sch_16f.h" 2
+
+# 1 "./SSD.h" 1
 
 
 
-extern uint8_t set_temp ;
-extern uint8_t measured_temp ;
+
+
+
+
+
+void ssd_init(void);
+uint8_t display7s(uint8_t v);
+void ssd_update(void);
+void ssd_turn_off(void);
+void ssd_blink(void);
+
+
+typedef enum {
+    SSD_LEFT,
+    SSD_RIGHT
+}SSD_SELECT_t;
+
+
+typedef enum {
+    SSD_ON,
+    SSD_OFF
+}SSD_BLINK_t;
+# 23 "./Sch_16f.h" 2
+
+# 1 "./switchs.h" 1
+
+
+
+
+
+
+# 1 "./eeprom.h" 1
+
+
+
+
+# 1 "./I2C_drive.h" 1
+# 16 "./I2C_drive.h"
+# 1 "./I2C_drive.h" 1
+# 16 "./I2C_drive.h" 2
+
+
+void I2C1_Init(uint32_t freq);
+void I2C_Wait(void);
+void I2C1_Start(void);
+void I2C1_Stop(void);
+void I2C1_Wr(uint8_t _data);
+uint8_t I2C1_Rd(void);
+# 5 "./eeprom.h" 2
+
+
+void EEPROM_init(void);
+void EEPROM_write (uint16_t address , uint8_t _x);
+uint8_t EEPROM_read(uint16_t address );
+void get_set_temp(void);
+# 7 "./switchs.h" 2
+
+# 1 "./Sch_16f.h" 1
+# 8 "./switchs.h" 2
+# 17 "./switchs.h"
+typedef enum{
+    PRE_PRESSED,
+    PRESSED,
+    PRE_RELEASED,
+    RELEASED
+}SWITCH_STATE_t;
+
+void switch_init(void);
+void switch_scan(void);
+void sw_action(void);
+# 24 "./Sch_16f.h" 2
+# 50 "./Sch_16f.h"
+typedef unsigned char tByte ;
+typedef unsigned int tWord ;
+
+
+typedef struct
+{
+
+    void (*pTask)(void);
+
+
+    tWord Delay;
+
+
+    tWord Period;
+
+    tByte RunMe;
+} sTask;
+
+
+
+tByte SCH_Delete_Task(const tByte);
+void SCH_Init(void);
+void SCH_Dispatch_Tasks(void);
+tByte SCH_Add_Task(void (*) (void), const tWord, const tWord);
+void SCH_Report_Status(void);
+void SCH_Start(void);
+void SCH_Stop(void);
+void __attribute__((picinterrupt(("")))) SCH_Update (void);
+# 2 "Sch_16f.c" 2
+
+
+
+static void SCH_Go_To_Sleep(void);
+
+
+static tWord Error_tick_count_G;
+static tByte Last_error_code_G;
+
+tWord timer_value ;
+
+
+sTask SCH_tasks_G[(8)];
+tByte Error_code_G = 0;
+
+
 extern MODE_STATE_t mode ;
+extern POWER_MODES_t power_mode ;
+# 35 "Sch_16f.c"
+void __attribute__((picinterrupt(("")))) SCH_Update (void){
+    if (PIR1 & (1 << 0)){
+
+        TMR1L = timer_value ;
+        TMR1H = ( timer_value >> 8 ) ;
+        PIR1 &= ~ (1 << 0) ;
+        tByte Index;
+
+        for (Index = 0; Index < (8); Index++)
+        {
+
+            if (SCH_tasks_G[Index].pTask)
+            {
+                if (SCH_tasks_G[Index].Delay == 0)
+                {
+
+                    SCH_tasks_G[Index].RunMe += 1;
+                    if (SCH_tasks_G[Index].Period)
+                    {
+
+                        SCH_tasks_G[Index].Delay = SCH_tasks_G[Index].Period;
+                    }
+                }
+                else
+                {
+
+                    SCH_tasks_G[Index].Delay -= (10);
+                }
+            }
+        }
+    }
+
+    if (INTCON & (1 << 1)){
+        (INTCON &= ~(1 << 1));
+        switch (power_mode){
+
+            case ON_STATE :
+                power_mode = OFF_STATE ;
+                ssd_turn_off();
+                temp_control_off();
+                SCH_Stop();
+                break;
+
+            case OFF_STATE :
+                power_mode = ON_STATE ;
+                SCH_Start();
+                break;
+        }
+    }
+}
+# 93 "Sch_16f.c"
+void SCH_Init(void)
+{
+    tByte i;
+    for (i = 0; i < (8); i++)
+    {
+        SCH_Delete_Task(i);
+    }
 
 
-TEMP_STATE_t state ;
+
+    Error_code_G = 0;
+
+
+    T1CON = 0X30;
+    PIR1 &= ~ (1 << 0) ;
+    PIE1 |= (1 << 0);
+    INTCON |= (1 << 7);
+    INTCON |= (1 << 6);
+
+    timer_value = 65536 - ( ((10) * (8000000) ) / (1000 * 4 * 8 ) );
+    TMR1L = timer_value ;
+    TMR1H = ( timer_value >> 8 ) ;
+}
 
 
 
 
 
 
-
-void temp_control_init(void){
-
-     (TRISC &= ~(1 << 5));
-     (PORTC &= ~(1 << 5));
-
-
-     (TRISC &= ~(1 << 2));
-     (PORTC &= ~(1 << 2));
+void SCH_Start(void)
+{
+    (T1CON |= (1 << 0));
+}
 
 
-     (TRISB &= ~(1 << 4));
-     (PORTB &= ~(1 << 4));
+
+
+
+void SCH_Stop(void)
+{
+    (T1CON &= ~(1 << 0));
+    int i = 0 ;
+    for (i = 0 ; i < (8) ; i++){
+        SCH_tasks_G[i].Delay = SCH_tasks_G[i].Period;
+    }
 }
 
 
@@ -1806,32 +2012,32 @@ void temp_control_init(void){
 
 
 
-void temp_set( void ){
-    if (mode == NORMAL_MODE){
-        if ( measured_temp < (set_temp - 5 ) ){
-            (PORTC |= (1 << 5));
-            (PORTC &= ~(1 << 2));
-            state = HEATER_ON ;
-        }
-        else if ( measured_temp > (set_temp + 5 ) ){
-            (PORTC |= (1 << 2));
-            (PORTC &= ~(1 << 5));
-            (PORTB |= (1 << 4));
-            state = HEATER_OFF ;
-        }
-        else if ( measured_temp == set_temp){
-            (PORTC &= ~(1 << 2));
-            (PORTC &= ~(1 << 5));
-            (PORTB &= ~(1 << 4));
-            state = HEATER_OFF ;
-        }
-        else {
+tByte SCH_Add_Task(void (* pFunction)(),
+    const tWord DELAY,
+    const tWord PERIOD)
+    {
+    tByte Index = 0;
 
-        }
+    while ((SCH_tasks_G[Index].pTask != 0) && (Index < (8)))
+    {
+        Index++;
     }
-    else {
-        temp_control_off();
+
+    if (Index == (8))
+    {
+
+
+
+
+
+        return (8);
     }
+
+    SCH_tasks_G[Index].pTask = pFunction;
+    SCH_tasks_G[Index].Delay = DELAY;
+    SCH_tasks_G[Index].Period = PERIOD;
+    SCH_tasks_G[Index].RunMe = 0;
+    return Index;
 }
 
 
@@ -1839,15 +2045,33 @@ void temp_set( void ){
 
 
 
-void led(void){
-    if (mode == NORMAL_MODE){
-        if (state == HEATER_ON){
-            (PORTB ^= ( 1 << 4));
-        }
-        else {
+void SCH_Go_To_Sleep(void)
+{
+   __asm(" SLEEP ");
+}
+# 191 "Sch_16f.c"
+void SCH_Dispatch_Tasks(void)
+{
+    tByte Index;
 
+    for (Index = 0; Index < (8); Index++)
+    {
+        if (SCH_tasks_G[Index].RunMe > 0)
+        {
+            (*SCH_tasks_G[Index].pTask)();
+            SCH_tasks_G[Index].RunMe -= 1;
+
+
+            if (SCH_tasks_G[Index].Period == 0)
+            {
+                SCH_Delete_Task(Index);
+            }
         }
     }
+
+    SCH_Report_Status();
+
+    SCH_Go_To_Sleep();
 }
 
 
@@ -1855,8 +2079,35 @@ void led(void){
 
 
 
-void temp_control_off(void){
-    (PORTC &= ~(1 << 5));
-    (PORTC &= ~(1 << 2));
-    (PORTB &= ~(1 << 4));
+
+tByte SCH_Delete_Task(const tByte TASK_INDEX)
+{
+    tByte Return_code;
+    if (SCH_tasks_G[TASK_INDEX].pTask == 0)
+    {
+
+
+
+        Error_code_G = (2);
+        Return_code = 1;
+    }
+    else
+    {
+        Return_code = 0;
+    }
+    SCH_tasks_G[TASK_INDEX].pTask = 0x0000;
+    SCH_tasks_G[TASK_INDEX].Delay = 0;
+    SCH_tasks_G[TASK_INDEX].Period = 0;
+    SCH_tasks_G[TASK_INDEX].RunMe = 0;
+    return Return_code;
+}
+
+
+
+
+
+
+void SCH_Report_Status(void)
+{
+# 278 "Sch_16f.c"
 }

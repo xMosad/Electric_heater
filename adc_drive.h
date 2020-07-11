@@ -8,7 +8,7 @@
 #define ADC_DRIVE_H_
 
 #include <xc.h>
-#include "types.h"
+#include "Main.h"
 #include "macros.h"
 
 void ADC_Init(void);

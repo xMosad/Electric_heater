@@ -1732,10 +1732,8 @@ extern __bank0 __bit __timeout;
 # 1 "./macros.h" 1
 # 5 "./temp_sensor.h" 2
 
-# 1 "./types.h" 1
-
-
-
+# 1 "./Main.h" 1
+# 13 "./Main.h"
 typedef unsigned char uint8_t;
 typedef signed char sint8_t;
 typedef unsigned int uint16_t;
@@ -1765,17 +1763,20 @@ uint16_t ADC_Read (uint8_t channel);
 
 
 
-
 void temp_sensor_init(void);
 uint8_t average (void);
-uint8_t temp_sensor_read (void);
+void temp_sensor_read (void);
 # 1 "temp_sensor.c" 2
 
 
-static uint16_t temp_hold_array[10] ;
-extern uint8_t temp_timer ;
+
+extern MODE_STATE_t mode ;
+extern uint8_t measured_temp ;
+
+
+static uint16_t temp_hold_array[10];
 static uint8_t i = 0 ;
-uint8_t temp = 0 ;
+
 
 
 
@@ -1806,20 +1807,13 @@ uint8_t average (void){
 
 
 
-uint8_t temp_sensor_read (void) {
-    temp_timer += 1;
-
-    if( temp_timer == 100 ){
+void temp_sensor_read (void) {
+    if (mode == NORMAL_MODE){
 
         temp_hold_array[i] = (ADC_Read(2) * 4.89 ) ;
         temp_hold_array[i] = temp_hold_array[i] / 10.0 ;
         i++ ;
-        temp_timer = 0 ;
         if (i == 10){i = 0 ;}
-        temp = average();
-        return temp ;
-    }
-    else {
-        return temp ;
+        measured_temp = average();
     }
 }

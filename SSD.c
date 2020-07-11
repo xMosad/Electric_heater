@@ -1,11 +1,16 @@
 #include "SSD.h"
 
-uint8_t tens , ones ; // hold the number to be written to each SSD 
-extern uint8_t ssd_delay ;
-extern uint16_t ssd_timer;
+// system variables
 extern uint8_t set_temp  ;
+extern uint8_t measured_temp ; // store the measured temperature
+extern MODE_STATE_t mode  ; // variable will hold the system state
+// private variabes
+uint8_t tens , ones ; // hold the number to be written to each SSD 
 SSD_SELECT_t ssd_select = SSD_LEFT ; // to switch between the two ssd
+uint8_t temp ;
+// global variables
 SSD_BLINK_t blink = SSD_ON ; // to store the ssd state on or off
+
 
 /******************************************************************************
 * Description : Initialize the SSD 
@@ -88,14 +93,20 @@ uint8_t display7s(uint8_t v)
 }
 
 /******************************************************************************
-* Description : write to the SSD will switch between the two SSD every 50 ms
+* Description : a task to write to the SSD will switch between the two SSD 
 * Parameters  : the value of the temp (uint8_t)
 * Return type : void                                                                           
 *******************************************************************************/
-void ssd_update(uint8_t temp){
-    ssd_delay  += TIC_TIME;
-    // enter the if every 50 ms
-    if (ssd_delay == SSD_SWITCH_TIME){
+void ssd_update(void){
+    if (blink == SSD_ON){
+        switch (mode){
+            case NORMAL_MODE : 
+                temp = measured_temp ;
+                break ;
+            case SETTING_MODE : 
+                temp = set_temp;
+                break ;
+        }
         //choose to write to the left or right SSD
         switch (ssd_select){
             case SSD_LEFT :
@@ -103,18 +114,17 @@ void ssd_update(uint8_t temp){
                 SET_BIT  (SSD_SELECT_PORT , SSD_PIN_LEFT);
                 CLEAR_BIT(SSD_SELECT_PORT , SSD_PIN_RIGHT);
                 SSD_PORT = display7s(tens);
-                ssd_delay = 0 ;          // initialize counter
                 ssd_select = SSD_RIGHT ; // update the ssd_select
                 break ;
             case SSD_RIGHT :
                  ones = temp % 10 ;
                  SET_BIT  (SSD_SELECT_PORT , SSD_PIN_RIGHT);
                  CLEAR_BIT(SSD_SELECT_PORT , SSD_PIN_LEFT);
-                 SSD_PORT = display7s(ones);
-                 ssd_delay = 0 ;         // initialize counter
+                 SSD_PORT = display7s(ones);                
                  ssd_select = SSD_LEFT ; // update the ssd_select
                  break;
             default :
+                /* shouldn't be here*/
                 break ;
         }
     }
@@ -129,39 +139,30 @@ void ssd_turn_off(void){
     CLEAR_REG(SSD_PORT);
     CLEAR_BIT(SSD_SELECT_PORT , SSD_PIN_LEFT);
     CLEAR_BIT(SSD_SELECT_PORT , SSD_PIN_RIGHT);
-    ssd_delay = 0 ;         // initialize counter
+    
 }
 
 /******************************************************************************
-* Description : to blink the SSD every 1 s in the setting mode  
+* Description : a task to blink the SSD every 1 s in the setting mode  
 * Parameters  : temp (uint8_t) 
 * Return type : void                                                                           
 *******************************************************************************/
-void ssd_blink(uint8_t e_temp){
-     ssd_timer  += TIC_TIME;
-     //choose to write to the left or right SSD
-     switch (blink){
-        // in SSD_ON state will keep updating the SSD 
-        case SSD_ON :
-            if (ssd_timer < SSD_BLINK_TIME){
-                ssd_update(e_temp);
-                }
-            else{
-                blink = SSD_OFF ;
-                ssd_timer = 0 ;
-                ssd_turn_off();
-            }
-            break ;
-        // in SSD_OFF state will shut down SSD for 1 s    
-        case SSD_OFF :
-            if (ssd_timer == SSD_BLINK_TIME){
-                blink = SSD_ON ;
-                ssd_timer = 0 ;
-            }
-            else {
-                 
-            }
-            break;
-        default : break ;
-     }
+void ssd_blink(void){
+    if (mode == SETTING_MODE){ 
+        //choose to write to the left or right SSD
+        switch (blink){
+           // in SSD_ON state will keep updating the SSD 
+           case SSD_ON :              
+               blink = SSD_OFF ;
+               ssd_turn_off();
+               break ;
+
+           case SSD_OFF :           
+               blink = SSD_ON ;
+               break;
+           default :
+               /* shouldn't be here*/
+               break ;
+        }
+    }
 }

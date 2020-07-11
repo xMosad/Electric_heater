@@ -5,12 +5,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1325 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1325: extern volatile unsigned char TRISA __attribute__((address(0x085)));
 [v _TRISA `Vuc ~T0 @X0 0 e@133 ]
-"4 temp_sensor.c
-[; ;temp_sensor.c: 4: extern uint8_t temp_timer ;
-[v _temp_timer `uc ~T0 @X0 0 e ]
+"42 temp_sensor.c
+[; ;temp_sensor.c: 42:     if (mode == NORMAL_MODE){
+[c E856 0 1 .. ]
+[n E856 . NORMAL_MODE SETTING_MODE  ]
+"4
+[; ;temp_sensor.c: 4: extern MODE_STATE_t mode ;
+[v _mode `E856 ~T0 @X0 0 e ]
 "15 ./adc_drive.h
 [; ;./adc_drive.h: 15: uint16_t ADC_Read (uint8_t channel);
 [v _ADC_Read `(ui ~T0 @X0 0 ef1`uc ]
+"5 temp_sensor.c
+[; ;temp_sensor.c: 5: extern uint8_t measured_temp ;
+[v _measured_temp `uc ~T0 @X0 0 e ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -191,133 +198,105 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"3 temp_sensor.c
-[; ;temp_sensor.c: 3: static uint16_t temp_hold_array[10] ;
+"8 temp_sensor.c
+[; ;temp_sensor.c: 8: static uint16_t temp_hold_array[10];
 [v _temp_hold_array `ui ~T0 @X0 -> 10 `i s ]
-"5
-[; ;temp_sensor.c: 5: static uint8_t i = 0 ;
+"9
+[; ;temp_sensor.c: 9: static uint8_t i = 0 ;
 [v _i `uc ~T0 @X0 1 s ]
 [i _i
 -> -> 0 `i `uc
 ]
-"6
-[; ;temp_sensor.c: 6: uint8_t temp = 0 ;
-[v _temp `uc ~T0 @X0 1 e ]
-[i _temp
--> -> 0 `i `uc
-]
-"13
-[; ;temp_sensor.c: 13: void temp_sensor_init(void){
+"17
+[; ;temp_sensor.c: 17: void temp_sensor_init(void){
 [v _temp_sensor_init `(v ~T0 @X0 1 ef ]
 {
 [e :U _temp_sensor_init ]
 [f ]
-"14
-[; ;temp_sensor.c: 14:     ADC_Init();
+"18
+[; ;temp_sensor.c: 18:     ADC_Init();
 [e ( _ADC_Init ..  ]
-"15
-[; ;temp_sensor.c: 15:     (TRISA |= (1 << 2));
+"19
+[; ;temp_sensor.c: 19:     (TRISA |= (1 << 2));
 [e =| _TRISA -> << -> 1 `i -> 2 `i `Vuc ]
-"16
-[; ;temp_sensor.c: 16: }
+"20
+[; ;temp_sensor.c: 20: }
 [e :UE 95 ]
 }
-"23
-[; ;temp_sensor.c: 23: uint8_t average (void){
+"27
+[; ;temp_sensor.c: 27: uint8_t average (void){
 [v _average `(uc ~T0 @X0 1 ef ]
 {
 [e :U _average ]
 [f ]
-"24
-[; ;temp_sensor.c: 24:     uint8_t i = 0 ;
+"28
+[; ;temp_sensor.c: 28:     uint8_t i = 0 ;
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-"25
-[; ;temp_sensor.c: 25:     uint16_t sum = 0 ;
+"29
+[; ;temp_sensor.c: 29:     uint16_t sum = 0 ;
 [v _sum `ui ~T0 @X0 1 a ]
 [e = _sum -> -> 0 `i `ui ]
-"26
-[; ;temp_sensor.c: 26:     for (i = 0 ; i < 10 ; i++){
+"30
+[; ;temp_sensor.c: 30:     for (i = 0 ; i < 10 ; i++){
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 10 `i 97  ]
 [e $U 98  ]
 [e :U 97 ]
 {
-"27
-[; ;temp_sensor.c: 27:         sum = sum + temp_hold_array[i] ;
+"31
+[; ;temp_sensor.c: 31:         sum = sum + temp_hold_array[i] ;
 [e = _sum + _sum *U + &U _temp_hold_array * -> _i `ux -> -> # *U &U _temp_hold_array `ui `ux ]
-"28
-[; ;temp_sensor.c: 28:     }
+"32
+[; ;temp_sensor.c: 32:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 10 `i 97  ]
 [e :U 98 ]
 }
-"29
-[; ;temp_sensor.c: 29:     return (sum / 10) ;
+"33
+[; ;temp_sensor.c: 33:     return (sum / 10) ;
 [e ) -> / _sum -> -> 10 `i `ui `uc ]
 [e $UE 96  ]
-"30
-[; ;temp_sensor.c: 30: }
+"34
+[; ;temp_sensor.c: 34: }
 [e :UE 96 ]
 }
-"37
-[; ;temp_sensor.c: 37: uint8_t temp_sensor_read (void) {
-[v _temp_sensor_read `(uc ~T0 @X0 1 ef ]
+"41
+[; ;temp_sensor.c: 41: void temp_sensor_read (void) {
+[v _temp_sensor_read `(v ~T0 @X0 1 ef ]
 {
 [e :U _temp_sensor_read ]
 [f ]
-"38
-[; ;temp_sensor.c: 38:     temp_timer += 1;
-[e =+ _temp_timer -> -> 1 `i `uc ]
-"40
-[; ;temp_sensor.c: 40:     if( temp_timer == 100 ){
-[e $ ! == -> _temp_timer `i -> 100 `i 101  ]
-{
 "42
-[; ;temp_sensor.c: 42:         temp_hold_array[i] = (ADC_Read(2) * 4.89 ) ;
-[e = *U + &U _temp_hold_array * -> _i `ux -> -> # *U &U _temp_hold_array `ui `ux -> * -> ( _ADC_Read (1 -> -> 2 `i `uc `d .4.89 `ui ]
-"43
-[; ;temp_sensor.c: 43:         temp_hold_array[i] = temp_hold_array[i] / 10.0 ;
-[e = *U + &U _temp_hold_array * -> _i `ux -> -> # *U &U _temp_hold_array `ui `ux -> / -> *U + &U _temp_hold_array * -> _i `ux -> -> # *U &U _temp_hold_array `ui `ux `d .10.0 `ui ]
+[; ;temp_sensor.c: 42:     if (mode == NORMAL_MODE){
+[e $ ! == -> _mode `ui -> . `E856 0 `ui 101  ]
+{
 "44
-[; ;temp_sensor.c: 44:         i++ ;
-[e ++ _i -> -> 1 `i `uc ]
+[; ;temp_sensor.c: 44:         temp_hold_array[i] = (ADC_Read(2) * 4.89 ) ;
+[e = *U + &U _temp_hold_array * -> _i `ux -> -> # *U &U _temp_hold_array `ui `ux -> * -> ( _ADC_Read (1 -> -> 2 `i `uc `d .4.89 `ui ]
 "45
-[; ;temp_sensor.c: 45:         temp_timer = 0 ;
-[e = _temp_timer -> -> 0 `i `uc ]
+[; ;temp_sensor.c: 45:         temp_hold_array[i] = temp_hold_array[i] / 10.0 ;
+[e = *U + &U _temp_hold_array * -> _i `ux -> -> # *U &U _temp_hold_array `ui `ux -> / -> *U + &U _temp_hold_array * -> _i `ux -> -> # *U &U _temp_hold_array `ui `ux `d .10.0 `ui ]
 "46
-[; ;temp_sensor.c: 46:         if (i == 10){i = 0 ;}
+[; ;temp_sensor.c: 46:         i++ ;
+[e ++ _i -> -> 1 `i `uc ]
+"47
+[; ;temp_sensor.c: 47:         if (i == 10){i = 0 ;}
 [e $ ! == -> _i `i -> 10 `i 102  ]
 {
 [e = _i -> -> 0 `i `uc ]
 }
 [e :U 102 ]
-"47
-[; ;temp_sensor.c: 47:         temp = average();
-[e = _temp ( _average ..  ]
 "48
-[; ;temp_sensor.c: 48:         return temp ;
-[e ) _temp ]
-[e $UE 100  ]
+[; ;temp_sensor.c: 48:         measured_temp = average();
+[e = _measured_temp ( _average ..  ]
 "49
 [; ;temp_sensor.c: 49:     }
 }
-[e $U 103  ]
-"50
-[; ;temp_sensor.c: 50:     else {
 [e :U 101 ]
-{
-"51
-[; ;temp_sensor.c: 51:         return temp ;
-[e ) _temp ]
-[e $UE 100  ]
-"52
-[; ;temp_sensor.c: 52:     }
-}
-[e :U 103 ]
-"53
-[; ;temp_sensor.c: 53: }
+"50
+[; ;temp_sensor.c: 50: }
 [e :UE 100 ]
 }

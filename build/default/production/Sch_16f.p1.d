@@ -1,5 +1,5 @@
-build/default/production/main_app.p1:  \
-main_app.c  \
+build/default/production/Sch_16f.p1:  \
+Sch_16f.c  \
 Sch_16f.h  \
 temp_sensor.h  \
 port.h  \

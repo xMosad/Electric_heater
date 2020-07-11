@@ -16,111 +16,18 @@
 #pragma config CP     = OFF       // Flash Program Memory Code Protection bit (Code protection off)4
 
 /*                  includes                      */
-#include <xc.h>
-#include "timer2.h"
-#include "temp_sensor.h"
-#include "temp_control.h"
-#include "SSD.h"
-#include "switchs.h"
-#include "eeprom.h"
+#include "Sch_16f.h"
+
 
 /*              global variables                  */
 
-//timers
-uint8_t temp_timer ; // to take the temp every 100 ms
-uint8_t ssd_delay ; // to power on one display at the time every 50 ms
-uint8_t switch_delay; // to check on the switches every 200 ms
-uint16_t switch_wait; // to count till 5000ms if no buttons pressed in setting mode
-uint16_t ssd_timer; // to blink ssd every 1000 ms 
-uint16_t led_timer ; // to blink led every 1000 ms
-
 uint8_t set_temp ; // store the setting temperature 
-uint8_t hold_temp ; // store the measured temperature 
+uint8_t measured_temp ; // store the measured temperature 
 
 MODE_STATE_t mode = NORMAL_MODE ; // variable will hold the system state 
 POWER_MODES_t power_mode = OFF_STATE ; // variable will hold the power state 
 
-/*
- * The ISR handle two interrupts :
- *   - > the timer 2 interrupt :
- *        * The timer will overflow every 1 ms.
- *        * Timer 2 is the main OS handling all the tasks in a cooperative style.
- *        * the system has 7 main tasks handled in the ISR.
- *        * a main state variable named *mode* will determine which tasks will be
- *        * executed every tick. 
- * 
- *        *  - > We have two main modes the normal mode where :  
- *        *    --> read temp from lm35 every 100 ms.
- *        *    --> update the SSD with the current temp.
- *        *    --> change the temp by turning on the heater or the cooler.
- *        *    --> set the indicator led will blink every 1 s if heater is on.
- *        *    --> scan the switches every 200 ms.
- *        *    --> if a switch is pressed an action will be taken in sw_action.
- * 
- *        *  - > The second mode is the setting mode  :
- *        *    --> scan the switches every 200 ms.
- *        *    --> if a switch is pressed an action will be taken in sw_action.
- *        *    --> blink the SSD every 1 s.
- *        * will exit the mode if no buttons are pressed for 5 s.
- * 
- *   - > the external interrupt :
- *        * handle the power button.
- *        * check on the current power state of the system.
- *        * if the system is on and the ISR is fired will power off the system.
- *        * if the system is off and the ISR is fired will power on the system.
- *        * if the system is off : SSD , led cooler , heater are off + the
- *        * timer will be off. 
- */
 
-void __interrupt () isr (void){
-    TMR2 = TIMER_INITIAL_VALUE ;     // initial value to fire every 1 ms
-    // timer interrupt
-    if(PIR1 & (1 << 1)){
-       CLEAR_BIT(PIR1 , 1);    // clear flag
-       switch (mode){
-           // this mode run when no switches are pressed 
-           case NORMAL_MODE  :
-                //tasks 
-                hold_temp = temp_sensor_read ();
-                ssd_update(hold_temp);
-                temp_set (hold_temp);
-                led();
-                switch_scan();
-                sw_action();
-                break;
-            // this mode will be entered when the up or down buttons are pressed    
-           case SETTING_MODE :
-                //tasks
-                switch_scan();
-                sw_action();
-                ssd_blink(set_temp);
-                break;
-           default : 
-               
-               break ;
-       }
-    }
-    
-    // external interrupt on b0
-    if (INTCON & (1 << 1)){
-        CLEAR_BIT(INTCON , 1); // clear the external interrupt flag 
-        switch (power_mode){
-            // if we were in the on state and the power button was pressed
-            case ON_STATE :
-                power_mode = OFF_STATE ;
-                stop_timer();
-                ssd_turn_off();
-                temp_control_off();
-                break;
-             // if we were in the off state and the power button was pressed    
-            case OFF_STATE :
-                power_mode = ON_STATE ;
-                start_timer();
-                break;
-        }
-    }
-
-}
 void main() {
     // system initialize 
     temp_sensor_init();
@@ -128,25 +35,49 @@ void main() {
     switch_init();
     ssd_init();
     EEPROM_init();
-    timer2_init();
-    // if a reading is stored in the eeprom we will read it 
-    // if not the default temperature is 60 
-    if (EEPROM_read(0xff) > 100){
-       set_temp = 60 ;
-    }
-    else {
-       set_temp = EEPROM_read(0xff) ;
-    }
+    SCH_Init(); // initialize the scheduler 
     
-    
-    // in off state 
-    stop_timer();
-    ssd_turn_off();
-    temp_control_off();
+    // tasks
+    /*
+     * we have 7 tasks will be handled by the scheduler 
+     * the scheduler uses timer1 an isr is fired every 10 ms 
+     * - > get_set_temp task : 
+     *      one shot task only invoked at the beginning to read set_temp
+     * - > temp_sensor_read task : 
+     *      a periodic task invoked every (GET_TEMP_TASK_PERIOD) 
+     *      only in ( NORMAL_MODE ) take temp from LM35 and calculate  
+     *      the average of the last ten values
+     * - > ssd_update task : 
+     *      a periodic task invoked every (SSD_UPDATE_TASK_PERIOD)
+     *      only in ( NORMAL_MODE ) write to one of SSD at a time 
+     * - > led task : 
+     *      a periodic task invoked every (LED_TASK_PERIOD) 
+     *      only in ( NORMAL_MODE ) and the heater is on  
+     * - > temp_set task : 
+     *      a periodic task invoked every (TEMP_SET_TASK_PERIOD) 
+     *      only in ( NORMAL_MODE ) and compare the measured_temp with set_temp
+     *      and open heater or cooler based on that 
+     * - > switch_scan task : 
+     *      a periodic task invoked every (SWITCH_SCAN_TASK_PERIOD) 
+     *      in both modes check on buttons and take action based on its state
+     * - > ssd_blink task : 
+     *      a periodic task invoked every (SSD_BLINK_TASK_PERIOD) 
+     *      only in (SETTING_MODE) to blink the SSD       
+     */
+    SCH_Add_Task(get_set_temp , 0 , 0); 
+    SCH_Add_Task(temp_sensor_read , 0 , GET_TEMP_TASK_PERIOD);
+    SCH_Add_Task(ssd_update , 0 , SSD_UPDATE_TASK_PERIOD);
+    SCH_Add_Task(led , 0 , LED_TASK_PERIOD);
+    SCH_Add_Task(temp_set , 0 , TEMP_SET_TASK_PERIOD);
+    SCH_Add_Task(switch_scan , 0 , SWITCH_SCAN_TASK_PERIOD);
+    SCH_Add_Task(ssd_blink , 0 , SSD_BLINK_TASK_PERIOD);
     
     //super loop 
     while(1){
-        // sleep
-        system_sleep();
+        // call the dispatcher 
+        SCH_Dispatch_Tasks();
     }
 }
+
+
+

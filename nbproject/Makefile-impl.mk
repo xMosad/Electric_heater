@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Electric water
+PROJECTNAME=Electric water 1
 
 # Active Configuration
 DEFAULTCONF=default

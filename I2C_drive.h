@@ -11,7 +11,7 @@
 #define I2C_DRIVE_H_
 
 #include <xc.h>
-#include "types.h"
+#include "Main.h"
 #include "macros.h"
 #include "I2C_drive.h"
 

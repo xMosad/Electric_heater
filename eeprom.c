@@ -1,5 +1,6 @@
 #include "eeprom.h"
 
+extern uint8_t set_temp ; // store the setting temperature 
 /******************************************************************************
 * Description : Initialize the EEPROM 24c04  
 * Parameters  : none 
@@ -38,4 +39,19 @@ uint8_t EEPROM_read(uint16_t address ){
     _x = I2C1_Rd();   // read the data
     I2C1_Stop();      // send stop
     return _x ;
+}
+/******************************************************************************
+* Description : get the set_temp when powering up (one - shot)  
+* Parameters  : none 
+* Return type : void                                                                           
+*******************************************************************************/
+void get_set_temp(void){
+    // if a reading is stored in the eeprom we will read it 
+    // if not the default temperature is 60 
+    if (EEPROM_read(0xff) > 100){
+       set_temp = 60 ;
+    }
+    else {
+       set_temp = EEPROM_read(0xff) ;
+    }
 }

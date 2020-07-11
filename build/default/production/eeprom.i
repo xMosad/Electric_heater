@@ -11,10 +11,8 @@
 
 
 
-# 1 "./types.h" 1
-
-
-
+# 1 "./Main.h" 1
+# 13 "./Main.h"
 typedef unsigned char uint8_t;
 typedef signed char sint8_t;
 typedef unsigned int uint16_t;
@@ -1772,9 +1770,11 @@ uint8_t I2C1_Rd(void);
 void EEPROM_init(void);
 void EEPROM_write (uint16_t address , uint8_t _x);
 uint8_t EEPROM_read(uint16_t address );
+void get_set_temp(void);
 # 1 "eeprom.c" 2
 
 
+extern uint8_t set_temp ;
 
 
 
@@ -1813,4 +1813,19 @@ uint8_t EEPROM_read(uint16_t address ){
     _x = I2C1_Rd();
     I2C1_Stop();
     return _x ;
+}
+
+
+
+
+
+void get_set_temp(void){
+
+
+    if (EEPROM_read(0xff) > 100){
+       set_temp = 60 ;
+    }
+    else {
+       set_temp = EEPROM_read(0xff) ;
+    }
 }

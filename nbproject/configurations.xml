@@ -6,15 +6,15 @@
                    projectFiles="true">
       <itemPath>adc_drive.h</itemPath>
       <itemPath>I2C_drive.h</itemPath>
-      <itemPath>types.h</itemPath>
       <itemPath>macros.h</itemPath>
       <itemPath>eeprom.h</itemPath>
       <itemPath>switchs.h</itemPath>
       <itemPath>SSD.h</itemPath>
       <itemPath>temp_control.h</itemPath>
       <itemPath>temp_sensor.h</itemPath>
-      <itemPath>timer2.h</itemPath>
       <itemPath>port.h</itemPath>
+      <itemPath>Sch_16f.h</itemPath>
+      <itemPath>Main.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -31,7 +31,7 @@
       <itemPath>switchs.c</itemPath>
       <itemPath>temp_control.c</itemPath>
       <itemPath>temp_sensor.c</itemPath>
-      <itemPath>timer2.c</itemPath>
+      <itemPath>Sch_16f.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

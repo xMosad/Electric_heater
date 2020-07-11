@@ -1,81 +1,59 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"40 main_app.c
-[; ;main_app.c: 40: MODE_STATE_t mode = NORMAL_MODE ;
+"27 main_app.c
+[; ;main_app.c: 27: MODE_STATE_t mode = NORMAL_MODE ;
+[c E856 0 1 .. ]
+[n E856 . NORMAL_MODE SETTING_MODE  ]
+"28
+[; ;main_app.c: 28: POWER_MODES_t power_mode = OFF_STATE ;
 [c E860 0 1 .. ]
-[n E860 . NORMAL_MODE SETTING_MODE  ]
-"41
-[; ;main_app.c: 41: POWER_MODES_t power_mode = OFF_STATE ;
-[c E864 0 1 .. ]
-[n E864 . ON_STATE OFF_STATE  ]
-[t ~ __interrupt . k ]
-[t T1 __interrupt ]
-"730 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 730: extern volatile unsigned char TMR2 __attribute__((address(0x011)));
-[v _TMR2 `Vuc ~T0 @X0 0 e@17 ]
-"532
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 532: extern volatile unsigned char PIR1 __attribute__((address(0x00C)));
-[v _PIR1 `Vuc ~T0 @X0 0 e@12 ]
-"14 ./temp_sensor.h
-[; ;./temp_sensor.h: 14: uint8_t temp_sensor_read (void);
-[v _temp_sensor_read `(uc ~T0 @X0 0 ef ]
-"13 ./SSD.h
-[; ;./SSD.h: 13: void ssd_update(uint8_t temp);
-[v _ssd_update `(v ~T0 @X0 0 ef1`uc ]
-"22 ./temp_control.h
-[; ;./temp_control.h: 22: void temp_set( uint8_t temp );
-[v _temp_set `(v ~T0 @X0 0 ef1`uc ]
-"23
-[; ;./temp_control.h: 23: void led(void);
-[v _led `(v ~T0 @X0 0 ef ]
-"19 ./switchs.h
-[; ;./switchs.h: 19: void switch_scan(void);
-[v _switch_scan `(v ~T0 @X0 0 ef ]
-"20
-[; ;./switchs.h: 20: void sw_action(void);
-[v _sw_action `(v ~T0 @X0 0 ef ]
-"15 ./SSD.h
-[; ;./SSD.h: 15: void ssd_blink(uint8_t e_temp);
-[v _ssd_blink `(v ~T0 @X0 0 ef1`uc ]
-"454 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 454: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
-[v _INTCON `Vuc ~T0 @X0 0 e@11 ]
-"10 ./timer2.h
-[; ;./timer2.h: 10: void stop_timer(void);
-[v _stop_timer `(v ~T0 @X0 0 ef ]
-"14 ./SSD.h
-[; ;./SSD.h: 14: void ssd_turn_off(void);
-[v _ssd_turn_off `(v ~T0 @X0 0 ef ]
-"20 ./temp_control.h
-[; ;./temp_control.h: 20: void temp_control_off(void);
-[v _temp_control_off `(v ~T0 @X0 0 ef ]
-"11 ./timer2.h
-[; ;./timer2.h: 11: void start_timer(void);
-[v _start_timer `(v ~T0 @X0 0 ef ]
+[n E860 . ON_STATE OFF_STATE  ]
 [p mainexit ]
-"12 ./temp_sensor.h
-[; ;./temp_sensor.h: 12: void temp_sensor_init(void);
+"11 ./temp_sensor.h
+[; ;./temp_sensor.h: 11: void temp_sensor_init(void);
 [v _temp_sensor_init `(v ~T0 @X0 0 ef ]
-"21 ./temp_control.h
-[; ;./temp_control.h: 21: void temp_control_init(void);
+"19 ./temp_control.h
+[; ;./temp_control.h: 19: void temp_control_init(void);
 [v _temp_control_init `(v ~T0 @X0 0 ef ]
-"18 ./switchs.h
-[; ;./switchs.h: 18: void switch_init(void);
+"24 ./switchs.h
+[; ;./switchs.h: 24: void switch_init(void);
 [v _switch_init `(v ~T0 @X0 0 ef ]
-"11 ./SSD.h
-[; ;./SSD.h: 11: void ssd_init(void);
+"9 ./SSD.h
+[; ;./SSD.h: 9: void ssd_init(void);
 [v _ssd_init `(v ~T0 @X0 0 ef ]
 "7 ./eeprom.h
 [; ;./eeprom.h: 7: void EEPROM_init(void);
 [v _EEPROM_init `(v ~T0 @X0 0 ef ]
-"9 ./timer2.h
-[; ;./timer2.h: 9: void timer2_init(void);
-[v _timer2_init `(v ~T0 @X0 0 ef ]
-"9 ./eeprom.h
-[; ;./eeprom.h: 9: uint8_t EEPROM_read(uint16_t address );
-[v _EEPROM_read `(uc ~T0 @X0 0 ef1`ui ]
-"12 ./timer2.h
-[; ;./timer2.h: 12: void system_sleep(void);
-[v _system_sleep `(v ~T0 @X0 0 ef ]
+"71 ./Sch_16f.h
+[; ;./Sch_16f.h: 71: void SCH_Init(void);
+[v _SCH_Init `(v ~T0 @X0 0 ef ]
+[v F930 `(v ~T0 @X0 0 tf ]
+"73
+[; ;./Sch_16f.h: 73: tByte SCH_Add_Task(void (*) (void), const tWord, const tWord);
+[v _SCH_Add_Task `(uc ~T0 @X0 0 ef3`*F930`Cui`Cui ]
+"10 ./eeprom.h
+[; ;./eeprom.h: 10: void get_set_temp(void);
+[v _get_set_temp `(v ~T0 @X0 0 ef ]
+"13 ./temp_sensor.h
+[; ;./temp_sensor.h: 13: void temp_sensor_read (void);
+[v _temp_sensor_read `(v ~T0 @X0 0 ef ]
+"11 ./SSD.h
+[; ;./SSD.h: 11: void ssd_update(void);
+[v _ssd_update `(v ~T0 @X0 0 ef ]
+"21 ./temp_control.h
+[; ;./temp_control.h: 21: void led(void);
+[v _led `(v ~T0 @X0 0 ef ]
+"20
+[; ;./temp_control.h: 20: void temp_set( void );
+[v _temp_set `(v ~T0 @X0 0 ef ]
+"25 ./switchs.h
+[; ;./switchs.h: 25: void switch_scan(void);
+[v _switch_scan `(v ~T0 @X0 0 ef ]
+"13 ./SSD.h
+[; ;./SSD.h: 13: void ssd_blink(void);
+[v _ssd_blink `(v ~T0 @X0 0 ef ]
+"72 ./Sch_16f.h
+[; ;./Sch_16f.h: 72: void SCH_Dispatch_Tasks(void);
+[v _SCH_Dispatch_Tasks `(v ~T0 @X0 0 ef ]
 "9 main_app.c
 [p x FOSC   = EXTRC ]
 "10
@@ -272,249 +250,84 @@ Version 4.0 HI-TECH Software Intermediate Code
 "2363
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 2363: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"30 main_app.c
-[; ;main_app.c: 30: uint8_t temp_timer ;
-[v _temp_timer `uc ~T0 @X0 1 e ]
-"31
-[; ;main_app.c: 31: uint8_t ssd_delay ;
-[v _ssd_delay `uc ~T0 @X0 1 e ]
-"32
-[; ;main_app.c: 32: uint8_t switch_delay;
-[v _switch_delay `uc ~T0 @X0 1 e ]
-"33
-[; ;main_app.c: 33: uint16_t switch_wait;
-[v _switch_wait `ui ~T0 @X0 1 e ]
-"34
-[; ;main_app.c: 34: uint16_t ssd_timer;
-[v _ssd_timer `ui ~T0 @X0 1 e ]
-"35
-[; ;main_app.c: 35: uint16_t led_timer ;
-[v _led_timer `ui ~T0 @X0 1 e ]
-"37
-[; ;main_app.c: 37: uint8_t set_temp ;
+"24 main_app.c
+[; ;main_app.c: 24: uint8_t set_temp ;
 [v _set_temp `uc ~T0 @X0 1 e ]
-"38
-[; ;main_app.c: 38: uint8_t hold_temp ;
-[v _hold_temp `uc ~T0 @X0 1 e ]
-"40
-[; ;main_app.c: 40: MODE_STATE_t mode = NORMAL_MODE ;
-[v _mode `E860 ~T0 @X0 1 e ]
+"25
+[; ;main_app.c: 25: uint8_t measured_temp ;
+[v _measured_temp `uc ~T0 @X0 1 e ]
+"27
+[; ;main_app.c: 27: MODE_STATE_t mode = NORMAL_MODE ;
+[v _mode `E856 ~T0 @X0 1 e ]
 [i _mode
-. `E860 0
+. `E856 0
 ]
-"41
-[; ;main_app.c: 41: POWER_MODES_t power_mode = OFF_STATE ;
-[v _power_mode `E864 ~T0 @X0 1 e ]
+"28
+[; ;main_app.c: 28: POWER_MODES_t power_mode = OFF_STATE ;
+[v _power_mode `E860 ~T0 @X0 1 e ]
 [i _power_mode
-. `E864 1
+. `E860 1
 ]
-[v $root$_isr `(v ~T0 @X0 0 e ]
-"75
-[; ;main_app.c: 75: void __attribute__((picinterrupt(("")))) isr (void){
-[v _isr `(v ~T1 @X0 1 ef ]
-{
-[e :U _isr ]
-[f ]
-"76
-[; ;main_app.c: 76:     TMR2 = 131 ;
-[e = _TMR2 -> -> 131 `i `uc ]
-"78
-[; ;main_app.c: 78:     if(PIR1 & (1 << 1)){
-[e $ ! != & -> _PIR1 `i << -> 1 `i -> 1 `i -> 0 `i 96  ]
-{
-"79
-[; ;main_app.c: 79:        (PIR1 &= ~(1 << 1));
-[e =& _PIR1 -> ~ << -> 1 `i -> 1 `i `Vuc ]
-"80
-[; ;main_app.c: 80:        switch (mode){
-[e $U 98  ]
-{
-"82
-[; ;main_app.c: 82:            case NORMAL_MODE :
-[e :U 99 ]
-"84
-[; ;main_app.c: 84:                 hold_temp = temp_sensor_read ();
-[e = _hold_temp ( _temp_sensor_read ..  ]
-"85
-[; ;main_app.c: 85:                 ssd_update(hold_temp);
-[e ( _ssd_update (1 _hold_temp ]
-"86
-[; ;main_app.c: 86:                 temp_set (hold_temp);
-[e ( _temp_set (1 _hold_temp ]
-"87
-[; ;main_app.c: 87:                 led();
-[e ( _led ..  ]
-"88
-[; ;main_app.c: 88:                 switch_scan();
-[e ( _switch_scan ..  ]
-"89
-[; ;main_app.c: 89:                 sw_action();
-[e ( _sw_action ..  ]
-"90
-[; ;main_app.c: 90:                 break;
-[e $U 97  ]
-"92
-[; ;main_app.c: 92:            case SETTING_MODE :
-[e :U 100 ]
-"94
-[; ;main_app.c: 94:                 switch_scan();
-[e ( _switch_scan ..  ]
-"95
-[; ;main_app.c: 95:                 sw_action();
-[e ( _sw_action ..  ]
-"96
-[; ;main_app.c: 96:                 ssd_blink(set_temp);
-[e ( _ssd_blink (1 _set_temp ]
-"97
-[; ;main_app.c: 97:                 break;
-[e $U 97  ]
-"98
-[; ;main_app.c: 98:            default :
-[e :U 101 ]
-"100
-[; ;main_app.c: 100:                break ;
-[e $U 97  ]
-"101
-[; ;main_app.c: 101:        }
-}
-[e $U 97  ]
-[e :U 98 ]
-[e [\ -> _mode `ui , $ -> . `E860 0 `ui 99
- , $ -> . `E860 1 `ui 100
- 101 ]
-[e :U 97 ]
-"102
-[; ;main_app.c: 102:     }
-}
-[e :U 96 ]
-"105
-[; ;main_app.c: 105:     if (INTCON & (1 << 1)){
-[e $ ! != & -> _INTCON `i << -> 1 `i -> 1 `i -> 0 `i 102  ]
-{
-"106
-[; ;main_app.c: 106:         (INTCON &= ~(1 << 1));
-[e =& _INTCON -> ~ << -> 1 `i -> 1 `i `Vuc ]
-"107
-[; ;main_app.c: 107:         switch (power_mode){
-[e $U 104  ]
-{
-"109
-[; ;main_app.c: 109:             case ON_STATE :
-[e :U 105 ]
-"110
-[; ;main_app.c: 110:                 power_mode = OFF_STATE ;
-[e = _power_mode . `E864 1 ]
-"111
-[; ;main_app.c: 111:                 stop_timer();
-[e ( _stop_timer ..  ]
-"112
-[; ;main_app.c: 112:                 ssd_turn_off();
-[e ( _ssd_turn_off ..  ]
-"113
-[; ;main_app.c: 113:                 temp_control_off();
-[e ( _temp_control_off ..  ]
-"114
-[; ;main_app.c: 114:                 break;
-[e $U 103  ]
-"116
-[; ;main_app.c: 116:             case OFF_STATE :
-[e :U 106 ]
-"117
-[; ;main_app.c: 117:                 power_mode = ON_STATE ;
-[e = _power_mode . `E864 0 ]
-"118
-[; ;main_app.c: 118:                 start_timer();
-[e ( _start_timer ..  ]
-"119
-[; ;main_app.c: 119:                 break;
-[e $U 103  ]
-"120
-[; ;main_app.c: 120:         }
-}
-[e $U 103  ]
-[e :U 104 ]
-[e [\ -> _power_mode `ui , $ -> . `E864 0 `ui 105
- , $ -> . `E864 1 `ui 106
- 103 ]
-[e :U 103 ]
-"121
-[; ;main_app.c: 121:     }
-}
-[e :U 102 ]
-"123
-[; ;main_app.c: 123: }
-[e :UE 95 ]
-}
 [v $root$_main `(v ~T0 @X0 0 e ]
-"124
-[; ;main_app.c: 124: void main() {
+"31
+[; ;main_app.c: 31: void main() {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"126
-[; ;main_app.c: 126:     temp_sensor_init();
+"33
+[; ;main_app.c: 33:     temp_sensor_init();
 [e ( _temp_sensor_init ..  ]
-"127
-[; ;main_app.c: 127:     temp_control_init();
+"34
+[; ;main_app.c: 34:     temp_control_init();
 [e ( _temp_control_init ..  ]
-"128
-[; ;main_app.c: 128:     switch_init();
+"35
+[; ;main_app.c: 35:     switch_init();
 [e ( _switch_init ..  ]
-"129
-[; ;main_app.c: 129:     ssd_init();
+"36
+[; ;main_app.c: 36:     ssd_init();
 [e ( _ssd_init ..  ]
-"130
-[; ;main_app.c: 130:     EEPROM_init();
+"37
+[; ;main_app.c: 37:     EEPROM_init();
 [e ( _EEPROM_init ..  ]
-"131
-[; ;main_app.c: 131:     timer2_init();
-[e ( _timer2_init ..  ]
-"134
-[; ;main_app.c: 134:     if (EEPROM_read(0xff) > 100){
-[e $ ! > -> ( _EEPROM_read (1 -> -> 255 `i `ui `i -> 100 `i 108  ]
+"38
+[; ;main_app.c: 38:     SCH_Init();
+[e ( _SCH_Init ..  ]
+"67
+[; ;main_app.c: 67:     SCH_Add_Task(get_set_temp , 0 , 0);
+[e ( _SCH_Add_Task (3 , , &U _get_set_temp -> -> 0 `i `ui -> -> 0 `i `ui ]
+"68
+[; ;main_app.c: 68:     SCH_Add_Task(temp_sensor_read , 0 , (100));
+[e ( _SCH_Add_Task (3 , , &U _temp_sensor_read -> -> 0 `i `ui -> -> 100 `i `ui ]
+"69
+[; ;main_app.c: 69:     SCH_Add_Task(ssd_update , 0 , (20));
+[e ( _SCH_Add_Task (3 , , &U _ssd_update -> -> 0 `i `ui -> -> 20 `i `ui ]
+"70
+[; ;main_app.c: 70:     SCH_Add_Task(led , 0 , (1000));
+[e ( _SCH_Add_Task (3 , , &U _led -> -> 0 `i `ui -> -> 1000 `i `ui ]
+"71
+[; ;main_app.c: 71:     SCH_Add_Task(temp_set , 0 , (100));
+[e ( _SCH_Add_Task (3 , , &U _temp_set -> -> 0 `i `ui -> -> 100 `i `ui ]
+"72
+[; ;main_app.c: 72:     SCH_Add_Task(switch_scan , 0 , (200));
+[e ( _SCH_Add_Task (3 , , &U _switch_scan -> -> 0 `i `ui -> -> 200 `i `ui ]
+"73
+[; ;main_app.c: 73:     SCH_Add_Task(ssd_blink , 0 , (1000));
+[e ( _SCH_Add_Task (3 , , &U _ssd_blink -> -> 0 `i `ui -> -> 1000 `i `ui ]
+"76
+[; ;main_app.c: 76:     while(1){
+[e :U 98 ]
 {
-"135
-[; ;main_app.c: 135:        set_temp = 60 ;
-[e = _set_temp -> -> 60 `i `uc ]
-"136
-[; ;main_app.c: 136:     }
+"78
+[; ;main_app.c: 78:         SCH_Dispatch_Tasks();
+[e ( _SCH_Dispatch_Tasks ..  ]
+"79
+[; ;main_app.c: 79:     }
 }
-[e $U 109  ]
-"137
-[; ;main_app.c: 137:     else {
-[e :U 108 ]
-{
-"138
-[; ;main_app.c: 138:        set_temp = EEPROM_read(0xff) ;
-[e = _set_temp ( _EEPROM_read (1 -> -> 255 `i `ui ]
-"139
-[; ;main_app.c: 139:     }
-}
-[e :U 109 ]
-"143
-[; ;main_app.c: 143:     stop_timer();
-[e ( _stop_timer ..  ]
-"144
-[; ;main_app.c: 144:     ssd_turn_off();
-[e ( _ssd_turn_off ..  ]
-"145
-[; ;main_app.c: 145:     temp_control_off();
-[e ( _temp_control_off ..  ]
-"148
-[; ;main_app.c: 148:     while(1){
-[e :U 111 ]
-{
-"150
-[; ;main_app.c: 150:         system_sleep();
-[e ( _system_sleep ..  ]
-"151
-[; ;main_app.c: 151:     }
-}
-[e :U 110 ]
-[e $U 111  ]
-[e :U 112 ]
-"152
-[; ;main_app.c: 152: }
-[e :UE 107 ]
+[e :U 97 ]
+[e $U 98  ]
+[e :U 99 ]
+"80
+[; ;main_app.c: 80: }
+[e :UE 96 ]
 }

@@ -7,14 +7,13 @@
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "switchs.c" 2
+
 # 1 "./switchs.h" 1
 
 
 
-# 1 "./types.h" 1
-
-
-
+# 1 "./Main.h" 1
+# 13 "./Main.h"
 typedef unsigned char uint8_t;
 typedef signed char sint8_t;
 typedef unsigned int uint16_t;
@@ -1779,30 +1778,130 @@ uint8_t I2C1_Rd(void);
 void EEPROM_init(void);
 void EEPROM_write (uint16_t address , uint8_t _x);
 uint8_t EEPROM_read(uint16_t address );
+void get_set_temp(void);
 # 7 "./switchs.h" 2
 
+# 1 "./Sch_16f.h" 1
+# 21 "./Sch_16f.h"
+# 1 "./temp_sensor.h" 1
 
 
 
 
 
+
+# 1 "./adc_drive.h" 1
+# 14 "./adc_drive.h"
+void ADC_Init(void);
+uint16_t ADC_Read (uint8_t channel);
+# 7 "./temp_sensor.h" 2
+
+
+
+
+void temp_sensor_init(void);
+uint8_t average (void);
+void temp_sensor_read (void);
+# 21 "./Sch_16f.h" 2
+
+# 1 "./temp_control.h" 1
+# 13 "./temp_control.h"
+typedef enum {
+    HEATER_ON ,
+    HEATER_OFF,
+    }TEMP_STATE_t ;
+
+void temp_control_off(void);
+void temp_control_init(void);
+void temp_set( void );
+void led(void);
+# 22 "./Sch_16f.h" 2
+
+# 1 "./SSD.h" 1
+
+
+
+
+
+
+
+
+void ssd_init(void);
+uint8_t display7s(uint8_t v);
+void ssd_update(void);
+void ssd_turn_off(void);
+void ssd_blink(void);
+
+
+typedef enum {
+    SSD_LEFT,
+    SSD_RIGHT
+}SSD_SELECT_t;
+
+
+typedef enum {
+    SSD_ON,
+    SSD_OFF
+}SSD_BLINK_t;
+# 23 "./Sch_16f.h" 2
+
+# 1 "./switchs.h" 1
+# 24 "./Sch_16f.h" 2
+# 50 "./Sch_16f.h"
+typedef unsigned char tByte ;
+typedef unsigned int tWord ;
+
+
+typedef struct
+{
+
+    void (*pTask)(void);
+
+
+    tWord Delay;
+
+
+    tWord Period;
+
+    tByte RunMe;
+} sTask;
+
+
+
+tByte SCH_Delete_Task(const tByte);
+void SCH_Init(void);
+void SCH_Dispatch_Tasks(void);
+tByte SCH_Add_Task(void (*) (void), const tWord, const tWord);
+void SCH_Report_Status(void);
+void SCH_Start(void);
+void SCH_Stop(void);
+void __attribute__((picinterrupt(("")))) SCH_Update (void);
+# 8 "./switchs.h" 2
+# 17 "./switchs.h"
 typedef enum{
+    PRE_PRESSED,
     PRESSED,
+    PRE_RELEASED,
     RELEASED
 }SWITCH_STATE_t;
 
 void switch_init(void);
 void switch_scan(void);
 void sw_action(void);
-# 1 "switchs.c" 2
+# 2 "switchs.c" 2
 
 
-extern uint8_t switch_delay;
-extern uint16_t switch_wait;
+
 extern uint8_t set_temp ;
+extern MODE_STATE_t mode ;
+extern SSD_BLINK_t blink ;
+
+
+uint16_t switch_wait;
 SWITCH_STATE_t up_sw = RELEASED ;
 SWITCH_STATE_t down_sw = RELEASED ;
-extern MODE_STATE_t mode ;
+SWITCH_STATE_t samples[2];
+
 
 
 
@@ -1823,9 +1922,8 @@ void switch_init(void){
 
 
 void switch_scan(void){
-    switch_delay += 1 ;
 
-    if (switch_delay == 200){
+
        if ( !((PORTB & (1<<2)))){
           up_sw = PRESSED ;
        }
@@ -1835,8 +1933,7 @@ void switch_scan(void){
        else {
 
        }
-       switch_delay = 0 ;
-    }
+       sw_action();
 }
 
 
@@ -1872,13 +1969,14 @@ void sw_action(void){
                     down_sw = RELEASED ;
                 }
                 else {
-                    switch_wait += 1 ;
+                    switch_wait += (200) ;
                 }
             }
             else {
                 mode = NORMAL_MODE ;
                 switch_wait = 0 ;
                 EEPROM_write(0xff , set_temp);
+                blink = SSD_ON ;
             }
             break;
         default :
