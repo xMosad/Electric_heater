@@ -38,8 +38,8 @@
 
 
 // configurations 
-#define SCH_MAX_TASKS (8) // determine the max number of tasks
-#define TICK_TIME (10) // determine the tick time in ms 
+#define SCH_MAX_TASKS (7) // determine the max number of tasks
+#define TICK_TIME (1) // determine the tick time in ms 
 #define F_OSC (8000000) 
 #define Error_port PORTD
 //uncomment to enable SCH_Report_Status()

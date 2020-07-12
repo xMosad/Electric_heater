@@ -28,19 +28,24 @@ SSD_OFF 1
 NORMAL_MODE 0
 SETTING_MODE 1
 ]
-"11 D:\xBlank\COM\swift\Electric water 1\switchs.c
-[e E930 . `uc
-PRE_PRESSED 0
-PRESSED 1
-PRE_RELEASED 2
-RELEASED 3
+"18 D:\xBlank\COM\swift\Electric water 1\switchs.c
+[e E934 . `uc
+RELEASED 0
+PRE_PRESSED 1
+PRESSED 2
+PRE_RELEASED 3
 ]
-"59
+"43
+[e E930 . `uc
+SW_UP 0
+SW_DOWN 1
+]
+"113
 [e E8 . `uc
 NORMAL_MODE 0
 SETTING_MODE 1
 ]
-"89
+"139
 [e E903 . `uc
 SSD_ON 0
 SSD_OFF 1
@@ -147,11 +152,11 @@ OFF_STATE 1
 [v i1_ssd_turn_off ssd_turn_off `(v  1 e 1 0 ]
 "150
 [v _ssd_blink ssd_blink `(v  1 e 1 0 ]
-"21 D:\xBlank\COM\swift\Electric water 1\switchs.c
+"26 D:\xBlank\COM\swift\Electric water 1\switchs.c
 [v _switch_init switch_init `(v  1 e 1 0 ]
-"34
+"41
 [v _switch_scan switch_scan `(v  1 e 1 0 ]
-"54
+"107
 [v _sw_action sw_action `(v  1 e 1 0 ]
 "17 D:\xBlank\COM\swift\Electric water 1\temp_control.c
 [v _temp_control_init temp_control_init `(v  1 e 1 0 ]
@@ -226,9 +231,9 @@ OFF_STATE 1
 [v _power_mode power_mode `E860  1 e 1 0 ]
 "11 D:\xBlank\COM\swift\Electric water 1\Sch_16f.c
 [v _timer_value timer_value `ui  1 e 2 0 ]
-[s S244 . 6 `*.27(v 1 pTask 1 0 `ui 1 Delay 2 1 `ui 1 Period 2 3 `uc 1 RunMe 1 5 ]
+[s S251 . 6 `*.27(v 1 pTask 1 0 `ui 1 Delay 2 1 `ui 1 Period 2 3 `uc 1 RunMe 1 5 ]
 "14
-[v _SCH_tasks_G SCH_tasks_G `[8]S244  1 e 48 0 ]
+[v _SCH_tasks_G SCH_tasks_G `[7]S251  1 e 42 0 ]
 "15
 [v _Error_code_G Error_code_G `uc  1 e 1 0 ]
 "8 D:\xBlank\COM\swift\Electric water 1\SSD.c
@@ -241,11 +246,10 @@ OFF_STATE 1
 "12
 [v _blink blink `E874  1 e 1 0 ]
 "10 D:\xBlank\COM\swift\Electric water 1\switchs.c
-[v _switch_wait switch_wait `ui  1 e 2 0 ]
-"11
-[v _up_sw up_sw `E930  1 e 1 0 ]
-"12
-[v _down_sw down_sw `E930  1 e 1 0 ]
+[v _switch_wait switch_wait `ui  1 s 2 switch_wait ]
+[s S178 . 3 `[2]uc 1 samples 2 0 `E934 1 state 1 2 ]
+"18
+[v _sw_info sw_info `[2]S178  1 s 6 sw_info ]
 "9 D:\xBlank\COM\swift\Electric water 1\temp_control.c
 [v _state state `E864  1 e 1 0 ]
 "8 D:\xBlank\COM\swift\Electric water 1\temp_sensor.c
@@ -272,10 +276,10 @@ OFF_STATE 1
 {
 "29
 } 0
-"21 D:\xBlank\COM\swift\Electric water 1\switchs.c
+"26 D:\xBlank\COM\swift\Electric water 1\switchs.c
 [v _switch_init switch_init `(v  1 e 1 0 ]
 {
-"27
+"34
 } 0
 "20 D:\xBlank\COM\swift\Electric water 1\SSD.c
 [v _ssd_init ssd_init `(v  1 e 1 0 ]
@@ -293,7 +297,7 @@ OFF_STATE 1
 [v _SCH_Dispatch_Tasks SCH_Dispatch_Tasks `(v  1 e 1 0 ]
 {
 "193
-[v SCH_Dispatch_Tasks@Index Index `uc  1 a 1 8 ]
+[v SCH_Dispatch_Tasks@Index Index `uc  1 a 1 6 ]
 "213
 } 0
 "150 D:\xBlank\COM\swift\Electric water 1\SSD.c
@@ -301,10 +305,12 @@ OFF_STATE 1
 {
 "168
 } 0
-"34 D:\xBlank\COM\swift\Electric water 1\switchs.c
+"41 D:\xBlank\COM\swift\Electric water 1\switchs.c
 [v _switch_scan switch_scan `(v  1 e 1 0 ]
 {
-"47
+"43
+[v switch_scan@current_button current_button `E930  1 a 1 17 ]
+"100
 } 0
 "70 D:\xBlank\COM\swift\Electric water 1\temp_control.c
 [v _led led `(v  1 e 1 0 ]
@@ -349,9 +355,9 @@ OFF_STATE 1
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
 "10
-[v ___lwdiv@quotient quotient `ui  1 a 2 13 ]
+[v ___lwdiv@quotient quotient `ui  1 a 2 14 ]
 "11
-[v ___lwdiv@counter counter `uc  1 a 1 15 ]
+[v ___lwdiv@counter counter `uc  1 a 1 13 ]
 "5
 [v ___lwdiv@divisor divisor `ui  1 p 2 8 ]
 [v ___lwdiv@dividend dividend `ui  1 p 2 10 ]
@@ -385,21 +391,21 @@ OFF_STATE 1
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S617 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S624 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S622 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S625 . 4 `l 1 i 4 0 `d 1 f 4 0 `S617 1 fAsBytes 4 0 `S622 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S625  1 a 4 47 ]
+[s S629 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S632 . 4 `l 1 i 4 0 `d 1 f 4 0 `S624 1 fAsBytes 4 0 `S629 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S632  1 a 4 47 ]
 "12
-[v ___flmul@grs grs `ul  1 a 4 41 ]
-[s S694 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[v ___flmul@grs grs `ul  1 a 4 42 ]
+[s S701 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S697 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S694 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S697  1 a 2 51 ]
+[u S704 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S701 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S704  1 a 2 51 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 46 ]
 "11
-[v ___flmul@aexp aexp `uc  1 a 1 45 ]
+[v ___flmul@aexp aexp `uc  1 a 1 41 ]
 "9
 [v ___flmul@sign sign `uc  1 a 1 40 ]
 "8
@@ -449,10 +455,10 @@ OFF_STATE 1
 [v ADC_Read@channel channel `uc  1 a 1 12 ]
 "37
 } 0
-"54 D:\xBlank\COM\swift\Electric water 1\switchs.c
+"107 D:\xBlank\COM\swift\Electric water 1\switchs.c
 [v _sw_action sw_action `(v  1 e 1 0 ]
 {
-"96
+"146
 } 0
 "19 D:\xBlank\COM\swift\Electric water 1\eeprom.c
 [v _EEPROM_write EEPROM_write `(v  1 e 1 0 ]

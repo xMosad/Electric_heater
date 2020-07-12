@@ -14,11 +14,18 @@
 #define PRESSED_VOLTAGE 0
 #define RELEASED_VOLTAGE 1
 
-typedef enum{
+typedef enum
+{
+    SW_UP,
+    SW_DOWN
+}SW_t;
+
+typedef enum
+{
+    RELEASED,
     PRE_PRESSED,
     PRESSED,
-    PRE_RELEASED,       
-    RELEASED
+    PRE_RELEASED
 }SWITCH_STATE_t;
 
 void switch_init(void);

@@ -1866,11 +1866,18 @@ void get_set_temp(void);
 # 1 "./Sch_16f.h" 1
 # 8 "./switchs.h" 2
 # 17 "./switchs.h"
-typedef enum{
+typedef enum
+{
+    SW_UP,
+    SW_DOWN
+}SW_t;
+
+typedef enum
+{
+    RELEASED,
     PRE_PRESSED,
     PRESSED,
-    PRE_RELEASED,
-    RELEASED
+    PRE_RELEASED
 }SWITCH_STATE_t;
 
 void switch_init(void);
@@ -1930,10 +1937,10 @@ void main() {
 # 67 "main_app.c"
     SCH_Add_Task(get_set_temp , 0 , 0);
     SCH_Add_Task(temp_sensor_read , 0 , (100));
-    SCH_Add_Task(ssd_update , 0 , (20));
+    SCH_Add_Task(ssd_update , 0 , (50));
     SCH_Add_Task(led , 0 , (1000));
     SCH_Add_Task(temp_set , 0 , (100));
-    SCH_Add_Task(switch_scan , 0 , (200));
+    SCH_Add_Task(switch_scan , 0 , (20));
     SCH_Add_Task(ssd_blink , 0 , (1000));
 
 

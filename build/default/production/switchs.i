@@ -1878,11 +1878,18 @@ void SCH_Stop(void);
 void __attribute__((picinterrupt(("")))) SCH_Update (void);
 # 8 "./switchs.h" 2
 # 17 "./switchs.h"
-typedef enum{
+typedef enum
+{
+    SW_UP,
+    SW_DOWN
+}SW_t;
+
+typedef enum
+{
+    RELEASED,
     PRE_PRESSED,
     PRESSED,
-    PRE_RELEASED,
-    RELEASED
+    PRE_RELEASED
 }SWITCH_STATE_t;
 
 void switch_init(void);
@@ -1897,10 +1904,15 @@ extern MODE_STATE_t mode ;
 extern SSD_BLINK_t blink ;
 
 
-uint16_t switch_wait;
-SWITCH_STATE_t up_sw = RELEASED ;
-SWITCH_STATE_t down_sw = RELEASED ;
-SWITCH_STATE_t samples[2];
+static uint16_t switch_wait;
+
+typedef struct
+{
+    unsigned char samples[2];
+    SWITCH_STATE_t state;
+}SWITCH_INFO_t;
+
+static SWITCH_INFO_t sw_info[2];
 
 
 
@@ -1910,10 +1922,12 @@ SWITCH_STATE_t samples[2];
 
 void switch_init(void){
 
-     (TRISB |= (1 << 2));
-     (TRISB |= (1 << 1));
-     (TRISB |= (1 << 0));
-     (INTCON |= (1 << 4));
+    (TRISB |= (1 << 2));
+    (TRISB |= (1 << 1));
+    (TRISB |= (1 << 0));
+    (INTCON |= (1 << 4));
+    sw_info[0].state = RELEASED;
+    sw_info[1].state = RELEASED;
 }
 
 
@@ -1923,17 +1937,63 @@ void switch_init(void){
 
 void switch_scan(void){
 
+    SW_t current_button = SW_UP;
+    for (current_button = SW_UP; current_button <= SW_DOWN; current_button++)
+    {
 
-       if ( !((PORTB & (1<<2)))){
-          up_sw = PRESSED ;
-       }
-       else if ( !((PORTB & (1<<1)))){
-          down_sw = PRESSED ;
-       }
-       else {
+        sw_info[current_button].samples[0] = sw_info[current_button].samples[1];
 
-       }
-       sw_action();
+        switch(current_button)
+        {
+         case SW_UP:
+            sw_info[current_button].samples[1] = ((PORTB >> 2) & 1);
+        break;
+        case SW_DOWN:
+            sw_info[current_button].samples[1] = ((PORTB >> 1) & 1);
+            break;
+        default:
+
+            break;
+        }
+
+
+        switch(sw_info[current_button].state)
+        {
+        case RELEASED:
+            if((sw_info[current_button].samples[0] == 0) &&
+               (sw_info[current_button].samples[1] == 0))
+            {
+                sw_info[current_button].state = PRE_PRESSED;
+            }
+            break;
+        case PRE_PRESSED:
+            if(sw_info[current_button].samples[1] == 0)
+            {
+                sw_info[current_button].state = PRESSED;
+            }
+            break;
+        case PRESSED:
+            if((sw_info[current_button].samples[0] == 1) &&
+               (sw_info[current_button].samples[1] == 1))
+            {
+                sw_info[current_button].state = PRE_RELEASED;
+            }
+            break;
+        case PRE_RELEASED:
+            if(sw_info[current_button].samples[1] == 1)
+            {
+                sw_info[current_button].state = RELEASED;
+            }
+            break;
+
+        default:
+
+            break;
+        }
+
+    }
+
+   sw_action();
 }
 
 
@@ -1942,13 +2002,12 @@ void switch_scan(void){
 
 
 void sw_action(void){
-    switch (mode){
+   switch (mode){
 
         case NORMAL_MODE :
-            if ( (up_sw == PRESSED ) || (down_sw == PRESSED) ) {
+            if ( (sw_info[0].state == PRE_RELEASED ) ||
+                (sw_info[1].state == PRE_RELEASED) ) {
                 mode = SETTING_MODE ;
-                up_sw = RELEASED ;
-                down_sw = RELEASED ;
             }
             else{
 
@@ -1958,18 +2017,16 @@ void sw_action(void){
         case SETTING_MODE :
 
             if (switch_wait < 5000){
-                if ( (up_sw == PRESSED) && (set_temp < 75)){
+                if ( (sw_info[0].state == PRE_RELEASED) && (set_temp < 75)){
                     set_temp += 5 ;
                     switch_wait = 0 ;
-                    up_sw = RELEASED ;
                 }
-                else if ( (down_sw == PRESSED) && (set_temp > 35)){
+                else if ( (sw_info[1].state == PRE_RELEASED) && (set_temp > 35)){
                     set_temp -= 5 ;
                     switch_wait = 0 ;
-                    down_sw = RELEASED ;
                 }
                 else {
-                    switch_wait += (200) ;
+                    switch_wait += (20) ;
                 }
             }
             else {

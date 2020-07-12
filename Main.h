@@ -3,10 +3,10 @@
 
 // tasks period
 #define GET_TEMP_TASK_PERIOD      (100) 
-#define SSD_UPDATE_TASK_PERIOD    (20)
+#define SSD_UPDATE_TASK_PERIOD    (50)
 #define LED_TASK_PERIOD           (1000)
 #define TEMP_SET_TASK_PERIOD      (100)
-#define SWITCH_SCAN_TASK_PERIOD   (200)
+#define SWITCH_SCAN_TASK_PERIOD   (20)
 #define SSD_BLINK_TASK_PERIOD     (1000)
 
 // system types 

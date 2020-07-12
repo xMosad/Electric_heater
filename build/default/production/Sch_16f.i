@@ -1848,11 +1848,18 @@ void get_set_temp(void);
 # 1 "./Sch_16f.h" 1
 # 8 "./switchs.h" 2
 # 17 "./switchs.h"
-typedef enum{
+typedef enum
+{
+    SW_UP,
+    SW_DOWN
+}SW_t;
+
+typedef enum
+{
+    RELEASED,
     PRE_PRESSED,
     PRESSED,
-    PRE_RELEASED,
-    RELEASED
+    PRE_RELEASED
 }SWITCH_STATE_t;
 
 void switch_init(void);
@@ -1901,7 +1908,7 @@ static tByte Last_error_code_G;
 tWord timer_value ;
 
 
-sTask SCH_tasks_G[(8)];
+sTask SCH_tasks_G[(7)];
 tByte Error_code_G = 0;
 
 
@@ -1916,7 +1923,7 @@ void __attribute__((picinterrupt(("")))) SCH_Update (void){
         PIR1 &= ~ (1 << 0) ;
         tByte Index;
 
-        for (Index = 0; Index < (8); Index++)
+        for (Index = 0; Index < (7); Index++)
         {
 
             if (SCH_tasks_G[Index].pTask)
@@ -1934,7 +1941,7 @@ void __attribute__((picinterrupt(("")))) SCH_Update (void){
                 else
                 {
 
-                    SCH_tasks_G[Index].Delay -= (10);
+                    SCH_tasks_G[Index].Delay -= (1);
                 }
             }
         }
@@ -1962,7 +1969,7 @@ void __attribute__((picinterrupt(("")))) SCH_Update (void){
 void SCH_Init(void)
 {
     tByte i;
-    for (i = 0; i < (8); i++)
+    for (i = 0; i < (7); i++)
     {
         SCH_Delete_Task(i);
     }
@@ -1978,7 +1985,7 @@ void SCH_Init(void)
     INTCON |= (1 << 7);
     INTCON |= (1 << 6);
 
-    timer_value = 65536 - ( ((10) * (8000000) ) / (1000 * 4 * 8 ) );
+    timer_value = 65536 - ( ((1) * (8000000) ) / (1000 * 4 * 8 ) );
     TMR1L = timer_value ;
     TMR1H = ( timer_value >> 8 ) ;
 }
@@ -2001,7 +2008,7 @@ void SCH_Stop(void)
 {
     (T1CON &= ~(1 << 0));
     int i = 0 ;
-    for (i = 0 ; i < (8) ; i++){
+    for (i = 0 ; i < (7) ; i++){
         SCH_tasks_G[i].Delay = SCH_tasks_G[i].Period;
     }
 }
@@ -2018,19 +2025,19 @@ tByte SCH_Add_Task(void (* pFunction)(),
     {
     tByte Index = 0;
 
-    while ((SCH_tasks_G[Index].pTask != 0) && (Index < (8)))
+    while ((SCH_tasks_G[Index].pTask != 0) && (Index < (7)))
     {
         Index++;
     }
 
-    if (Index == (8))
+    if (Index == (7))
     {
 
 
 
 
 
-        return (8);
+        return (7);
     }
 
     SCH_tasks_G[Index].pTask = pFunction;
@@ -2054,7 +2061,7 @@ void SCH_Dispatch_Tasks(void)
 {
     tByte Index;
 
-    for (Index = 0; Index < (8); Index++)
+    for (Index = 0; Index < (7); Index++)
     {
         if (SCH_tasks_G[Index].RunMe > 0)
         {

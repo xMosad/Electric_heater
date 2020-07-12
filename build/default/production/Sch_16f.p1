@@ -1,8 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[v F920 `(v ~T0 @X0 0 tf ]
+[v F924 `(v ~T0 @X0 0 tf ]
 "55 ./Sch_16f.h
 [; ;./Sch_16f.h: 55: {
-[s S95 `*F920 1 `ui 1 `ui 1 `uc 1 ]
+[s S95 `*F924 1 `ui 1 `ui 1 `uc 1 ]
 [n S95 . pTask Delay Period RunMe ]
 [t ~ __interrupt . k ]
 [t T2 __interrupt ]
@@ -15,7 +15,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "648
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 648: extern volatile unsigned char TMR1H __attribute__((address(0x00F)));
 [v _TMR1H `Vuc ~T0 @X0 0 e@15 ]
-[v F951 `(v ~T0 @X0 0 tf ]
+[v F955 `(v ~T0 @X0 0 tf ]
 "454
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 454: extern volatile unsigned char INTCON __attribute__((address(0x00B)));
 [v _INTCON `Vuc ~T0 @X0 0 e@11 ]
@@ -47,15 +47,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1618
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 1618: extern volatile unsigned char PIE1 __attribute__((address(0x08C)));
 [v _PIE1 `Vuc ~T0 @X0 0 e@140 ]
-[v F958 `(v ~T0 @X0 0 tf ]
-[v F960 `(v ~T0 @X0 0 t? ]
-[v F965 `(v ~T0 @X0 0 tf ]
-[v F967 `(v ~T0 @X0 0 tf ]
+[v F962 `(v ~T0 @X0 0 tf ]
+[v F964 `(v ~T0 @X0 0 t? ]
+[v F969 `(v ~T0 @X0 0 tf ]
+[v F971 `(v ~T0 @X0 0 tf ]
 "74 ./Sch_16f.h
 [; ;./Sch_16f.h: 74: void SCH_Report_Status(void);
 [v _SCH_Report_Status `(v ~T0 @X0 0 ef ]
-[v F977 `(v ~T0 @X0 0 tf ]
-[v F979 `(v ~T0 @X0 0 tf ]
+[v F981 `(v ~T0 @X0 0 tf ]
+[v F983 `(v ~T0 @X0 0 tf ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f877a.h: 54: __asm("INDF equ 00h");
 [; <" INDF equ 00h ;# ">
@@ -246,8 +246,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 11: tWord timer_value ;
 [v _timer_value `ui ~T0 @X0 1 e ]
 "14
-[; ;Sch_16f.c: 14: sTask SCH_tasks_G[(8)];
-[v _SCH_tasks_G `S95 ~T0 @X0 -> 8 `i e ]
+[; ;Sch_16f.c: 14: sTask SCH_tasks_G[(7)];
+[v _SCH_tasks_G `S95 ~T0 @X0 -> 7 `i e ]
 "15
 [; ;Sch_16f.c: 15: tByte Error_code_G = 0;
 [v _Error_code_G `uc ~T0 @X0 1 e ]
@@ -278,10 +278,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 41:         tByte Index;
 [v _Index `uc ~T0 @X0 1 a ]
 "43
-[; ;Sch_16f.c: 43:         for (Index = 0; Index < (8); Index++)
+[; ;Sch_16f.c: 43:         for (Index = 0; Index < (7); Index++)
 {
 [e = _Index -> -> 0 `i `uc ]
-[e $ < -> _Index `i -> 8 `i 98  ]
+[e $ < -> _Index `i -> 7 `i 98  ]
 [e $U 99  ]
 [e :U 98 ]
 "44
@@ -289,7 +289,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "46
 [; ;Sch_16f.c: 46:             if (SCH_tasks_G[Index].pTask)
-[e $ ! != . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F951 101  ]
+[e $ ! != . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F955 101  ]
 "47
 [; ;Sch_16f.c: 47:             {
 {
@@ -326,8 +326,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 59:                 {
 {
 "61
-[; ;Sch_16f.c: 61:                     SCH_tasks_G[Index].Delay -= (10);
-[e =- . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 1 -> -> 10 `i `ui ]
+[; ;Sch_16f.c: 61:                     SCH_tasks_G[Index].Delay -= (1);
+[e =- . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 1 -> -> 1 `i `ui ]
 "62
 [; ;Sch_16f.c: 62:                 }
 }
@@ -340,7 +340,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 64:         }
 }
 [e ++ _Index -> -> 1 `i `uc ]
-[e $ < -> _Index `i -> 8 `i 98  ]
+[e $ < -> _Index `i -> 7 `i 98  ]
 [e :U 99 ]
 }
 "65
@@ -417,10 +417,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 95:     tByte i;
 [v _i `uc ~T0 @X0 1 a ]
 "96
-[; ;Sch_16f.c: 96:     for (i = 0; i < (8); i++)
+[; ;Sch_16f.c: 96:     for (i = 0; i < (7); i++)
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 8 `i 111  ]
+[e $ < -> _i `i -> 7 `i 111  ]
 [e $U 112  ]
 [e :U 111 ]
 "97
@@ -433,7 +433,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 99:     }
 }
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 111  ]
+[e $ < -> _i `i -> 7 `i 111  ]
 [e :U 112 ]
 }
 "103
@@ -455,8 +455,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 110:     INTCON |= (1 << 6);
 [e =| _INTCON -> << -> 1 `i -> 6 `i `Vuc ]
 "112
-[; ;Sch_16f.c: 112:     timer_value = 65536 - ( ((10) * (8000000) ) / (1000 * 4 * 8 ) );
-[e = _timer_value -> - -> 65536 `l / * -> -> 10 `i `l -> 8000000 `l -> * * -> 1000 `i -> 4 `i -> 8 `i `l `ui ]
+[; ;Sch_16f.c: 112:     timer_value = 65536 - ( ((1) * (8000000) ) / (1000 * 4 * 8 ) );
+[e = _timer_value -> - -> 65536 `l / * -> -> 1 `i `l -> 8000000 `l -> * * -> 1000 `i -> 4 `i -> 8 `i `l `ui ]
 "113
 [; ;Sch_16f.c: 113:     TMR1L = timer_value ;
 [e = _TMR1L -> _timer_value `uc ]
@@ -498,10 +498,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 "135
-[; ;Sch_16f.c: 135:     for (i = 0 ; i < (8) ; i++){
+[; ;Sch_16f.c: 135:     for (i = 0 ; i < (7) ; i++){
 {
 [e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 116  ]
+[e $ < _i -> 7 `i 116  ]
 [e $U 117  ]
 [e :U 116 ]
 {
@@ -512,7 +512,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 137:     }
 }
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 116  ]
+[e $ < _i -> 7 `i 116  ]
 [e :U 117 ]
 }
 "138
@@ -521,14 +521,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "146
 [; ;Sch_16f.c: 146: tByte SCH_Add_Task(void (* pFunction)(),
-[v _SCH_Add_Task `(uc ~T0 @X0 1 ef3`*F958`Cui`Cui ]
+[v _SCH_Add_Task `(uc ~T0 @X0 1 ef3`*F962`Cui`Cui ]
 "149
 [; ;Sch_16f.c: 149:     {
 {
 [e :U _SCH_Add_Task ]
 "146
 [; ;Sch_16f.c: 146: tByte SCH_Add_Task(void (* pFunction)(),
-[v _pFunction `*F960 ~T0 @X0 1 r1 ]
+[v _pFunction `*F964 ~T0 @X0 1 r1 ]
 "147
 [; ;Sch_16f.c: 147:     const tWord DELAY,
 [v _DELAY `Cui ~T0 @X0 1 r2 ]
@@ -543,7 +543,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _Index `uc ~T0 @X0 1 a ]
 [e = _Index -> -> 0 `i `uc ]
 "152
-[; ;Sch_16f.c: 152:     while ((SCH_tasks_G[Index].pTask != 0) && (Index < (8)))
+[; ;Sch_16f.c: 152:     while ((SCH_tasks_G[Index].pTask != 0) && (Index < (7)))
 [e $U 120  ]
 [e :U 121 ]
 "153
@@ -557,18 +557,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 120 ]
 "152
-[; ;Sch_16f.c: 152:     while ((SCH_tasks_G[Index].pTask != 0) && (Index < (8)))
-[e $ && != . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F965 < -> _Index `i -> 8 `i 121  ]
+[; ;Sch_16f.c: 152:     while ((SCH_tasks_G[Index].pTask != 0) && (Index < (7)))
+[e $ && != . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F969 < -> _Index `i -> 7 `i 121  ]
 [e :U 122 ]
 "157
-[; ;Sch_16f.c: 157:     if (Index == (8))
-[e $ ! == -> _Index `i -> 8 `i 123  ]
+[; ;Sch_16f.c: 157:     if (Index == (7))
+[e $ ! == -> _Index `i -> 7 `i 123  ]
 "158
 [; ;Sch_16f.c: 158:     {
 {
 "164
-[; ;Sch_16f.c: 164:         return (8);
-[e ) -> -> 8 `i `uc ]
+[; ;Sch_16f.c: 164:         return (7);
+[e ) -> -> 7 `i `uc ]
 [e $UE 119  ]
 "165
 [; ;Sch_16f.c: 165:     }
@@ -576,7 +576,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 123 ]
 "167
 [; ;Sch_16f.c: 167:     SCH_tasks_G[Index].pTask = pFunction;
-[e = . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> _pFunction `*F967 ]
+[e = . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> _pFunction `*F971 ]
 "168
 [; ;Sch_16f.c: 168:     SCH_tasks_G[Index].Delay = DELAY;
 [e = . *U + &U _SCH_tasks_G * -> _Index `ux -> -> # *U &U _SCH_tasks_G `ui `ux 1 _DELAY ]
@@ -621,10 +621,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 193:     tByte Index;
 [v _Index `uc ~T0 @X0 1 a ]
 "195
-[; ;Sch_16f.c: 195:     for (Index = 0; Index < (8); Index++)
+[; ;Sch_16f.c: 195:     for (Index = 0; Index < (7); Index++)
 {
 [e = _Index -> -> 0 `i `uc ]
-[e $ < -> _Index `i -> 8 `i 126  ]
+[e $ < -> _Index `i -> 7 `i 126  ]
 [e $U 127  ]
 [e :U 126 ]
 "196
@@ -663,7 +663,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Sch_16f.c: 208:     }
 }
 [e ++ _Index -> -> 1 `i `uc ]
-[e $ < -> _Index `i -> 8 `i 126  ]
+[e $ < -> _Index `i -> 7 `i 126  ]
 [e :U 127 ]
 }
 "210
@@ -694,7 +694,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _Return_code `uc ~T0 @X0 1 a ]
 "224
 [; ;Sch_16f.c: 224:     if (SCH_tasks_G[TASK_INDEX].pTask == 0)
-[e $ ! == . *U + &U _SCH_tasks_G * -> _TASK_INDEX `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F977 132  ]
+[e $ ! == . *U + &U _SCH_tasks_G * -> _TASK_INDEX `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F981 132  ]
 "225
 [; ;Sch_16f.c: 225:     {
 {
@@ -723,7 +723,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 133 ]
 "236
 [; ;Sch_16f.c: 236:     SCH_tasks_G[TASK_INDEX].pTask = 0x0000;
-[e = . *U + &U _SCH_tasks_G * -> _TASK_INDEX `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F979 ]
+[e = . *U + &U _SCH_tasks_G * -> _TASK_INDEX `ux -> -> # *U &U _SCH_tasks_G `ui `ux 0 -> -> 0 `i `*F983 ]
 "237
 [; ;Sch_16f.c: 237:     SCH_tasks_G[TASK_INDEX].Delay = 0;
 [e = . *U + &U _SCH_tasks_G * -> _TASK_INDEX `ux -> -> # *U &U _SCH_tasks_G `ui `ux 1 -> -> 0 `i `ui ]

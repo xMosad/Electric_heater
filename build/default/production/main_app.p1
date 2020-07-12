@@ -14,8 +14,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "19 ./temp_control.h
 [; ;./temp_control.h: 19: void temp_control_init(void);
 [v _temp_control_init `(v ~T0 @X0 0 ef ]
-"24 ./switchs.h
-[; ;./switchs.h: 24: void switch_init(void);
+"31 ./switchs.h
+[; ;./switchs.h: 31: void switch_init(void);
 [v _switch_init `(v ~T0 @X0 0 ef ]
 "9 ./SSD.h
 [; ;./SSD.h: 9: void ssd_init(void);
@@ -26,10 +26,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "71 ./Sch_16f.h
 [; ;./Sch_16f.h: 71: void SCH_Init(void);
 [v _SCH_Init `(v ~T0 @X0 0 ef ]
-[v F930 `(v ~T0 @X0 0 tf ]
+[v F934 `(v ~T0 @X0 0 tf ]
 "73
 [; ;./Sch_16f.h: 73: tByte SCH_Add_Task(void (*) (void), const tWord, const tWord);
-[v _SCH_Add_Task `(uc ~T0 @X0 0 ef3`*F930`Cui`Cui ]
+[v _SCH_Add_Task `(uc ~T0 @X0 0 ef3`*F934`Cui`Cui ]
 "10 ./eeprom.h
 [; ;./eeprom.h: 10: void get_set_temp(void);
 [v _get_set_temp `(v ~T0 @X0 0 ef ]
@@ -45,8 +45,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "20
 [; ;./temp_control.h: 20: void temp_set( void );
 [v _temp_set `(v ~T0 @X0 0 ef ]
-"25 ./switchs.h
-[; ;./switchs.h: 25: void switch_scan(void);
+"32 ./switchs.h
+[; ;./switchs.h: 32: void switch_scan(void);
 [v _switch_scan `(v ~T0 @X0 0 ef ]
 "13 ./SSD.h
 [; ;./SSD.h: 13: void ssd_blink(void);
@@ -300,8 +300,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main_app.c: 68:     SCH_Add_Task(temp_sensor_read , 0 , (100));
 [e ( _SCH_Add_Task (3 , , &U _temp_sensor_read -> -> 0 `i `ui -> -> 100 `i `ui ]
 "69
-[; ;main_app.c: 69:     SCH_Add_Task(ssd_update , 0 , (20));
-[e ( _SCH_Add_Task (3 , , &U _ssd_update -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;main_app.c: 69:     SCH_Add_Task(ssd_update , 0 , (50));
+[e ( _SCH_Add_Task (3 , , &U _ssd_update -> -> 0 `i `ui -> -> 50 `i `ui ]
 "70
 [; ;main_app.c: 70:     SCH_Add_Task(led , 0 , (1000));
 [e ( _SCH_Add_Task (3 , , &U _led -> -> 0 `i `ui -> -> 1000 `i `ui ]
@@ -309,8 +309,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main_app.c: 71:     SCH_Add_Task(temp_set , 0 , (100));
 [e ( _SCH_Add_Task (3 , , &U _temp_set -> -> 0 `i `ui -> -> 100 `i `ui ]
 "72
-[; ;main_app.c: 72:     SCH_Add_Task(switch_scan , 0 , (200));
-[e ( _SCH_Add_Task (3 , , &U _switch_scan -> -> 0 `i `ui -> -> 200 `i `ui ]
+[; ;main_app.c: 72:     SCH_Add_Task(switch_scan , 0 , (20));
+[e ( _SCH_Add_Task (3 , , &U _switch_scan -> -> 0 `i `ui -> -> 20 `i `ui ]
 "73
 [; ;main_app.c: 73:     SCH_Add_Task(ssd_blink , 0 , (1000));
 [e ( _SCH_Add_Task (3 , , &U _ssd_blink -> -> 0 `i `ui -> -> 1000 `i `ui ]
